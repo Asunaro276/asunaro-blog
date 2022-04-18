@@ -12,7 +12,6 @@ interface Params extends ParsedUrlQuery {
 }
 
 export default function BlogId(props: Props) {
-  console.log(props.blog)
   return (
     <main>
       <h1>title: {props.blog.title}</h1>
