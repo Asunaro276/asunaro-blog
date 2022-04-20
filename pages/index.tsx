@@ -1,28 +1,23 @@
 // pages/index.js
-import Link from "next/link";
-import { client } from "../libs/client";
-import { Blog } from "../types";
+import HomePage from "components/templates/HomePage";
+import { client } from "libs/client";
+import { Blog } from "types";
 
 type Props = {
   blogs: Blog[]
 }
 
-
 export default function Home(props: Props) {
+  console.log(props.blogs[0].image)
   return (
     <div>
-      <ul>
-        {props.blogs.map((blog) => (
-          <li key={blog.id}>
-            <Link href={`./blog/${blog.id}`}>
-              <a>{blog.title}</a>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <HomePage
+        blogs={props.blogs}
+      />
     </div>
   );
 }
+
 
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async () => {
