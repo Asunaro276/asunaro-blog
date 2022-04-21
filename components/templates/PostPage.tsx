@@ -1,17 +1,18 @@
 import { Footer } from "components/organisms/Footer";
 import Header from "components/organisms/Header"
-import PostsList from "components/organisms/PostsList"
+import PostBody from "components/organisms/PostBody";
 import SideBar from "components/organisms/SideBar"
+import { ParsedUrlQuery } from "querystring";
 import { Blog } from "types";
 
 type Props = {
-  blogs: Blog[]
+  blog: Blog
 }
 
 const pages = ["Home", "About"]
 const linkTo = ["/", "about"]
 
-const HomePage = (props: Props) => {
+const PostPage = (props: Props) => {
   return (
     <div className="bg-slate-100">
       <div>
@@ -22,9 +23,11 @@ const HomePage = (props: Props) => {
       </div>
       <div className="flex flex-row justify-between">
         <div className="ml-5 sm:ml-8 lg:ml-10">
-          <PostsList
-            blogs={props.blogs}
+        <div>
+          <PostBody
+            blog={props.blog}
           />
+        </div>
         </div>
         <div className="mx-5 sm:mx-8 lg:mx-20x">
           <SideBar />
@@ -40,4 +43,4 @@ const HomePage = (props: Props) => {
   )
 }
 
-export default HomePage
+export default PostPage

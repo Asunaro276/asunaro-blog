@@ -7,14 +7,14 @@ type Props = {
   blogs: Blog[]
 }
 
+
 export default function Home(props: Props) {
-  console.log(props.blogs[0].image)
   return (
-    <div>
+    <main>
       <HomePage
         blogs={props.blogs}
       />
-    </div>
+    </main>
   );
 }
 

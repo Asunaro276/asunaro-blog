@@ -1,3 +1,4 @@
+import PostPage from "components/templates/PostPage";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { client } from "../../libs/client";
@@ -14,12 +15,8 @@ interface Params extends ParsedUrlQuery {
 export default function BlogId(props: Props) {
   return (
     <main>
-      <h1>title: {props.blog.title}</h1>
-      <p>published time: {props.blog.publishedAt}</p>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: `${props.blog.body}`,
-        }}
+      <PostPage
+        blog={props.blog}
       />
     </main>
   );

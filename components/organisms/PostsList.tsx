@@ -7,10 +7,10 @@ type Props = {
 
 const PostsList = (props: Props) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-wrap">
       {props.blogs.map((post, index) => {
         return (
-        <div key={index} className="my-10 mx-5 sm:mx-8 lg:mx-20">
+        <div key={index} className="my-10 mr-10">
           <PostCard 
             blog={{
                 id: post.id,

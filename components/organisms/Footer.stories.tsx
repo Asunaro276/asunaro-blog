@@ -1,16 +1,16 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 
-import Header from './Header'
+import { Footer } from './Footer'
 
 export default {
-  title: 'Organisms/Header',
-  component: Header,
+  title: 'Organisms/Footer',
+  component: Footer,
   argTypes: {
     backgroundColor: { control: 'color' },
   },
-} as ComponentMeta<typeof Header>;
+} as ComponentMeta<typeof Footer>;
 
-const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;
+const Template: ComponentStory<typeof Footer> = (args) => <Footer {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

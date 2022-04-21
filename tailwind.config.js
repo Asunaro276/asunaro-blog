@@ -9,6 +9,9 @@ module.exports = {
       fontFamily: {
         vollkorn: ['Vollkorn'],
         montserrat: ['Montserrat Subrayada'],
+        nserif: ["Noto Serif"],
+        mplus: ["M PLUS Rounded 1c"],
+        biz: ['BIZ UDPGothic'],
       }
     },
   },

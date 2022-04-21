@@ -2,7 +2,7 @@ import * as React from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
-import { Button, Container, IconButton, Menu, MenuItem, Typography } from '@mui/material'
+import { Button, Container, IconButton, Link, Menu, MenuItem, Typography } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 
 type Props = {
@@ -22,8 +22,8 @@ const NavigationBar = (props: Props) => {
   };
 
   return (
-    <AppBar position="static" className="bg-slate-500">
-      <Container maxWidth="xl">
+    <AppBar position="static" className="bg-slate-500" sx={{ paddingY: {xs: 2, md:0} }}>
+      <Container>
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -55,9 +55,11 @@ const NavigationBar = (props: Props) => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {props.pages.map((page) => (
+              {props.pages.map((page, index) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Link href={props.linkTo[index]} className="text-center">
+                    {page}
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -72,14 +74,18 @@ const NavigationBar = (props: Props) => {
             {props.logo}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {props.pages.map((page) => (
-              <Button
+            {props.pages.map((page, index) => (
+              <Link
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ mx:4, my: 2, color: 'white', display: 'block' }}
+                href={props.linkTo[index]}
+                sx={{ mx:4, my: 2, display: 'block' }}
+                underline="none"
+                color="inherit"
+                className='text-lg'
               >
                 {page}
-              </Button>
+              </Link>
             ))}
           </Box>
         </Toolbar>
