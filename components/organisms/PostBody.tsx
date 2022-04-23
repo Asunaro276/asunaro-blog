@@ -6,13 +6,15 @@ import Caption from "../molecules/Caption"
 
 type Props = {
   blog: Blog
-  parsedBody: { text: string
+  content: string
+  heading: { text: string
     id: string
     tag: string
   }[]
 }
 
 const PostBody = (props: Props) => {
+  console.log(props)
   return (
   <Card className="my-10">
     <Box className="my-10">
@@ -25,18 +27,12 @@ const PostBody = (props: Props) => {
     </Box>
     <Box className="flex justify-center">
       <TableOfContents
-        parsedBody={props.parsedBody}
+        parsedBody={props.heading}
       />
     </Box>
     <Box className="flex justify-center">
       <Box className="w-10/12">
-        {props.parsedBody.map((textParts) => (
-          <RenderedElement
-            id={textParts.id}
-            text={textParts.text}
-            tag={textParts.tag}
-          />
-        ))}
+        <div dangerouslySetInnerHTML={{ __html: props.content }} />
       </Box>
     </Box>
   </Card>

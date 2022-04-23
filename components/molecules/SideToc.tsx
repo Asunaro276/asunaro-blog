@@ -2,7 +2,7 @@ import { Box, Card, Typography } from "@mui/material"
 import { Link as Scroll } from "react-scroll"
 
 type Props = {
-  parsedBody: { text: string
+  heading: { text: string
     id: string
     tag: string
   }[]
@@ -15,7 +15,7 @@ export const SideToc = (props: Props) => {
       <Typography className="mt-10 text-center">目次</Typography>
       <Box sx={{ marginX: "10%" }}>
       <ul className="mb-10">
-        {props.parsedBody.map((data, index) => {
+        {props.heading.map((data, index) => {
           if (data.text === undefined) {
             return <div></div>
           }

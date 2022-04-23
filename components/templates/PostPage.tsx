@@ -9,12 +9,13 @@ import { linkTo, pages } from "pages";
 
 type Props = {
   blog: Blog
+  content: string
   categories: Category[]
 }
 
 const PostPage = (props: Props) => {
   const linkToId = ["/"].concat([...props.categories].filter((category) => linkTo.includes(category.name)).map((category) => `/blog/category/${category.id}`))
-  const parsedBody = parsePostBody(props.blog.body)
+  const heading = parsePostBody(props.blog.body)
   return (
     <div className="bg-slate-100">
       <div>
@@ -23,15 +24,16 @@ const PostPage = (props: Props) => {
         />
       </div>
       <div className="flex flex-row justify-between">
-        <Box className="" sx={{ marginX: "3%" }}>
+        <Box className="" sx={{ marginX: "2%", width: { md: "75%" } }}>
           <PostBody
             blog={props.blog}
-            parsedBody={parsedBody}
+            content={props.content}
+            heading={heading}
           />
         </Box>
-        <Box className="mt-32 w-3/12" sx={{ marginX: "3%", display: { xs: "none", md: "block" }}}>
+        <Box className="mt-32 w-3/12" sx={{ marginX: "2%", display: { xs: "none", md: "block" }}}>
           <SideBar
-            parsedBody={parsedBody}
+            heading={heading}
           />
         </Box>
       </div>

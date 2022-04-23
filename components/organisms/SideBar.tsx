@@ -3,7 +3,7 @@ import SideProfile from "components/molecules/SideProfile"
 import { SideToc } from "components/molecules/SideToc"
 
 type Props = {
-  parsedBody?: {
+  heading?: {
     text: string
     id: string
     tag: string
@@ -12,17 +12,17 @@ type Props = {
 
 
 const SideBar = (props: Props) => {
-  const profileHeight = 29 
+  const profileHeight = 32 
   return (
     <Box className="h-full">
       <Box sx={{ height: `calc(${profileHeight}rem)` }}>
         <SideProfile />
       </Box>
       <Box className="box-border" sx={{ height: `calc(100% - ${profileHeight}rem)` }}>
-        {props.parsedBody !== undefined &&
+        {props.heading !== undefined &&
           (<Box className="sticky top-4">
             <SideToc
-              parsedBody={props.parsedBody}
+              heading={props.heading}
             />
           </Box>)}
       </Box>

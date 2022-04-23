@@ -86,7 +86,7 @@ const NavigationBar = (props: Props) => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page, index) => (
-              <Box>
+              <Box key={index}>
                 <Link
                   key={page}
                   onClick={handleCloseNavMenu}

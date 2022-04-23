@@ -1,11 +1,14 @@
+import * as cheerio from 'cheerio'
 import PostPage from "components/templates/PostPage";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { client } from "../../libs/client";
 import { Blog, Category } from "../../types";
+import hljs from 'highlight.js/lib/core';
 
 type Props = {
   blog: Blog
+  content: string
   categories: Category[]
 }
 
@@ -14,11 +17,12 @@ interface Params extends ParsedUrlQuery {
 }
 
 export default function BlogId(props: Props) {
-  console.log(props)
+  console.log(props.content)
   return (
     <main>
       <PostPage
         blog={props.blog}
+        content={props.content}
         categories={props.categories}
       />
     </main>
@@ -38,10 +42,53 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   const id = context.params!.id
   const data = await client.get({ endpoint: "blog", contentId: id }) as Blog;
   const categories = await client.get({ endpoint: "categories" })
+  const $ = cheerio.load(data.body);
+
+  $('pre code').each((_, element) => {
+  const result = hljs.highlightAuto($(element).text());
+  $(element).html(result.value)
+  $(element).addClass('hljs')
+  })
+
+  $('h1').each((_, element) => {
+  $(element).html()
+  $(element).addClass('ml-8 my-5 text-3xl font-semibold font-body')
+  $(element).wrap('<div class="bg-slate-100 my-10 flex"></div>')
+  $(element).parent().append('<div class="w-2 bg-yellow-400"></div>')
+  })
+
+  $('h2').each((_, element) => {
+  $(element).html()
+  $(element).addClass('ml-4 my-2 text-xl font-semibold font-body')
+  $(element).wrap('<div class="my-8 flex"></div>')
+  $(element).parent().prepend('<div class="w-2 bg-yellow-400"></div>')
+  })
+
+  $('p').each((_, element) => {
+  $(element).html()
+  $(element).addClass('text-lg font-body')
+  $(element).wrap('<div class="mb-20"></div>')
+  })
+
+  $('img').each((_, element) => {
+  $(element).html();
+  $(element).addClass("")
+  });
+
+  $('a').each((_, element) => {
+  $(element).html();
+  $(element).addClass("")
+  });
+
+  $('h1').each((_, element) => {
+  $(element).html();
+  $(element).addClass("")
+  });
 
   return {
     props: {
       blog: data,
+      content: $.html(),
       categories: categories.contents
     },
   };

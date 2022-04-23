@@ -14,7 +14,7 @@ export const BottomNavigationBar = (props: Props) => {
         {props.pages.map((page, index) => {
           return (
             <div className="text-white mx-6" key={index}>
-              <Link href={props.linkTo[index]} color="inherit">
+              <Link href={props.linkTo[index]} color="inherit" className="hover:text-slate-300">
                 {page}
               </Link>
             </div>
