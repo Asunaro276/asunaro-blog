@@ -15,7 +15,6 @@ export const linkTo = ["/", "programming", "other"]
 export const pageIcons = [<HomeOutlinedIcon />, <CodeIcon />, <MoreHorizIcon />]
 
 export default function Home(props: Props) {
-  console.log(props)
   return (
     <main>
       <HomePage

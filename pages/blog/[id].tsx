@@ -1,10 +1,11 @@
 import * as cheerio from 'cheerio'
-import PostPage from "components/templates/PostPage";
-import { GetStaticPaths, GetStaticProps } from "next";
-import { ParsedUrlQuery } from "querystring";
-import { client } from "../../libs/client";
-import { Blog, Category } from "../../types";
-import hljs from 'highlight.js/lib/core';
+import PostPage from "components/templates/PostPage"
+import { GetStaticPaths, GetStaticProps } from "next"
+import { ParsedUrlQuery } from "querystring"
+import { client } from "../../libs/client"
+import { Blog, Category } from "../../types"
+import hljs from 'highlight.js/lib/core'
+import { NextSeo } from 'next-seo'
 
 type Props = {
   blog: Blog
@@ -17,9 +18,12 @@ interface Params extends ParsedUrlQuery {
 }
 
 export default function BlogId(props: Props) {
-  console.log(props.content)
   return (
     <main>
+    <NextSeo
+      title={props.blog.title}
+      description={props.blog.description}
+    />
       <PostPage
         blog={props.blog}
         content={props.content}
@@ -45,16 +49,16 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   const $ = cheerio.load(data.body);
 
   $('pre code').each((_, element) => {
-  const result = hljs.highlightAuto($(element).text());
+  const result = hljs.highlightAuto($(element).text())
   $(element).html(result.value)
-  $(element).addClass('hljs')
+  $(element).addClass('hljs my-5')
   })
 
   $('h1').each((_, element) => {
   $(element).html()
   $(element).addClass('ml-8 my-5 text-3xl font-semibold font-body')
-  $(element).wrap('<div class="bg-slate-100 my-10 flex"></div>')
-  $(element).parent().append('<div class="w-2 bg-yellow-400"></div>')
+  $(element).wrap('<div class="bg-slate-100 mb-5 mt-20 flex"></div>')
+  $(element).parent().prepend('<div class="w-2 bg-yellow-400"></div>')
   })
 
   $('h2').each((_, element) => {
@@ -66,8 +70,8 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
 
   $('p').each((_, element) => {
   $(element).html()
-  $(element).addClass('text-lg font-body')
-  $(element).wrap('<div class="mb-20"></div>')
+  $(element).addClass('text-lg font-body leading-loose')
+  $(element).wrap('<div class="my-5></div>')
   })
 
   $('img').each((_, element) => {

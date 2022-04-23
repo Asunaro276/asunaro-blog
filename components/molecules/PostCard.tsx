@@ -16,7 +16,7 @@ type Props = {
 
 export default function PostCard(props: Props) {
   return (
-    <Card className=''>
+    <Card sx={{ height: "100%" }}>
       <Link href={`blog/${props.blog.id}`} underline="none">
         <CardMedia
           component="img"
@@ -30,7 +30,7 @@ export default function PostCard(props: Props) {
             {props.blog.title}
           </Link>
         </Typography>
-        <Typography variant="body1" color="text.secondary" className='ml-5'>
+        <Typography variant="body1" color="text.secondary" className='ml-5 h-20'>
           {props.blog.description}
         </Typography>
         <Typography variant="body2" color="text.secondary" className='ml-5 mt-5'>

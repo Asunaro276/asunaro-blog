@@ -1,5 +1,4 @@
 import { Box, Card } from "@mui/material"
-import { RenderedElement } from "components/molecules/RenderedElement"
 import { TableOfContents } from "components/molecules/TableOfContents"
 import { Blog } from "types"
 import Caption from "../molecules/Caption"
@@ -14,7 +13,6 @@ type Props = {
 }
 
 const PostBody = (props: Props) => {
-  console.log(props)
   return (
   <Card className="my-10">
     <Box className="my-10">

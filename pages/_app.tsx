@@ -1,10 +1,15 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { ThemeProvider } from '@emotion/react'
+import { DefaultSeo } from 'next-seo'
+import SEO from "next-seo.config"
+
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Component {...pageProps} />
+    <>
+      <DefaultSeo {...SEO} />
+      <Component {...pageProps} />
+    </>
   )
 }
 
