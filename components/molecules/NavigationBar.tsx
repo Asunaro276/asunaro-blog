@@ -82,7 +82,9 @@ const NavigationBar = (props: Props) => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, fontSize: { xs: 30, md: 60 } }}
           >
-            {props.logo}
+            <Link href="/" underline="none" color="inherit">
+              {props.logo}
+            </Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page, index) => (

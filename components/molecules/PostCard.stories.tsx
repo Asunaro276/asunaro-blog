@@ -19,6 +19,10 @@ Primary.args = {
     title: "title",
     description: "description",
     body: "",
+    category: {
+      id: "",
+      name: "category1",
+    },
     publishedAt: "",
     image: {
       url: "/logo.png", 

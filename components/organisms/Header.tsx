@@ -1,6 +1,4 @@
-import { ThemeProvider } from "@emotion/react"
-import { Box, Link, Typography } from "@mui/material"
-import { titleFontTheme } from "theme"
+import { Link, Typography } from "@mui/material"
 import NavigationBar from "../molecules/NavigationBar"
 
 

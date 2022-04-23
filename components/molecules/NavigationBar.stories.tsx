@@ -13,6 +13,6 @@ const Template: ComponentStory<typeof NavigationBar> = (args) => <NavigationBar 
 
 export const Primary = Template.bind({});
 Primary.args = {
-  pages: [...Array(5)].map((v, k) => `Option${k}`),
-  linkTo: [...Array(5)].map(() => "")
+  logo: "LOGO",
+  linkToId: [...Array(5)].map(() => "")
 };
