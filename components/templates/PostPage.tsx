@@ -24,7 +24,7 @@ const PostPage = (props: Props) => {
         />
       </div>
       <div className="flex flex-row justify-between">
-        <Box className="" sx={{ marginX: "2%", width: { md: "75%" } }}>
+        <Box className="" sx={{ marginX: "2%", width: { xs: "95%", md: "75%" } }}>
           <PostBody
             blog={props.blog}
             content={props.content}

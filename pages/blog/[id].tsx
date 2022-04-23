@@ -20,10 +20,10 @@ interface Params extends ParsedUrlQuery {
 export default function BlogId(props: Props) {
   return (
     <main>
-    <NextSeo
-      title={props.blog.title}
-      description={props.blog.description}
-    />
+      <NextSeo
+        title={props.blog.title}
+        description={props.blog.description}
+      />
       <PostPage
         blog={props.blog}
         content={props.content}
