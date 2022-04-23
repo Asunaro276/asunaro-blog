@@ -1,4 +1,5 @@
 
 {
-  "ignorePatterns": ["*.config.ts"]
+  "ignorePatterns": ["*.config.ts"],
+  "extends": ["next", "next/core-web-vitals"]
 }
