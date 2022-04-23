@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Footer } from "components/organisms/Footer";
 import Header from "components/organisms/Header"
 import PostsList from "components/organisms/PostsList"
@@ -9,11 +9,11 @@ import { Blog, Category } from "types";
 type Props = {
   blogs: Blog[]
   categories: Category[]
+  categoryName: string
 }
 
-const HomePage = (props: Props) => {
+const CategoryPage = (props: Props) => {
   const linkToId = ["/"].concat([...props.categories].filter((category) => linkTo.includes(category.name)).map((category) => `/blog/category/${category.id}`))
-  console.log(linkToId)
   return (
     <div className="bg-slate-100">
       <div>
@@ -23,6 +23,16 @@ const HomePage = (props: Props) => {
       </div>
       <div className="flex flex-row justify-between">
         <Box className="mt-10" sx={{ width: { xs: "100%", md: "75%" }}}>
+          <Box className="text-center my-12">
+            {props.blogs.length === 0
+            ? (<Typography className="">
+                該当するカテゴリーの記事はありません
+              </Typography>)
+              : (<Typography>
+                  {pages[linkTo.indexOf(props.categoryName)]}カテゴリの記事一覧
+                </Typography>)
+            }
+          </Box>
           <PostsList
             blogs={props.blogs}
           />
@@ -41,4 +51,4 @@ const HomePage = (props: Props) => {
   )
 }
 
-export default HomePage
+export default CategoryPage

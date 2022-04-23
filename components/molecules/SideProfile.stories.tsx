@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import SideProfile from './SideProfile'
 
 export default {
-  title: 'Organisms/SideProfile',
+  title: 'molecule/SideProfile',
   component: SideProfile,
   argTypes: {
     backgroundColor: { control: 'color' },

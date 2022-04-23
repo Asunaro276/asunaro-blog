@@ -1,4 +1,4 @@
-import { Avatar, Card, CardContent, CardHeader, Divider, Typography } from "@mui/material"
+import { Avatar, Card, CardContent, Divider, Typography } from "@mui/material"
 import Box from "@mui/material/Box"
 
 type Props = {}
@@ -6,12 +6,7 @@ type Props = {}
 const SideProfile = (props: Props) => {
   return (
     <Box className="justify-end">
-      <Card sx={{ width: {
-        md:300
-      }, display: {
-        xs:"none", md:"block"
-      }
-      }} className="">
+      <Card>
         <CardContent className="">
           <Typography className="my-5 text-center">
             profile

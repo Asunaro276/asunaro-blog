@@ -3,6 +3,10 @@ export type Blog = {
   title: string
   description: string
   body: string
+  category: {
+    id: string
+    name: string
+  }
   publishedAt: string
   image: {
     url: string
@@ -10,4 +14,9 @@ export type Blog = {
     height: number
   }
   imageAlt: string
+}
+
+export type Category = {
+  id: string
+  name: string
 }

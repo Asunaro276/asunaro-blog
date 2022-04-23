@@ -1,4 +1,5 @@
 module.exports = {
+  mode: "jit",
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
@@ -7,11 +8,13 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        vollkorn: ['Vollkorn'],
-        montserrat: ['Montserrat Subrayada'],
-        nserif: ["Noto Serif"],
-        mplus: ["M PLUS Rounded 1c"],
-        biz: ['BIZ UDPGothic'],
+        logo: ['Montserrat Subrayada'],
+        title: ['Noto Serif', 'Helvetica', 'Arial', 'Verdana'],
+        body: [
+          'Noto Serif',
+          'Yu Gothic',
+          'Roboto',
+        ],
       }
     },
   },

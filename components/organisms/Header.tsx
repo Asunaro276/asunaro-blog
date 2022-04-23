@@ -1,25 +1,26 @@
 import { ThemeProvider } from "@emotion/react"
-import { Box, Typography } from "@mui/material"
+import { Box, Link, Typography } from "@mui/material"
 import { titleFontTheme } from "theme"
 import NavigationBar from "../molecules/NavigationBar"
 
 
 type Props = {
-  pages: string[]
-  linkTo: string[]
+  linkToId: string[]
+  
 }
 
 const Header = (props: Props) => {
   const logo = "Asunaro Blog"
   return (
     <div>
-      <Typography className="py-8 ml-10 font-montserrat" sx={{flexGrow: 1, display: { xs: 'none', md: 'block' }, fontSize: { xs: 30, md: 60 }}}>
+      <Typography className="py-5 ml-10 font-logo" sx={{flexGrow: 1, display: { xs: 'none', md: 'block' }, fontSize: { xs: 30, md: 40 }}}>
+        <Link href="/" underline="none" className="text-slate-700" >
           {logo}
+        </Link> 
       </Typography>
       <NavigationBar
         logo={logo}
-        linkTo={props.linkTo}
-        pages={props.pages}
+        linkToId={props.linkToId}
       />
     </div>
   )

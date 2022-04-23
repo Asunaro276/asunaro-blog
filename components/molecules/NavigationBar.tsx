@@ -2,16 +2,17 @@ import * as React from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
-import { Button, Container, IconButton, Link, Menu, MenuItem, Typography } from '@mui/material'
+import { Container, IconButton, Link, Menu, MenuItem, Typography } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
+import { pages, pageIcons } from 'pages'
 
 type Props = {
   logo: string
-  pages: string[]
-  linkTo: string[]
+  linkToId: string[]
 }
 
 const NavigationBar = (props: Props) => {
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -55,17 +56,27 @@ const NavigationBar = (props: Props) => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {props.pages.map((page, index) => (
+              {pages.map((page, index) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Link href={props.linkTo[index]} className="text-center">
-                    {page}
+                  <Link
+                    href={props.linkToId[index]}
+                    underline="none"
+                    color="inherit"
+                    className='text-lg flex hover:text-slate-300 ease-out duration-100'
+                  >
+                    <Box className="mr-1">
+                      {pageIcons[index]}
+                    </Box>
+                    <Box className='pt-0.5'>
+                      {page}
+                    </Box>
                   </Link>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           <Typography
-            className='font-montserrat'
+            className='font-logo'
             variant="h6"
             noWrap
             component="div"
@@ -74,18 +85,25 @@ const NavigationBar = (props: Props) => {
             {props.logo}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {props.pages.map((page, index) => (
-              <Link
-                key={page}
-                onClick={handleCloseNavMenu}
-                href={props.linkTo[index]}
-                sx={{ mx:4, my: 2, display: 'block' }}
-                underline="none"
-                color="inherit"
-                className='text-lg'
-              >
-                {page}
-              </Link>
+            {pages.map((page, index) => (
+              <Box>
+                <Link
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  href={props.linkToId[index]}
+                  sx={{ mx:4, my: 2, display: 'block' }}
+                  underline="none"
+                  color="inherit"
+                  className='text-lg flex hover:text-slate-600 ease-out duration-100'
+                >
+                  <Box className="mr-1">
+                    {pageIcons[index]}
+                  </Box>
+                  <Box className='pt-0.5'>
+                    {page}
+                  </Box>
+                </Link>
+              </Box>
             ))}
           </Box>
         </Toolbar>

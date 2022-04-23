@@ -1,10 +1,15 @@
 import { Box, Card } from "@mui/material"
+import { RenderedElement } from "components/molecules/RenderedElement"
 import { TableOfContents } from "components/molecules/TableOfContents"
 import { Blog } from "types"
 import Caption from "../molecules/Caption"
 
 type Props = {
   blog: Blog
+  parsedBody: { text: string
+    id: string
+    tag: string
+  }[]
 }
 
 const PostBody = (props: Props) => {
@@ -20,15 +25,19 @@ const PostBody = (props: Props) => {
     </Box>
     <Box className="flex justify-center">
       <TableOfContents
-        body={props.blog.body}
+        parsedBody={props.parsedBody}
       />
     </Box>
-    <Box>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: `${props.blog.body}`,
-        }}
-      />
+    <Box className="flex justify-center">
+      <Box className="w-10/12">
+        {props.parsedBody.map((textParts) => (
+          <RenderedElement
+            id={textParts.id}
+            text={textParts.text}
+            tag={textParts.tag}
+          />
+        ))}
+      </Box>
     </Box>
   </Card>
   )

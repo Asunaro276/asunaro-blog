@@ -1,10 +1,31 @@
 import { Box } from "@mui/material"
-import SideProfile from "./SideProfile"
+import SideProfile from "components/molecules/SideProfile"
+import { SideToc } from "components/molecules/SideToc"
 
-const SideBar = () => {
+type Props = {
+  parsedBody?: {
+    text: string
+    id: string
+    tag: string
+  }[]
+}
+
+
+const SideBar = (props: Props) => {
+  const profileHeight = 29 
   return (
-    <Box className="my-10">
-      <SideProfile />
+    <Box className="h-full">
+      <Box sx={{ height: `calc(${profileHeight}rem)` }}>
+        <SideProfile />
+      </Box>
+      <Box className="box-border" sx={{ height: `calc(100% - ${profileHeight}rem)` }}>
+        {props.parsedBody !== undefined &&
+          (<Box className="sticky top-4">
+            <SideToc
+              parsedBody={props.parsedBody}
+            />
+          </Box>)}
+      </Box>
     </Box>
   )
 }

@@ -10,23 +10,25 @@ type Props = {
 
 const Caption = (props: Props) => {
   return (
-    <Box>
+    <Box className="">
       <Box className="flex justify-center mb-10">
         <Typography color="text.secondary" variant="caption">
           {convertDateFormat(props.publishedAt)}
         </Typography>
       </Box>
       <Box className="text-center my-10">
-        <Typography variant="h4" className="font-biz">
+        <Typography className="font-title text-2xl font-bold text-slate-600">
           {props.title}
         </Typography>
       </Box>
-      <Box className="mx-32">
-        <CardMedia
-          component="img"
-          alt={props.imageAlt}
-          image={props.imageUrl}
-        />
+      <Box className="flex justify-center">
+        <Box className="w-9/12">
+          <CardMedia
+            component="img"
+            alt={props.imageAlt}
+            image={props.imageUrl}
+          />
+        </Box>
       </Box>
     </Box>
   )

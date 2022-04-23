@@ -2,10 +2,11 @@ import PostPage from "components/templates/PostPage";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { client } from "../../libs/client";
-import { Blog } from "../../types";
+import { Blog, Category } from "../../types";
 
 type Props = {
   blog: Blog
+  categories: Category[]
 }
 
 interface Params extends ParsedUrlQuery {
@@ -13,10 +14,12 @@ interface Params extends ParsedUrlQuery {
 }
 
 export default function BlogId(props: Props) {
+  console.log(props)
   return (
     <main>
       <PostPage
         blog={props.blog}
+        categories={props.categories}
       />
     </main>
   );
@@ -32,12 +35,14 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps: GetStaticProps<Props, Params> = async (context) => {
-  const id = context.params!.id;
-  const data = await client.get({ endpoint: "blog", contentId: id });
+  const id = context.params!.id
+  const data = await client.get({ endpoint: "blog", contentId: id }) as Blog;
+  const categories = await client.get({ endpoint: "categories" })
 
   return {
     props: {
       blog: data,
+      categories: categories.contents
     },
   };
 };
