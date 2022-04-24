@@ -17,7 +17,7 @@ type Props = {
 export default function PostCard(props: Props) {
   return (
     <Card sx={{ height: "100%" }}>
-      <Link href={`blog/${props.blog.id}`} underline="none">
+      <Link href={`/blog/${props.blog.id}`} underline="none">
         <CardMedia
           component="img"
           alt={props.blog.imageAlt}
@@ -26,7 +26,7 @@ export default function PostCard(props: Props) {
       </Link>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div" className='ml-5'>
-          <Link href={`blog/${props.blog.id}`} color="inherit" underline='hover'>
+          <Link href={`/blog/${props.blog.id}`} color="inherit" underline='hover'>
             {props.blog.title}
           </Link>
         </Typography>
@@ -38,7 +38,7 @@ export default function PostCard(props: Props) {
         </Typography>
       </CardContent>
       <CardActions className='justify-center'>
-        <Link href={`blog/${props.blog.id}`} color="inherit" underline='none'>
+        <Link href={`/blog/${props.blog.id}`} color="inherit" underline='none'>
           <Button size="small" variant="outlined" color="inherit">Read More</Button>
         </Link>
       </CardActions>

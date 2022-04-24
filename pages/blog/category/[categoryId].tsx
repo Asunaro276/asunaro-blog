@@ -15,7 +15,7 @@ interface Params extends ParsedUrlQuery {
 }
 
 export default function CategoryId(props: Props) {
-  // カテゴリーに紐付いたコンテンツがcない場合に表示
+  console.log(props)
   return (
     <div>
       <CategoryPage
