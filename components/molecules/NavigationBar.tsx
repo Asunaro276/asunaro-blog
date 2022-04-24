@@ -23,7 +23,7 @@ const NavigationBar = (props: Props) => {
   };
 
   return (
-    <AppBar position="static" className="bg-slate-500" sx={{ paddingY: {xs: 2, md:0} }}>
+    <AppBar position="static" className="bg-slate-500" sx={{ paddingY: {xs: 1, sm: 2, md:0} }}>
       <Container>
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -80,7 +80,7 @@ const NavigationBar = (props: Props) => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, fontSize: { xs: 30, md: 60 } }}
+            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, fontSize: { xs: 25, md: 60 } }}
           >
             <Link href="/" underline="none" color="inherit">
               {props.logo}
