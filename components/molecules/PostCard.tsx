@@ -30,7 +30,7 @@ export default function PostCard(props: Props) {
             {props.blog.title}
           </Link>
         </Typography>
-        <Typography variant="body1" color="text.secondary" className='ml-5 h-20'>
+        <Typography variant="body1" color="text.secondary" className='ml-5 h-20 text-ellipsis overflow-y-hidden'>
           {props.blog.description}
         </Typography>
         <Typography variant="body2" color="text.secondary" className='ml-5 mt-5'>

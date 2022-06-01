@@ -2,6 +2,7 @@ import * as cheerio from 'cheerio'
 import PostPage from "components/templates/PostPage"
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
+import { Button } from '@mui/material'
 import { client } from "../../libs/client"
 import { Blog, Category } from "../../types"
 import hljs from 'highlight.js/lib/core'
