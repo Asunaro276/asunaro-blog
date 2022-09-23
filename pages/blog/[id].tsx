@@ -2,11 +2,16 @@ import * as cheerio from 'cheerio'
 import PostPage from "components/templates/PostPage"
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
-import { Button } from '@mui/material'
 import { client } from "../../libs/client"
 import { Blog, Category } from "../../types"
-import hljs from 'highlight.js/lib/core'
 import { NextSeo } from 'next-seo'
+import hljs from 'highlight.js/lib/core'
+import javascript from 'highlight.js/lib/languages/javascript';
+import xml from 'highlight.js/lib/languages/xml'
+import 'highlight.js/styles/vs2015.css'
+
+hljs.registerLanguage("xml", xml)
+hljs.registerLanguage("javascript", javascript)
 
 type Props = {
   blog: Blog
@@ -72,7 +77,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   $('p').each((_, element) => {
   $(element).html()
   $(element).addClass('text-lg font-body leading-loose')
-  $(element).wrap('<div class="my-5></div>')
+  $(element).wrap('<div class="my-5"></div>')
   })
 
   $('img').each((_, element) => {
@@ -83,6 +88,11 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   $('a').each((_, element) => {
   $(element).html();
   $(element).addClass("")
+  });
+
+  $('ul').each((_, element) => {
+  $(element).html();
+  $(element).addClass("list-disc list-inside text-lg space-y-2")
   });
 
   $('h1').each((_, element) => {

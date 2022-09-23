@@ -14,7 +14,7 @@ type Props = {
 
 export const pages = ["Home", "プログラミング", "その他"]
 export const linkTo = ["/", "programming", "other"]
-export const pageIcons = [<HomeOutlinedIcon />, <CodeIcon />, <MoreHorizIcon />]
+export const pageIcons = [<HomeOutlinedIcon key={0} />, <CodeIcon key={1} />, <MoreHorizIcon key={2} />]
 
 export default function Home(props: Props) {
   return (

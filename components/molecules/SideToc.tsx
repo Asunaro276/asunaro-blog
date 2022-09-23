@@ -17,7 +17,7 @@ export const SideToc = (props: Props) => {
       <ul className="mb-10">
         {props.heading.map((data, index) => {
           if (data.text === undefined) {
-            return <div></div>
+            return <div key={data.id}></div>
           }
           if (data.tag === "h1") {
             tocCount[0] += 1

@@ -11,7 +11,7 @@ export default {
     },
   ],
   openGraph: {
-    url: 'https://asunaro-blog.com/',
+    url: 'https://asunaroblog.net/',
     type: 'website',
     locale: 'ja_JP',
     site_name: 'Asunaro Blog',

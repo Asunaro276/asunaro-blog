@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: 'https://asunaro-blog.com',
+  siteUrl: 'https://asunaroblog.net',
   generateRobotsTxt: true,
   sitemapSize: 7000,
   outDir: './out',

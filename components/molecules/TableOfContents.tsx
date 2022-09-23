@@ -18,10 +18,11 @@ export const TableOfContents = (props: Props) => {
       <ul className="">
         {props.parsedBody.map((data, index) => {
           if (data.text === undefined) {
-            return <div></div>
+            return <div key={index}></div>
           }
           if (data.tag === "h1") {
             tocCount[0] += 1
+            tocCount[1] = 1
             return (
               <li key={data.id} className="mt-4">
                 <Scroll to={`${data.id}`} smooth={true} className="hover:opacity-50 cursor-pointer flex" id={`l${index}`} duration={400}>
@@ -37,6 +38,7 @@ export const TableOfContents = (props: Props) => {
           }
           if (data.tag === "h2") {
             tocCount[1] += 1
+            tocCount[2] = 1
             return (
               <li key={data.id} className="my-2">
                 <Scroll to={`${data.id}`} smooth={true} className="hover:opacity-50 cursor-pointer flex" id={`${index}`} duration={400}>

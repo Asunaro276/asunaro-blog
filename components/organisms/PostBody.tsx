@@ -23,13 +23,13 @@ const PostBody = (props: Props) => {
         imageAlt={props.blog.imageAlt}
       />
     </Box>
-    <Box className="flex justify-center">
+    <Box className="flex justify-center mb-20">
       <TableOfContents
         parsedBody={props.heading}
       />
     </Box>
     <Box className="flex justify-center">
-      <Box className="w-10/12">
+      <Box className="w-10/12 mb-20">
         <div dangerouslySetInnerHTML={{ __html: props.content }} />
       </Box>
     </Box>

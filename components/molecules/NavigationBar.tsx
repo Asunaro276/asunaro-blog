@@ -2,7 +2,7 @@ import * as React from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
-import { Container, IconButton, Link, Menu, MenuItem, Typography } from '@mui/material'
+import { Button, Container, IconButton, Link, Menu, MenuItem, Typography } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { pages, pageIcons } from 'pages'
 
@@ -57,12 +57,12 @@ const NavigationBar = (props: Props) => {
               }}
             >
               {pages.map((page, index) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={handleCloseNavMenu} className='text-lg hover:bg-slate-200 ease-out duration-100'>
                   <Link
                     href={props.linkToId[index]}
                     underline="none"
                     color="inherit"
-                    className='text-lg flex hover:text-slate-300 ease-out duration-100'
+                    className='flex'
                   >
                     <Box className="mr-1">
                       {pageIcons[index]}
@@ -88,24 +88,23 @@ const NavigationBar = (props: Props) => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page, index) => (
-              <Box key={index}>
-                <Link
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  href={props.linkToId[index]}
-                  sx={{ mx:4, my: 2, display: 'block' }}
-                  underline="none"
-                  color="inherit"
-                  className='text-lg flex hover:text-slate-600 ease-out duration-100'
-                >
-                  <Box className="mr-1">
-                    {pageIcons[index]}
-                  </Box>
-                  <Box className='pt-0.5'>
-                    {page}
-                  </Box>
-                </Link>
-              </Box>
+              <Link
+                key={page}
+                onClick={handleCloseNavMenu}
+                href={props.linkToId[index]}
+                sx={{ mx:3, my: 1, display: 'block' }}
+                underline="none"
+                color="inherit"
+                className='flex text-lg hover:bg-slate-400 ease-out duration-100 p-3'
+                variant="button"
+              >
+                <Box className="mr-1">
+                  {pageIcons[index]}
+                </Box>
+                <Box className='pt-0.5'>
+                  {page}
+                </Box>
+              </Link>
             ))}
           </Box>
         </Toolbar>
