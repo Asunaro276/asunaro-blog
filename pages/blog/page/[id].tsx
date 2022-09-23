@@ -18,7 +18,6 @@ type Params = {
 
 // pages/blog/[id].js
 export default function BlogPageId(props: Props) {
-  console.log(props.pageNumber)
   return (
     <main>
       <HomePage
