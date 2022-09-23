@@ -8,7 +8,9 @@ import Head from 'next/head'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Head>asunaroblog</Head>
+      <Head>
+        <title>asunaroblog</title>
+      </Head>
       <DefaultSeo {...SEO} />
       <Component {...pageProps} />
     </>
