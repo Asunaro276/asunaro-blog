@@ -25,7 +25,6 @@ interface Params extends ParsedUrlQuery {
 }
 
 export default function BlogId(props: Props) {
-  console.log(props.cardDatas)
   return (
     <main>
       <NextSeo
@@ -64,22 +63,22 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
 
   $('h1').each((_, element) => {
   $(element).html()
-  $(element).addClass('ml-8 my-5 text-3xl font-semibold font-body')
-  $(element).wrap('<div class="bg-slate-100 mb-5 mt-20 flex"></div>')
-  $(element).parent().prepend('<div class="w-2 bg-yellow-400"></div>')
+  // $(element).addClass('ml-8 my-5 text-3xl font-semibold font-body')
+  // $(element).wrap('<div class="bg-slate-100 mb-5 mt-20 flex"></div>')
+  // $(element).parent().prepend('<div class="w-2 bg-yellow-400"></div>')
   })
 
   $('h2').each((_, element) => {
   $(element).html()
-  $(element).addClass('ml-4 my-2 text-xl font-semibold font-body')
-  $(element).wrap('<div class="my-8 flex"></div>')
-  $(element).parent().prepend('<div class="w-2 bg-yellow-400"></div>')
+  // $(element).addClass('ml-4 my-2 text-xl font-semibold font-body')
+  // $(element).wrap('<div class="my-8 flex"></div>')
+  // $(element).parent().prepend('<div class="w-2 bg-yellow-400"></div>')
   })
 
   $('p').each((_, element) => {
   $(element).html()
-  $(element).addClass('text-lg font-body leading-loose')
-  $(element).wrap('<div class="my-5"></div>')
+  // $(element).addClass('text-lg font-body leading-loose')
+  // $(element).wrap('<div class="my-5"></div>')
   })
 
   $('img').each((_, element) => {
@@ -89,12 +88,15 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
 
   $('ul').each((_, element) => {
   $(element).html();
-  $(element).addClass("list-disc list-inside text-lg space-y-2 ml-6 pl-4 indent-[-1em]")
+  // $(element).addClass("list-disc list-inside text-lg space-y-2 ml-6 pl-4 indent-[-1em]")
   });
 
-  $('h1').each((_, element) => {
+
+  $('blockquote').each((_, element) => {
   $(element).html();
-  $(element).addClass("")
+  $(element).addClass('ml-4 text-xl opacity-90 font-body')
+  $(element).wrap('<div class="flex"></div>')
+  $(element).parent().prepend('<div class="w-2 bg-slate-200"></div>')
   });
 
   const links = $('a').toArray().map((data) => {

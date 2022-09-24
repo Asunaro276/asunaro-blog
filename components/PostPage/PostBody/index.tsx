@@ -1,7 +1,7 @@
 import { Box, Card } from "@mui/material"
 import { Blog } from "types"
-import parse from 'html-react-parser';
 import Caption from "../Caption"
+import { MarkdownTemplate } from "../MarkdownTemplate";
 import { TableOfContents } from "../TableOfContents";
 
 type Props = {
@@ -31,8 +31,8 @@ const PostBody = (props: Props) => {
     </Box>
     <Box className="flex justify-center">
       <Box className="w-10/12 mb-20">
-        <div dangerouslySetInnerHTML={{ __html: props.content }} />
-        {/* {parse(props.content)} */}
+        {/* <div dangerouslySetInnerHTML={{ __html: props.content }} /> */}
+        <MarkdownTemplate html={props.content} />
       </Box>
     </Box>
   </Card>
