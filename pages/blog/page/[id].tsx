@@ -1,5 +1,5 @@
-import { PER_PAGE } from 'components/organisms/PaginationButton';
-import HomePage from 'components/templates/HomePage';
+import { PER_PAGE } from 'components/HomePage/elements/PaginationButton';
+import HomePage from 'components/HomePage/HomePage';
 import { client } from 'libs/client';
 import { GetStaticProps } from 'next';
 import { Blog, Category } from 'types';

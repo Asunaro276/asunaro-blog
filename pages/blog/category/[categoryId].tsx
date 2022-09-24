@@ -1,4 +1,4 @@
-import CategoryPage from "components/templates/CategoryPage";
+import CategoryPage from "components/HomePage/CategoryPage";
 import { client } from "libs/client";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { ParsedUrlQuery } from "querystring";

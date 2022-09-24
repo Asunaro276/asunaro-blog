@@ -1,4 +1,5 @@
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
+import hljs from 'highlight.js/lib/core'
 
 export default class Document extends NextDocument {
   render() {
@@ -13,8 +14,8 @@ export default class Document extends NextDocument {
           <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@700&family=M+PLUS+Rounded+1c:wght@500&family=Montserrat+Subrayada&family=Vollkorn&display=swap" rel="stylesheet" /> 
           <meta name="msapplication-TileColor" content="#da532c" />
           <meta name="theme-color" content="#ffffff" />
+          <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js" async />
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs2015.min.css" />
-          <script>hljs.initHighlightingOnLoad();</script>
         </Head>
         <body>
           <Main />

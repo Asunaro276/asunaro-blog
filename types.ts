@@ -20,3 +20,10 @@ export type Category = {
   id: string
   name: string
 }
+
+export type MetaData = {
+  url: string,
+  title: string,
+  description: string,
+  image: string,
+}

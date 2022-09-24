@@ -1,11 +1,11 @@
-import HomePage from "components/templates/HomePage";
 import { client } from "libs/client";
 import { Blog, Category } from "types";
 import CodeIcon from '@mui/icons-material/Code';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import BusinessIcon from '@mui/icons-material/Business';
-import { PER_PAGE } from "components/organisms/PaginationButton";
+import HomePage from "components/HomePage/HomePage";
+import { PER_PAGE } from "components/HomePage/elements/PaginationButton";
 
 type Props = {
   blogs: Blog[]
@@ -33,7 +33,7 @@ export default function Home(props: Props) {
 
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async () => {
-  const data = await client.get({ endpoint: "blog", queries: { offset: 0, limit: PER_PAGE } })
+  const data = await client.get({ endpoint: "blog", queries: { offset: 0, limit: PER_PAGE} })
   const categoryData = await client.get({ endpoint: "categories" })
 
   return {

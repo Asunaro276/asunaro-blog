@@ -1,14 +1,14 @@
 import * as cheerio from 'cheerio'
-import PostPage from "components/templates/PostPage"
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { client } from "../../libs/client"
-import { Blog, Category } from "../../types"
+import { Blog, Category, MetaData } from "../../types"
 import { NextSeo } from 'next-seo'
 import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript';
 import xml from 'highlight.js/lib/languages/xml'
-import 'highlight.js/styles/vs2015.css'
+import 'highlight.js/styles/github-dark.css'
+import PostPage from 'components/PostPage'
 
 hljs.registerLanguage("xml", xml)
 hljs.registerLanguage("javascript", javascript)
@@ -16,6 +16,7 @@ hljs.registerLanguage("javascript", javascript)
 type Props = {
   blog: Blog
   content: string
+  cardDatas: MetaData[]
   categories: Category[]
 }
 
@@ -24,6 +25,7 @@ interface Params extends ParsedUrlQuery {
 }
 
 export default function BlogId(props: Props) {
+  console.log(props.cardDatas)
   return (
     <main>
       <NextSeo
@@ -85,14 +87,9 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   $(element).addClass("")
   });
 
-  $('a').each((_, element) => {
-  $(element).html();
-  $(element).addClass("")
-  });
-
   $('ul').each((_, element) => {
   $(element).html();
-  $(element).addClass("list-disc list-inside text-lg space-y-2")
+  $(element).addClass("list-disc list-inside text-lg space-y-2 ml-6 pl-4 indent-[-1em]")
   });
 
   $('h1').each((_, element) => {
@@ -100,10 +97,48 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   $(element).addClass("")
   });
 
+  const links = $('a').toArray().map((data) => {
+    const url = data.attribs.href.indexOf("http") === -1
+      ? `${process.env.NEXT_PUBLIC_DOMEIN}${data.attribs.href}`
+      : data.attribs.href;
+    return {url: url}
+  })
+  const cardDatas = await Promise.all(
+    links.map(async (link) => {
+      const metaData: MetaData = {
+        url: link.url,
+        title: "",
+        description: "",
+        image: "",
+      }
+      const metas = await fetch(link.url)
+        .then((res) => res.text())
+        .then((text) => {
+          const $ = cheerio.load(text)
+          const metas = $("meta").toArray()
+          metas.forEach((meta) => {
+            if (meta.attribs?.property === "og:title")
+              metaData.title = meta.attribs.content
+            if (meta.attribs?.property === "og:description")
+              metaData.description = meta.attribs.content
+            if (meta.attribs?.property === "og:image")
+              metaData.image = meta.attribs.content
+          })
+          return metaData
+        }).catch((error: unknown) => {
+          if (error instanceof Error) {
+            console.log(error)
+          }
+          return metaData
+        })
+        return metas
+    })
+  )
   return {
     props: {
       blog: data,
       content: $.html(),
+      cardDatas: cardDatas,
       categories: categories.contents
     },
   };

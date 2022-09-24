@@ -3,6 +3,8 @@ import type { AppProps } from 'next/app'
 import { DefaultSeo } from 'next-seo'
 import SEO from "next-seo.config"
 import Head from 'next/head'
+import { ThemeProvider } from '@emotion/react'
+import { basicTheme } from 'styles/theme'
 
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -12,7 +14,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>asunaroblog</title>
       </Head>
       <DefaultSeo {...SEO} />
-      <Component {...pageProps} />
+      <ThemeProvider theme={basicTheme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   )
 }
