@@ -1,21 +1,20 @@
 import { Blog, Category } from "types";
 import Box from "@mui/material/Box"
 import { linkTo, pages } from "pages";
-import { parsePostHeading } from "libs/parsePostHeading";
 import Header from "components/common/Header";
 import PostBody from "./PostBody";
 import Footer from "components/common/Footer";
 import SideBar from "components/common/SideBar";
+import { parsePostBody } from "libs/parsePostBody";
 
 type Props = {
   blog: Blog
-  content: string
   categories: Category[]
 }
 
 const PostPage = (props: Props) => {
   const linkToId = ["/"].concat([...props.categories].filter((category) => linkTo.includes(category.name)).map((category) => `/blog/category/${category.id}`))
-  const heading = parsePostHeading(props.blog.body)
+  const headings = parsePostBody(props.blog.body)
   return (
     <div className="bg-slate-100">
       <div>
@@ -23,20 +22,19 @@ const PostPage = (props: Props) => {
           linkToId={linkToId}
         />
       </div>
-      <div className="flex flex-row justify-between">
+      <Box className="flex justify-between" sx={{ flexDirection: {xs: "column", md: "row"} }}>
         <Box className="" sx={{ marginX: "2%", width: { xs: "95%", md: "75%" } }}>
           <PostBody
             blog={props.blog}
-            content={props.content}
-            heading={heading}
+            headings={headings}
           />
         </Box>
-        <Box className="mt-32 w-3/12" sx={{ marginX: "2%", display: { xs: "none", md: "block" }}}>
+        <Box className="mt-32" sx={{ marginX: "2%", width: { md: "25%" } }}>
           <SideBar
-            heading={heading}
+            headings={headings}
           />
         </Box>
-      </div>
+      </Box>
       <div>
         <Footer
           pages={pages}

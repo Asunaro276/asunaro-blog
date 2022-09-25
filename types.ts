@@ -2,18 +2,32 @@ export type Blog = {
   id: string
   title: string
   description: string
-  body: string
-  category: {
-    id: string
-    name: string
-  }
+  body: BlogBody
+  category: Category
   publishedAt: string
-  image: {
-    url: string
-    width: number
-    height: number
-  }
+  image: Image
   imageAlt: string
+}
+
+export type BlogBody = (Paragraph | Link)[]
+
+export type Paragraph = {
+  fieldId: string
+  paragraph: string
+}
+
+export type Link = {
+  fieldId: string
+  url: string
+  title: string
+  image: Image
+  linkTo: string
+}
+
+type Image = {
+  url: string
+  width: number
+  height: number
 }
 
 export type Category = {
@@ -21,9 +35,8 @@ export type Category = {
   name: string
 }
 
-export type MetaData = {
-  url: string,
-  title: string,
-  description: string,
-  image: string,
+export type Heading = {
+  text: string
+  tag: string
+  id: string
 }

@@ -3,7 +3,7 @@ import SideProfile from "components/common/SideBar/SideProfile"
 import { SideToc } from "./SideToc"
 
 type Props = {
-  heading?: {
+  headings?: {
     text: string
     id: string
     tag: string
@@ -18,11 +18,11 @@ const SideBar = (props: Props) => {
       <Box sx={{ height: `calc(${profileHeight}rem)` }}>
         <SideProfile />
       </Box>
-      <Box className="box-border" sx={{ height: `calc(100% - ${profileHeight}rem)` }}>
-        {props.heading !== undefined &&
+      <Box className="box-border" sx={{ display: {xs: "none", md: "block"}, height: `calc(100% - ${profileHeight}rem)` }}>
+        {props.headings !== undefined &&
           (<Box className="sticky top-4">
             <SideToc
-              heading={props.heading}
+              heading={props.headings}
             />
           </Box>)}
       </Box>

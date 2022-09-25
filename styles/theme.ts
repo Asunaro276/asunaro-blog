@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material";
+import { blueGrey } from "@mui/material/colors";
 
 export const titleFontTheme = createTheme({
   typography: {
@@ -11,6 +12,12 @@ export const titleFontTheme = createTheme({
 })
 
 export const basicTheme = createTheme({
+  palette: {
+    primary: {
+      main: blueGrey[300],
+      contrastText: "#fff"
+    }
+  },
   typography: {
     fontFamily: [
       '-apple-system',

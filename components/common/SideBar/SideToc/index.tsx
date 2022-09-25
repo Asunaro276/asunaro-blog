@@ -24,8 +24,10 @@ export const SideToc = (props: Props) => {
             return (
               <li key={data.id} className="mt-4">
                 <Scroll to={`${data.id}`} smooth={true} className="hover:opacity-50 cursor-pointer flex" id={`l${index}`} duration={400}>
-                  <Box className="border-solid border-2 w-10 h-10  rounded-full text-center pt-1 bg-slate-200 font-body text-lg">
-                    {(tocCount[0] - 1).toString()}
+                  <Box className="border-solid border border-slate-400 w-10 h-10 flex justify-center items-center rounded-full bg-slate-200 ">
+                    <Typography className="font-body text-lg">
+                      {(tocCount[0] - 1).toString()}
+                    </Typography>
                   </Box>
                   <Box className="ml-2 mt-2">
                     {data.text}

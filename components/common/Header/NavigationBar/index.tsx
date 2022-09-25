@@ -34,6 +34,7 @@ export const NavigationBar = (props: Props) => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
+              className=''
             >
               <MenuIcon />
             </IconButton>
@@ -64,10 +65,10 @@ export const NavigationBar = (props: Props) => {
                     color="inherit"
                     className='flex'
                   >
-                    <Box className="mr-1">
+                    <Box className="mr-1 pt-0.5">
                       {pageIcons[index]}
                     </Box>
-                    <Box className='pt-0.5'>
+                    <Box className=''>
                       {page}
                     </Box>
                   </Link>
@@ -98,10 +99,10 @@ export const NavigationBar = (props: Props) => {
                 className='flex text-lg hover:bg-slate-400 ease-out duration-100 p-3'
                 variant="button"
               >
-                <Box className="mr-1">
+                <Box className="mr-1 pt-0.5">
                   {pageIcons[index]}
                 </Box>
-                <Box className='pt-0.5'>
+                <Box className=''>
                   {page}
                 </Box>
               </Link>
