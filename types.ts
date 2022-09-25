@@ -9,7 +9,7 @@ export type Blog = {
   imageAlt: string
 }
 
-export type BlogBody = (Paragraph | Link)[]
+export type BlogBody = (Paragraph | Link | Code)[]
 
 export type Paragraph = {
   fieldId: string
@@ -21,7 +21,13 @@ export type Link = {
   url: string
   title: string
   image: Image
-  linkTo: string
+  linkTo?: string
+}
+
+export type Code = {
+  fieldId: string
+  code: string
+  fileName: string
 }
 
 type Image = {

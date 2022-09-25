@@ -48,17 +48,6 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   const id = context.params!.id
   const data = await client.get({ endpoint: "blog", contentId: id }) as Blog;
   const categories = await client.get({ endpoint: "categories" })
-  // const $ = cheerio.load(data.body.flatMap(value => {
-  //   if (value.fieldId === "paragraph") {
-  //     return (value as Paragraph).paragraph
-  //   }
-  // }));
-
-  // $('pre code').each((_, element) => {
-  // const result = hljs.highlightAuto($(element).text())
-  // $(element).html(result.value)
-  // $(element).addClass('hljs my-5')
-  // })
   return {
     props: {
       blog: data,

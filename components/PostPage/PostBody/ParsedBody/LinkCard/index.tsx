@@ -15,9 +15,10 @@ export const LinkCard = ({ link }: Props) => {
             <Typography className="text-lg text-blue-700 underline">
               {link.title}
             </Typography>
+            {Boolean(link.linkTo) && 
             <Button className="max-h-20" variant="contained" color="primary" sx={{textTransform: "none"}}>
               {link.linkTo}でみる
-            </Button>
+            </Button>}
           </Box>
         </CardContent>
       </CardActionArea>

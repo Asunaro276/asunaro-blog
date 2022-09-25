@@ -11,6 +11,7 @@ hljs.registerLanguage("javascript", javascript)
 
 type MarkdownTemplateProps = {
   html: string,
+  fileName?: string,
 } & BoxProps
 
 
@@ -46,7 +47,7 @@ const options: HTMLReactParserOptions = {
       }
       if ((domNode as Element).name === "code") {
         return (
-          <Highlight>
+          <Highlight className="pt-14">
             {domToReact((domNode as Element).children, options)}
           </Highlight>
         )
