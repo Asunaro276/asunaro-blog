@@ -2,7 +2,7 @@ import * as cheerio from 'cheerio'
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { client } from "../../libs/client"
-import { Blog, Category } from "../../types"
+import { Blog, Category, Paragraph } from "../../types"
 import { NextSeo } from 'next-seo'
 import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript';
@@ -48,7 +48,11 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   const id = context.params!.id
   const data = await client.get({ endpoint: "blog", contentId: id }) as Blog;
   const categories = await client.get({ endpoint: "categories" })
-  // const $ = cheerio.load(data.body);
+  // const $ = cheerio.load(data.body.flatMap(value => {
+  //   if (value.fieldId === "paragraph") {
+  //     return (value as Paragraph).paragraph
+  //   }
+  // }));
 
   // $('pre code').each((_, element) => {
   // const result = hljs.highlightAuto($(element).text())

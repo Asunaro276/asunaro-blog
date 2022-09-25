@@ -22,12 +22,12 @@ export default function PostCard(props: Props) {
           component="img"
           alt={props.blog.imageAlt}
           image={props.blog.image.url}
-          className="h-52"
+          className="h-52 hover:brightness-[0.7] duration-[300ms]"
         />
       </Link>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div" className='ml-5'>
-          <Link href={`/blog/${props.blog.id}`} color="inherit" underline='hover'>
+          <Link href={`/blog/${props.blog.id}`} color="inherit" underline='hover' className=''>
             {props.blog.title}
           </Link>
         </Typography>

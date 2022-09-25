@@ -2,7 +2,6 @@ import * as cheerio from 'cheerio'
 import { BlogBody, Heading, Paragraph } from 'types'
 
 const parsePostHeading = (html: string) => {
-  console.log(html)
   const $ = cheerio.load(html)
   const headings = $('h1, h2, h3').toArray()
   const toc: Heading[] = headings.map((data) => ({
@@ -15,7 +14,6 @@ const parsePostHeading = (html: string) => {
 }
 
 export const parsePostBody = (body: BlogBody) => {
-  console.log(Boolean([]))
   const parsedBody = body.map(data => {
     if (data.fieldId === "paragraph") {
       return parsePostHeading(((data as Paragraph).paragraph))

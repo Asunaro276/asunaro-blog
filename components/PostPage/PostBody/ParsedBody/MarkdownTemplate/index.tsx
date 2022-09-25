@@ -1,5 +1,13 @@
 import { Box, BoxProps, Link, Typography } from "@mui/material"
 import parse, { DOMNode, domToReact, Element, HTMLReactParserOptions, Node, ProcessingInstruction, Text } from "html-react-parser"
+import hljs from 'highlight.js/lib/core'
+import javascript from 'highlight.js/lib/languages/javascript';
+import xml from 'highlight.js/lib/languages/xml'
+import 'highlight.js/styles/github-dark.css'
+import Highlight from "react-highlight"
+
+hljs.registerLanguage("xml", xml)
+hljs.registerLanguage("javascript", javascript)
 
 type MarkdownTemplateProps = {
   html: string,
@@ -36,13 +44,11 @@ const options: HTMLReactParserOptions = {
           </ul>
         )
       }
-      if ((domNode as Element).name === "") {
+      if ((domNode as Element).name === "code") {
         return (
-          <Box className="my-5">
-            <Typography className="text-lg font-body leading-loose">
-              {domToReact((domNode as Element).children, options)}
-            </Typography>
-          </Box>
+          <Highlight>
+            {domToReact((domNode as Element).children, options)}
+          </Highlight>
         )
       }
       if ((domNode as Element).name === "p") {

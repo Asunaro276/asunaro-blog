@@ -11,7 +11,7 @@ type Props = {
 export const SideToc = (props: Props) => {
   var tocCount = [1, 1, 1]
   return (
-    <Card className="border-solid border-slate-200 rounded">
+    <Card>
       <Typography className="mt-10 text-center">目次</Typography>
       <Box sx={{ marginX: "10%" }}>
       <ul className="mb-10">
