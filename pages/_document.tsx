@@ -17,7 +17,7 @@ export default class Document extends NextDocument {
           <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js" async />
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs2015.min.css" />
         </Head>
-        <body>
+        <body className='-m-0'>
           <Main />
           <NextScript />
         </body>
