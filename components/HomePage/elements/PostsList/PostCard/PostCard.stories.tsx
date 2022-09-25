@@ -18,7 +18,12 @@ Primary.args = {
     id: "",
     title: "title",
     description: "description",
-    body: "",
+    body: [
+      {
+        "fieldId": "paragrapgh",
+        "paragraph": "<div>aaaa</div>"
+      }
+    ],
     category: {
       id: "",
       name: "category1",

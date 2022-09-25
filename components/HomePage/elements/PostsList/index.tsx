@@ -1,6 +1,6 @@
 import { Blog } from "types"
 import { Box } from "@mui/material"
-import PostCard from "../PostCard"
+import PostCard from "./PostCard"
 
 type Props = {
   blogs: Blog[]
