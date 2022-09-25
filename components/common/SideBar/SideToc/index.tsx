@@ -22,7 +22,7 @@ export const SideToc = (props: Props) => {
           if (data.tag === "h1") {
             tocCount[0] += 1
             return (
-              <li key={data.id} className="mt-4">
+              <li key={data.id} className="mt-4 list-none">
                 <Scroll to={`${data.id}`} smooth={true} className="hover:opacity-50 cursor-pointer flex" id={`l${index}`} duration={400}>
                   <Box className="border-solid border border-slate-400 w-10 h-10 flex justify-center items-center rounded-full bg-slate-200 ">
                     <Typography className="font-body text-lg">
@@ -39,7 +39,7 @@ export const SideToc = (props: Props) => {
           if (data.tag === "h2" && tocCount[0] === 1) {
             tocCount[1] += 1
             return (
-              <li key={data.id} className="my-2">
+              <li key={data.id} className="my-2 list-none">
                 <Scroll to={`${data.id}`} smooth={true} className="hover:opacity-50 cursor-pointer flex" id={`${index}`} duration={400}>
                   <Box className="ml-5 mr-5 text-md">
                       {`${tocCount[1] - 1}`}
