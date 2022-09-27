@@ -19,7 +19,7 @@ export const BottomNavigationBar = (props: Props) => {
                 </Link>
               </div>
               {index < props.pages.length - 1 && 
-              <Divider variant="fullWidth" light sx={{ display: { xs: "block", sm: "none", borderTop: "1px dashed", borderBottom: "0"}, backgroundColor: "white" }} />}
+              <Divider variant="fullWidth" light sx={{ display: { xs: "block", sm: "none", borderTop: "1px dashed", borderBottom: "0"}, borderColor: "white" }} />}
             </Box>
           )
         })}
