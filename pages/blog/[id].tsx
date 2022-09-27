@@ -79,15 +79,14 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
         $c('pre code').each((_, element) => {
           const result = hljs.highlightAuto($c(element).text()).value
           $c(element).html(result)
-          $c(element).wrap('<div class="hljs pt-14 pb-6 pl-4"></div>')
-          $c(element).parent().prepend(`<p class=absolute text-center inline-block px-2 text-white bg-slate-500>
-                                          ${(value as Code).fileName}
-                                      </p>`)
+          $c(element).addClass(`hljs pt-14`)
+          $c(element).parent().addClass("relative")
+          $c(element).parent().prepend(`<p class="absolute my-0 p-1 text-white bg-slate-500">${(value as Code).fileName}</p>`)
         })
         return $c("body").html()
       case "link":
         const linkBody = String.raw`
-        <div class="shadow shadow-outline bg-slate-50 my-4 hover:brightness-[0.9] duration-300 ease-out">
+        <div class="shadow-md shadow-outline bg-slate-50 my-4 hover:brightness-[0.9] duration-300 ease-out">
           <a class="p-4" href=${(value as Link).url} target="_blank" rel="noopener noreferrer">
             <div class="flex justify-evenly flex-wrap">
               <img src=${(value as Link).image.url} class="w-40" />
