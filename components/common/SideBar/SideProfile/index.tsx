@@ -1,5 +1,6 @@
 import { Avatar, Card, CardContent, Divider, Typography } from "@mui/material"
 import Box from "@mui/material/Box"
+import Image from "next/image"
 
 type Props = {}
 
@@ -11,8 +12,8 @@ const SideProfile = (props: Props) => {
           <Typography className="my-5 text-center">
             profile
           </Typography>
-          <Box className="flex justify-center">
-            <Avatar src="/asunaro.jpg" className="w-32 h-32 object-center my-3" />
+          <Box className="flex justify-center my-2">
+            <Image src="/asunaro.jpg" alt="asunaro.jpg" width="150" height="150" className="rounded-full object-center" />
           </Box>
             <Typography className="text-center">
               あすなろ
