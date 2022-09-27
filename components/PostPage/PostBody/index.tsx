@@ -1,12 +1,11 @@
 import { Box, Card } from "@mui/material"
 import { parsePostBody } from "libs/parsePostBody";
-import { Blog, Heading } from "types"
+import { Blog, Heading, ParsedBlog } from "types"
 import Caption from "./Caption"
-import { ParsedBody } from "./ParsedBody";
 import { TableOfContents } from "./TableOfContents";
 
 type Props = {
-  blog: Blog
+  blog: ParsedBlog
   headings: Heading[]
 }
 
@@ -22,11 +21,11 @@ const PostBody = (props: Props) => {
       />
     </Box>
     <Box className="flex justify-center mb-20">
-      <TableOfContents heading={parsePostBody(props.blog.body)} />
+      <TableOfContents heading={props.headings} />
     </Box>
     <Box className="flex justify-center">
       <Box className="w-10/12 mb-20">
-        <ParsedBody body={props.blog.body} />
+        <div dangerouslySetInnerHTML={{ __html: props.blog.body }} />
       </Box>
     </Box>
   </Card>

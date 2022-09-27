@@ -1,20 +1,20 @@
-import { Blog, Category } from "types";
+import { Blog, Category, ParsedBlog } from "types";
 import Box from "@mui/material/Box"
 import { linkTo, pages } from "pages";
 import Header from "components/common/Header";
 import PostBody from "./PostBody";
 import Footer from "components/common/Footer";
 import SideBar from "components/common/SideBar";
-import { parsePostBody } from "libs/parsePostBody";
+import { parsePostBody, parsePostHeading } from "libs/parsePostBody";
 
 type Props = {
-  blog: Blog
+  blog: ParsedBlog
   categories: Category[]
 }
 
 const PostPage = (props: Props) => {
   const linkToId = ["/"].concat([...props.categories].filter((category) => linkTo.includes(category.name)).map((category) => `/blog/category/${category.id}`))
-  const headings = parsePostBody(props.blog.body)
+  const headings = parsePostHeading(props.blog.body)
   return (
     <div className="bg-slate-100">
       <div>

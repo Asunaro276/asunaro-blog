@@ -9,6 +9,17 @@ export type Blog = {
   imageAlt: string
 }
 
+export type ParsedBlog = {
+  id: string
+  title: string
+  description: string
+  body: string
+  category: Category
+  publishedAt: string
+  image: Image
+  imageAlt: string
+}
+
 export type BlogBody = (Paragraph | Link | Code)[]
 
 export type Paragraph = {
@@ -30,7 +41,7 @@ export type Code = {
   fileName: string
 }
 
-type Image = {
+export type Image = {
   url: string
   width: number
   height: number
