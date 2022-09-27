@@ -5,7 +5,7 @@
     "postbuild": "next-sitemap",
     "build": "next build",
     "start": "next start",
-    "export": "yarn run build && next export",
+    "export": "yarn run build && next export && next-export-optimize-images",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "lint": "next lint"
@@ -49,6 +49,7 @@
     "eslint": "^8.14.0",
     "eslint-config-next": "^12.3.1",
     "eslint-config-prettier": "8.5.0",
+    "next-export-optimize-images": "^1.9.0",
     "postcss": "^8.4.5",
     "prettier": "2.6.2",
     "prettier-plugin-tailwindcss": "^0.1.10",
