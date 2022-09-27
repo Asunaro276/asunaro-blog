@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography'
 import { Blog } from "types"
 import { Link } from '@mui/material';
 import { convertDateFormat } from 'libs/convertDateFormat';
+import Image from 'next/image';
 
 
 type Props = {
@@ -16,16 +17,16 @@ type Props = {
 
 export default function PostCard(props: Props) {
   return (
-    <Card sx={{ height: "580px" }}>
-      <Link href={`/blog/${props.blog.id}`} underline="none">
+    <Card className='flex flex-col h-[30rem]'>
+      <Link href={`/blog/${props.blog.id}`} underline="none" className='h-2/5'>
         <CardMedia
-          component="img"
-          alt={props.blog.imageAlt}
-          image={props.blog.image.url}
-          className="h-52 hover:brightness-[0.7] duration-[300ms]"
-        />
+          className="hover:brightness-[0.7] duration-[300ms]"
+          sx={{ height: "100%" }}
+        >
+          <Image src={props.blog.image.url} alt={props.blog.imageAlt} width="500" height="200" objectFit='cover' />
+        </CardMedia>
       </Link>
-      <CardContent sx={{ height: '230px' }}>
+      <CardContent className='h-3/5' >
         <Typography gutterBottom variant="h5" component="div" className='ml-5'>
           <Link href={`/blog/${props.blog.id}`} color="inherit" underline='hover' className=''>
             {props.blog.title}

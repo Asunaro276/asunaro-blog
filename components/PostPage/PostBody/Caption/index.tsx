@@ -1,5 +1,6 @@
 import { Box, CardMedia, Typography } from "@mui/material"
 import { convertDateFormat } from "libs/convertDateFormat"
+import Image from "next/image"
 
 type Props = {
   title: string
@@ -23,11 +24,9 @@ const Caption = (props: Props) => {
       </Box>
       <Box className="flex justify-center">
         <Box className="w-9/12">
-          <CardMedia
-            component="img"
-            alt={props.imageAlt}
-            image={props.imageUrl}
-          />
+          <CardMedia>
+            <Image src={props.imageUrl} alt={props.imageAlt} width="800" height="350" objectPosition="50% 50%" objectFit="contain" />
+          </CardMedia>
         </Box>
       </Box>
     </Box>

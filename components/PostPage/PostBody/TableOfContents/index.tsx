@@ -28,7 +28,7 @@ export const TableOfContents = (props: Props) => {
               tocCount[0] += 1
               tocCount[1] = 1
               return (
-                <li key={index} className="list-none ml-6">
+                <li key={index} className="list-none ml-6 my-4">
                   <Scroll to={`${data.id}`} smooth={true} className="relative hover:opacity-50 cursor-pointer flex" id={`l${index}`} duration={400}>
                     <Box className="absolute -left-10 border-solid border border-slate-400 w-10 aspect-square flex justify-center items-center rounded-full bg-slate-200 ">
                       {(tocCount[0] - 1).toString()}
