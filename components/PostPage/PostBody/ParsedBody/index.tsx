@@ -34,7 +34,11 @@ export const ParsedBody = (props: Props) => {
                 image: (field as Link).image,
                 linkTo: (field as Link).linkTo,
               }
-              return <LinkCard link={link} key={index} />
+              return (
+                <Box className="mb-2">
+                  <LinkCard link={link} key={index} />
+                </Box>
+              )
             default:
               return <></>
           }

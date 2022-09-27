@@ -15,7 +15,9 @@ export const basicTheme = createTheme({
   palette: {
     primary: {
       main: blueGrey[300],
-      contrastText: "#fff"
+      dark: blueGrey[600],
+      light: blueGrey[100],
+      contrastText: "#fff",
     }
   },
   typography: {

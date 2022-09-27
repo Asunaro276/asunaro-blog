@@ -7,11 +7,11 @@ type Props = {
 
 export const LinkCard = ({ link }: Props) => {
   return (
-    <Card className="max-h-56 shadow-outline bg-slate-50">
+    <Card className="shadow-outline bg-slate-50">
       <CardActionArea href={link.url} target="_blank" rel="noopener noreferrer">
-        <CardContent className="flex justify-evenly">
+        <CardContent className="flex justify-evenly flex-wrap">
           <CardMedia src={link.image.url} component="img" sx={{width: 120}} />
-          <Box className="flex flex-col justify-center items-start space-y-5">
+          <Box className="flex flex-col w-2/3 justify-center items-center space-y-5">
             <Typography className="text-lg text-blue-700 underline">
               {link.title}
             </Typography>

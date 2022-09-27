@@ -2,6 +2,9 @@ import * as cheerio from 'cheerio'
 import { BlogBody, Heading, Paragraph } from 'types'
 
 const parsePostHeading = (html: string) => {
+  if (!html) {
+    html = ""
+  }
   const $ = cheerio.load(html)
   const headings = $('h1, h2, h3').toArray()
   const toc: Heading[] = headings.map((data) => ({
