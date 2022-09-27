@@ -1,13 +1,8 @@
 import { Box, BoxProps, Link, Typography } from "@mui/material"
-import parse, { DOMNode, domToReact, Element, HTMLReactParserOptions, Node, ProcessingInstruction, Text } from "html-react-parser"
+import parse, { DOMNode, domToReact, Element, HTMLReactParserOptions, Text } from "html-react-parser"
 import hljs from 'highlight.js/lib/core'
-import javascript from 'highlight.js/lib/languages/javascript';
-import xml from 'highlight.js/lib/languages/xml'
-import 'highlight.js/styles/github-dark.css'
-import Highlight from "react-highlight"
-
-hljs.registerLanguage("xml", xml)
-hljs.registerLanguage("javascript", javascript)
+import 'highlight.js/lib/common'
+import 'highlight.js/styles/monokai.css'
 
 type MarkdownTemplateProps = {
   html: string,
@@ -46,10 +41,11 @@ const options: HTMLReactParserOptions = {
         )
       }
       if ((domNode as Element).name === "code") {
+        const html = hljs.highlightAuto(((domNode as Element).children[0] as Text).data).value
         return (
-          <Highlight className="pt-14">
-            {domToReact((domNode as Element).children, options)}
-          </Highlight>
+          <Box className="hljs pt-14 pb-6 pl-4">
+            <div dangerouslySetInnerHTML={{__html: html}} />
+          </Box>
         )
       }
       if ((domNode as Element).name === "p") {

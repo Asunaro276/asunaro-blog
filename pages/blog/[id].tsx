@@ -1,17 +1,9 @@
-import * as cheerio from 'cheerio'
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { client } from "../../libs/client"
-import { Blog, Category, Paragraph } from "../../types"
+import { Blog, Category } from "../../types"
 import { NextSeo } from 'next-seo'
-import hljs from 'highlight.js/lib/core'
-import javascript from 'highlight.js/lib/languages/javascript';
-import xml from 'highlight.js/lib/languages/xml'
-import 'highlight.js/styles/github-dark.css'
 import PostPage from 'components/PostPage'
-
-hljs.registerLanguage("xml", xml)
-hljs.registerLanguage("javascript", javascript)
 
 type Props = {
   blog: Blog
