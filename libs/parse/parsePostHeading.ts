@@ -15,12 +15,3 @@ export const parsePostHeading = (html: string) => {
   )
   return toc
 }
-
-export const parsePostBody = (body: BlogBody) => {
-  const parsedBody = body.map(data => {
-    if (data.fieldId === "paragraph") {
-      return parsePostHeading(((data as Paragraph).paragraph))
-    }
-  })
-  return parsedBody.flat().filter(Boolean) as Heading[]
-}

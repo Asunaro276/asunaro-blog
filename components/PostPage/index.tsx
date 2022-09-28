@@ -5,7 +5,7 @@ import Header from "components/common/Header";
 import PostBody from "./PostBody";
 import Footer from "components/common/Footer";
 import SideBar from "components/common/SideBar";
-import { parsePostBody, parsePostHeading } from "libs/parsePostBody";
+import { parsePostBody, parsePostHeading } from "libs/parse/parsePostHeading";
 
 type Props = {
   blog: ParsedBlog
