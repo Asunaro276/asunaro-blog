@@ -9,7 +9,7 @@ export const parseParagraph = (paragraph: string) => {
   })
   $("h2").each((_, element) => {
     $(element).addClass('ml-4 my-2 text-xl font-semibold font-body')
-    $(element).wrap('<div class="my-8 flex"></div>')
+    $(element).wrap('<div class="mb-8 mt-8 flex"></div>')
     $(element).parent().prepend('<div class="w-2 bg-yellow-400"></div>')
   })
 
