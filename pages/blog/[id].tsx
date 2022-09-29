@@ -1,19 +1,17 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { client } from "../../libs/client"
-import { Blog, Category, Code, Image, Link, Paragraph, ParsedBlog } from "../../types"
-import cheerio from 'cheerio'
-import hljs from 'highlight.js/lib/core'
-import 'highlight.js/lib/common'
-import 'highlight.js/styles/monokai.css'
+import { Blog, Category, Code, Heading, Link, Paragraph, ParsedBlog } from "types"
 import { NextSeo } from "next-seo"
 import PostPage from "components/PostPage"
 import { parseParagraph } from "libs/parse/parseParagraph"
 import { parseCode } from "libs/parse/parseCode"
 import { parseLink } from "libs/parse/parseLink"
+import { parseHeading } from "libs/parse/parseHeading"
 
 type Props = {
   blog: ParsedBlog
+  headings: Heading[]
   categories: Category[]
 }
 
@@ -30,6 +28,7 @@ export default function BlogId(props: Props) {
       />
       <PostPage
         blog={props.blog}
+        headings={props.headings}
         categories={props.categories}
       />
     </main>
@@ -64,9 +63,11 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
     }
   )
   const body = bodyList.join("")
+  const heading = parseHeading(body)
   return {
     props: {
       blog: {...data, body: body},
+      headings: heading,
       categories: categories.contents
     },
   }
