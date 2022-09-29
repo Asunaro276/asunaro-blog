@@ -1,6 +1,5 @@
 import { Box, Card } from "@mui/material"
-import { parsePostBody } from "libs/parse/parsePostHeading";
-import { Blog, Heading, ParsedBlog } from "types"
+import { Heading, ParsedBlog } from "types"
 import Caption from "./Caption"
 import { TableOfContents } from "./TableOfContents";
 
