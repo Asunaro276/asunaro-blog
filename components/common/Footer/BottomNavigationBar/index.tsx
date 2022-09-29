@@ -5,7 +5,6 @@ type Props = {
   linkTo: string[]
 }
 
-
 export const BottomNavigationBar = (props: Props) => {
   return (
     <Box className="bg-slate-500" sx={{ height: { xs: "50", sm: "20" } }}>

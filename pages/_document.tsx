@@ -10,9 +10,7 @@ export default class Document extends NextDocument {
           <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
           <link rel="manifest" href="/favicons/site.webmanifest" />
           <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5" />
-          <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@700&family=M+PLUS+Rounded+1c:wght@500&family=Montserrat+Subrayada&family=Vollkorn&display=swap" rel="stylesheet" /> 
-          <meta name="msapplication-TileColor" content="#da532c" />
-          <meta name="theme-color" content="#ffffff" />
+          <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada&display=swap" rel="stylesheet" /> 
         </Head>
         <body className='-m-0'>
           <Main />
