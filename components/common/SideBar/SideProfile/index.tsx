@@ -22,7 +22,7 @@ const SideProfile = (props: Props) => {
               <Divider className="w-20" />
             </Box>
             <Typography className="my-10 px-10">
-              都内の大学生。web開発を中心にプログラミングの情報を発信
+              都内の大学生。2023年度からWeb広告企業に就職予定。Next.js, MUI中心に勉強中
             </Typography>
         </CardContent>
       </Card>
