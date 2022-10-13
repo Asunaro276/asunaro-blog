@@ -8,7 +8,7 @@ type Props = {
   }[]
 }
 
-export const SideToc = (props: Props) => {
+const SideToc = (props: Props) => {
   var tocCount = [1, 1, 1]
   return (
     <Card>
@@ -72,3 +72,5 @@ export const SideToc = (props: Props) => {
     </Card>
   )
 }
+
+export default SideToc

@@ -11,6 +11,8 @@ export default class Document extends NextDocument {
           <link rel="manifest" href="/favicons/site.webmanifest" />
           <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5" />
           <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada&display=swap" rel="stylesheet" /> 
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai.min.css" />
+          <script>hljs.initHighlightingOnLoad();</script>
         </Head>
         <body className='-m-0'>
           <Main />

@@ -1,6 +1,6 @@
 import { Box } from "@mui/material"
-import SideProfile from "components/common/SideBar/SideProfile"
-import { SideToc } from "./SideToc"
+import SideProfile from "./SideProfile"
+import SideToc from "./SideToc"
 
 type Props = {
   headings?: {

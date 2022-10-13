@@ -8,10 +8,15 @@ type Props = {
 
 const PostsList = (props: Props) => {
   return (
-    <Box className="flex flex-wrap" sx={{ marginLeft: "2%"}}>
+    <Box className="flex flex-wrap" sx={{ marginLeft: "3%"}}>
       {props.blogs.map((post, index) => {
         return (
-        <Box key={index} sx={{ marginRight: "2%", width: { xs: "100%", sm: "48%" } }} className="mb-8">
+        <Box
+          key={index}
+          sx={{ marginRight: index % 2 === 0 ? "3%" : "0",
+                width: { xs: "100%", sm: "48%" } }}
+          className="mb-8"
+        >
           <PostCard
             blog={{
                 id: post.id,

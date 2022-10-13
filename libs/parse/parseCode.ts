@@ -8,7 +8,7 @@ export const parseCode = (code: string, fileName: string) => {
   $('pre code').each((_, element) => {
     const result = hljs.highlightAuto($(element).text()).value
     $(element).html(result)
-    $(element).addClass(`hljs pt-14`)
+    $(element).addClass(`hljs pt-14 mb-10`)
     $(element).parent().addClass("relative")
     $(element).parent().prepend(`<p class="absolute my-0 p-1 text-white bg-slate-500">${fileName}</p>`)
   })

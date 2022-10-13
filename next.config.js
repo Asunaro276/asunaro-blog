@@ -1,13 +1,15 @@
 const withPlugins = require('next-compose-plugins')
+let plugins = []
+
 const withExportImages = require('next-export-optimize-images')
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
+plugins.push(withExportImages)
+if (process.env.ANALYZE === 'true') {
+  const withBundleAnalyzer = require('@next/bundle-analyzer')
+  plugins.push(withBundleAnalyzer)
+}
+
 module.exports = withPlugins(
-  [
-    withExportImages,
-    withBundleAnalyzer,
-  ],
+  plugins,
   {
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
     reactStrictMode: true,
