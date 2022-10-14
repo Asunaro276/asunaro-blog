@@ -27,6 +27,7 @@ Primary.args = {
     category: {
       id: "",
       name: "category1",
+      displayedName: "カテゴリ1"
     },
     publishedAt: "",
     image: {

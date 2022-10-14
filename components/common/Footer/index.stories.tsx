@@ -14,6 +14,8 @@ const Template: ComponentStory<typeof Footer> = (args) => <Footer {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  pages: ["page1", "page2"],
-  linkTo: ["", ""]
+  categories: [
+    {id: "", name: "category1", displayedName: "カテゴリ1"},
+    {id: "", name: "category2", displayedName: "カテゴリ2"},
+  ]
 };

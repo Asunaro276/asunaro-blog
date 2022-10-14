@@ -13,6 +13,8 @@ const Template: ComponentStory<typeof NavigationBar> = (args) => <NavigationBar 
 
 export const Primary = Template.bind({});
 Primary.args = {
-  logo: "LOGO",
-  linkToId: [...Array(5)].map(() => "")
+  categories: [
+    {id: "", name: "category1", displayedName: "カテゴリ1"},
+    {id: "", name: "category2", displayedName: "カテゴリ2"},
+  ]
 };

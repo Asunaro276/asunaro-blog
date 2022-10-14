@@ -14,5 +14,8 @@ const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  linkToId: ["", ""]
+  categories: [
+    {id: "", name: "category1", displayedName: "カテゴリ1"},
+    {id: "", name: "category2", displayedName: "カテゴリ2"},
+  ]
 };

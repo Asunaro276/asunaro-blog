@@ -13,7 +13,3 @@ export default {
 const Template: ComponentStory<typeof SideProfile> = (args) => <SideProfile {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = {
-  pages: ["page1", "page2"],
-  linkTo: ["", ""]
-};

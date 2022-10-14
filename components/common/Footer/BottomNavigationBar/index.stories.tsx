@@ -14,6 +14,8 @@ const Template: ComponentStory<typeof BottomNavigationBar> = (args) => <BottomNa
 
 export const Primary = Template.bind({});
 Primary.args = {
-  pages: ["Page1", "Page2"],
-  linkTo: ["Page1", "Page2"]
+  categories: [
+    {id: "", name: "category1", displayedName: "カテゴリ1"},
+    {id: "", name: "category2", displayedName: "カテゴリ2"},
+  ]
 };
