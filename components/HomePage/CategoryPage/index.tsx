@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import Footer from "components/common/Footer";
 import Header from "components/common/Header";
 import SideBar from "components/common/SideBar";
-import { linkTo, pages } from "pages";
 import { Blog, Category } from "types";
 import PostsList from "../elements/PostsList";
 
@@ -13,12 +12,11 @@ type Props = {
 }
 
 const CategoryPage = (props: Props) => {
-  const linkToId = ["/"].concat([...props.categories].filter((category) => linkTo.includes(category.name)).map((category) => `/blog/category/${category.id}`))
   return (
     <div className="bg-slate-100">
       <div>
         <Header
-          linkToId={linkToId}
+          categories={props.categories}
         />
       </div>
       <div className="flex flex-row justify-between">
@@ -29,7 +27,7 @@ const CategoryPage = (props: Props) => {
                 該当するカテゴリーの記事はありません
               </Typography>)
               : (<Typography>
-                  {pages[linkTo.indexOf(props.categoryName)]}カテゴリの記事一覧
+                  {props.categories.filter((category) => category.name === props.categoryName)[0].displayedName}カテゴリの記事一覧
                 </Typography>)
             }
           </Box>
@@ -43,8 +41,7 @@ const CategoryPage = (props: Props) => {
       </div>
       <div>
         <Footer
-          pages={pages}
-          linkTo={linkToId}
+          categories={props.categories}
         />
       </div>
     </div>

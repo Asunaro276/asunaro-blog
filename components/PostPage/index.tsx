@@ -1,6 +1,5 @@
-import { Blog, Category, Heading, ParsedBlog } from "types";
+import { Category, Heading, ParsedBlog } from "types";
 import Box from "@mui/material/Box"
-import { linkTo, pages } from "pages";
 import Header from "components/common/Header";
 import PostBody from "./PostBody";
 import Footer from "components/common/Footer";
@@ -13,12 +12,11 @@ type Props = {
 }
 
 const PostPage = (props: Props) => {
-  const linkToId = ["/"].concat([...props.categories].filter((category) => linkTo.includes(category.name)).map((category) => `/blog/category/${category.id}`))
   return (
     <div className="bg-slate-100">
       <div>
         <Header
-          linkToId={linkToId}
+          categories={props.categories}
         />
       </div>
       <Box className="flex justify-between" sx={{ flexDirection: {xs: "column", md: "row"} }}>
@@ -36,8 +34,7 @@ const PostPage = (props: Props) => {
       </Box>
       <div>
         <Footer
-          pages={pages}
-          linkTo={linkTo}
+          categories={props.categories}
         />
       </div>
     </div>

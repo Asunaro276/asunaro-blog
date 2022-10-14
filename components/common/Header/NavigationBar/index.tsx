@@ -2,19 +2,19 @@ import * as React from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
-import { Container, IconButton, Link, Menu, MenuItem, Typography } from '@mui/material'
+import { Container, IconButton, Link as MuiLink, Menu, MenuItem, Typography } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
-import { pages, pageIcons } from 'pages'
+import { pageIcons } from 'pages'
+import { Category } from 'types'
+import NextLink from 'next/link'
 
 type Props = {
   logo: string
-  linkToId: string[]
+  categories: Category[]
 }
 
 export const NavigationBar = (props: Props) => {
-
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
-
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
   };
@@ -57,21 +57,27 @@ export const NavigationBar = (props: Props) => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page, index) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu} className='text-lg hover:bg-slate-200 ease-out duration-100'>
-                  <Link
-                    href={props.linkToId[index]}
-                    underline="none"
-                    color="inherit"
-                    className='flex'
+              {props.categories.map((category, index) => (
+                <MenuItem key={index} onClick={handleCloseNavMenu} className='text-lg hover:bg-slate-200 ease-out duration-100'>
+                  <NextLink
+                    href={category.id}
+                    as={[...category.id.split("/").slice(0, -1), category.name].join("/")}
+                    passHref
                   >
-                    <Box className="mr-1 pt-0.5">
-                      {pageIcons[index]}
-                    </Box>
-                    <Box className=''>
-                      {page}
-                    </Box>
-                  </Link>
+                    <MuiLink
+                      underline="none"
+                      color="inherit"
+                      className='flex'
+                      rel="noopener noreferrer"
+                    >
+                      <Box className="mr-1 pt-0.5">
+                        {pageIcons[index]}
+                      </Box>
+                      <Box className=''>
+                        {category.displayedName}
+                      </Box>
+                    </MuiLink>
+                  </NextLink>
                 </MenuItem>
               ))}
             </Menu>
@@ -83,29 +89,36 @@ export const NavigationBar = (props: Props) => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, fontSize: { xs: 25, md: 60 } }}
           >
-            <Link href="/" underline="none" color="inherit">
-              {props.logo}
-            </Link>
+            <NextLink href="/" passHref>
+              <MuiLink underline="none" color="inherit" rel="noopener noreferrer">
+                {props.logo}
+              </MuiLink>
+            </NextLink>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page, index) => (
-              <Link
-                key={page}
-                onClick={handleCloseNavMenu}
-                href={props.linkToId[index]}
-                sx={{ mx:3, my: 1, display: 'block' }}
-                underline="none"
-                color="inherit"
-                className='flex text-lg hover:bg-slate-400 ease-out duration-100 p-3'
-                variant="button"
+            {props.categories.map((category, index) => (
+              <NextLink
+                href={category.id}
+                passHref
+                key={index}
               >
-                <Box className="mr-1 pt-0.5">
-                  {pageIcons[index]}
-                </Box>
-                <Box className=''>
-                  {page}
-                </Box>
-              </Link>
+                <MuiLink
+                  onClick={handleCloseNavMenu}
+                  sx={{ mx: {md: 1, lg: 3}, my: 1, display: 'block' }}
+                  underline="none"
+                  color="inherit"
+                  className='flex text-lg hover:bg-slate-400 ease-out duration-100 p-3'
+                  variant="button"
+                  rel="noopener noreferrer"
+                >
+                  <Box className="mr-1 pt-0.5">
+                    {pageIcons[index]}
+                  </Box>
+                  <Box>
+                    {category.displayedName}
+                  </Box>
+                </MuiLink>
+              </NextLink>
             ))}
           </Box>
         </Toolbar>

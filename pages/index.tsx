@@ -4,6 +4,7 @@ import CodeIcon from '@mui/icons-material/Code';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import BusinessIcon from '@mui/icons-material/Business';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import HomePage from "components/HomePage/HomePage";
 import { PER_PAGE } from "components/HomePage/elements/PaginationButton";
 
@@ -13,17 +14,23 @@ type Props = {
   totalCount: number
 }
 
-export const pages = ["Home", "プログラミング", "ビジネス" ,"その他"]
-export const linkTo = ["/", "programming", "business", "other"]
-export const pageIcons = [<HomeOutlinedIcon key={0} />, <CodeIcon key={1} />, <BusinessIcon key={2} />, <MoreHorizIcon key={3} />]
+export const pageIcons = [<HomeOutlinedIcon key={0} />, <CodeIcon key={1} />, <BusinessIcon key={2} />, <QueryStatsIcon key={3} />, <MoreHorizIcon key={4} />]
 
 export default function Home(props: Props) {
+  const homeCategory: Category = { id: "/", displayedName: "Home", name: "home" }
+  const categories = [
+    homeCategory,
+    ...props.categories.map((category) => ({
+      ...category,
+      id: `/blog/category/${category.id}`,
+    }))
+  ]
   return (
     <main>
       <HomePage
         pageNumber={1}
         blogs={props.blogs}
-        categories={props.categories}
+        categories={categories}
         totalCount={props.totalCount}
       />
     </main>

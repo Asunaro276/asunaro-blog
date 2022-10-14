@@ -1,10 +1,10 @@
 import { Link, Typography } from "@mui/material"
+import { Category } from "types"
 import { NavigationBar } from "./NavigationBar"
 
 
 type Props = {
-  linkToId: string[]
-  
+  categories: Category[]
 }
 
 const Header = (props: Props) => {
@@ -18,7 +18,7 @@ const Header = (props: Props) => {
       </Typography>
       <NavigationBar
         logo={logo}
-        linkToId={props.linkToId}
+        categories={props.categories}
       />
     </div>
   )

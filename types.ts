@@ -50,6 +50,7 @@ export type Image = {
 export type Category = {
   id: string
   name: string
+  displayedName: string
 }
 
 export type Heading = {

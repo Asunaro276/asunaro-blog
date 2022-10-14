@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import Footer from "components/common/Footer";
 import Header from "components/common/Header";
 import SideBar from "components/common/SideBar";
-import { linkTo, pages } from "pages";
 import { Blog, Category } from "types";
 import PaginationButton from "../elements/PaginationButton";
 import PostsList from "../elements/PostsList";
@@ -15,12 +14,11 @@ type Props = {
 }
 
 const HomePage = (props: Props) => {
-  const linkToId = ["/"].concat([...props.categories].filter((category) => linkTo.includes(category.name)).map((category) => `/blog/category/${category.id}`))
   return (
     <div className="bg-slate-100">
       <div>
         <Header
-          linkToId={linkToId}
+          categories={props.categories}
         />
       </div>
       <Box className="flex justify-between" sx={{ flexDirection: { xs: "column", md: "row" }}}>
@@ -40,8 +38,7 @@ const HomePage = (props: Props) => {
       </Box>
       <div>
         <Footer
-          pages={pages}
-          linkTo={linkToId}
+          categories={props.categories}
         />
       </div>
     </div>

@@ -18,12 +18,20 @@ type Params = {
 
 // pages/blog/[id].js
 export default function BlogPageId(props: Props) {
+  const homeCategory: Category = { id: "/", displayedName: "Home", name: "home" }
+  const categories = [
+    homeCategory,
+    ...props.categories.map((category) => ({
+      ...category,
+      id: `/blog/category/${category.id}`,
+    }))
+  ]
   return (
     <main>
       <HomePage
         pageNumber={props.pageNumber}
         blogs={props.blogs}
-        categories={props.categories}
+        categories={categories}
         totalCount={props.totalCount}
       />
     </main>
