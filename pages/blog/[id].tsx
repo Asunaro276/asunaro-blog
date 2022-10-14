@@ -20,6 +20,14 @@ interface Params extends ParsedUrlQuery {
 }
 
 export default function BlogId(props: Props) {
+  const homeCategory: Category = { id: "/", displayedName: "Home", name: "home" }
+  const categories = [
+    homeCategory,
+    ...props.categories.map((category) => ({
+      ...category,
+      id: `/blog/category/${category.id}`,
+    }))
+  ]
   return (
     <main>
       <NextSeo
@@ -29,7 +37,7 @@ export default function BlogId(props: Props) {
       <PostPage
         blog={props.blog}
         headings={props.headings}
-        categories={props.categories}
+        categories={categories}
       />
     </main>
   );
