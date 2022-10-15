@@ -1,13 +1,14 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { client } from "../../libs/client"
-import { Blog, Category, Code, Heading, Link, Paragraph, ParsedBlog } from "types"
+import { Blog, Category, Code, Heading, Link, Math, Paragraph, ParsedBlog } from "types"
 import { NextSeo } from "next-seo"
 import PostPage from "components/PostPage"
 import { parseParagraph } from "libs/parse/parseParagraph"
 import { parseCode } from "libs/parse/parseCode"
 import { parseLink } from "libs/parse/parseLink"
 import { parseHeading } from "libs/parse/parseHeading"
+import { parseMath } from "libs/parse/parseMath"
 
 type Props = {
   blog: ParsedBlog
@@ -55,6 +56,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   const data = await client.get({ endpoint: "blog", contentId: id }) as Blog
   const categories = await client.get({ endpoint: "categories" })
   const bodyList = data.body.map(value => {
+    console.log(value)
     switch (value.fieldId) {
       case "paragraph":
         return parseParagraph((value as Paragraph).paragraph)
@@ -65,8 +67,12 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
       case "link":
         return parseLink((value as Link).url, (value as Link).image.url, (value as Link).title)
 
+      case "math":
+        return parseMath((value as Math).formula)
+
+
       default:
-        return String.raw`<></>`
+        return String.raw``
       }
     }
   )

@@ -20,7 +20,7 @@ export type ParsedBlog = {
   imageAlt: string
 }
 
-export type BlogBody = (Paragraph | Link | Code)[]
+export type BlogBody = (Paragraph | Link | Code | Math)[]
 
 export type Paragraph = {
   fieldId: string
@@ -39,6 +39,11 @@ export type Code = {
   fieldId: string
   code: string
   fileName: string
+}
+
+export type Math = {
+  fieldId: string
+  formula: string
 }
 
 export type Image = {

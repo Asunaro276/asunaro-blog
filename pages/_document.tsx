@@ -13,6 +13,26 @@ export default class Document extends NextDocument {
           <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada&display=swap" rel="stylesheet" /> 
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai.min.css" />
           <script>hljs.initHighlightingOnLoad();</script>
+          <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+          {/* <script>
+            {String.raw `
+              MathJax = {
+                tex: {
+                  inlineMath: [
+                    ['$', '$'],
+                    ['\\(', '\\)']
+                  ],
+                  displayMath: [
+                    ['$$', '$$'],
+                    ['\\[', '\\]']
+                  ]
+                },
+                options: {
+                  skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+                }
+              }
+            `}
+          </script> */}
         </Head>
         <body className='-m-0'>
           <Main />
