@@ -1,31 +1,37 @@
 import { Box } from "@mui/material"
+import { Tag } from "types"
 import SideProfile from "./SideProfile"
+import SideCategory from "./SideTags"
 import SideToc from "./SideToc"
 
 type Props = {
   headings?: {
     text: string
     id: string
-    tag: string
+    htmlTag: string
   }[]
+  tags: Tag[]
 }
 
 
 const SideBar = (props: Props) => {
-  const profileHeight = 32 
+  const profileHeight = 26
   return (
     <Box className="h-full">
-      <Box sx={{ height: `calc(${profileHeight}rem)` }}>
+      <Box className="mb-8" sx={{ height: `calc(${profileHeight}rem)` }}>
         <SideProfile />
       </Box>
-      <Box className="box-border" sx={{ display: {xs: "none", md: "block"}, height: `calc(100% - ${profileHeight}rem)` }}>
-        {props.headings !== undefined &&
-          (<Box className="sticky top-4">
+      <Box className="mb-8">
+        <SideCategory tags={props.tags} />
+      </Box>
+      {props.headings !== undefined &&
+      (<Box className="box-border" sx={{ display: {xs: "none", md: "block"}, height: `calc(100% - ${profileHeight}rem)` }}>
+          <Box className="sticky top-4">
             <SideToc
               heading={props.headings}
             />
-          </Box>)}
-      </Box>
+          </Box>
+      </Box>)}
     </Box>
   )
 }

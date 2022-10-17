@@ -4,6 +4,7 @@ export type Blog = {
   description: string
   body: BlogBody
   category: Category
+  tags: Tag[]
   publishedAt: string
   image: Image
   imageAlt: string
@@ -15,6 +16,7 @@ export type ParsedBlog = {
   description: string
   body: string
   category: Category
+  tags: Tag[]
   publishedAt: string
   image: Image
   imageAlt: string
@@ -52,6 +54,12 @@ export type Image = {
   height: number
 }
 
+export type Tag = {
+  id: string
+  tag: string
+  tagTotalCount?: number
+}
+
 export type Category = {
   id: string
   name: string
@@ -60,6 +68,6 @@ export type Category = {
 
 export type Heading = {
   text: string
-  tag: string
+  htmlTag: string
   id: string
 }

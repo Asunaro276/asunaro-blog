@@ -6,8 +6,8 @@ type Props = {}
 
 const SideProfile = (props: Props) => {
   return (
-    <Box className="justify-end">
-      <Card>
+    <Box className="h-full justify-end">
+      <Card className="h-full">
         <CardContent className="">
           <Typography className="my-5 text-center">
             profile

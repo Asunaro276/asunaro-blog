@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { client } from "../../libs/client"
-import { Blog, Category, Code, Heading, Link, Math, Paragraph, ParsedBlog } from "types"
+import { Blog, Category, Code, Heading, Link, Math, Paragraph, ParsedBlog, Tag } from "types"
 import { NextSeo } from "next-seo"
 import PostPage from "components/PostPage"
 import { parseParagraph } from "libs/parse/parseParagraph"
@@ -14,10 +14,11 @@ type Props = {
   blog: ParsedBlog
   headings: Heading[]
   categories: Category[]
+  tags: Tag[]
 }
 
 interface Params extends ParsedUrlQuery {
-  id: string
+  blogId: string
 }
 
 export default function BlogId(props: Props) {
@@ -26,7 +27,7 @@ export default function BlogId(props: Props) {
     homeCategory,
     ...props.categories.map((category) => ({
       ...category,
-      id: `/blog/category/${category.id}`,
+      id: `/category/${category.id}`,
     }))
   ]
   return (
@@ -39,22 +40,33 @@ export default function BlogId(props: Props) {
         blog={props.blog}
         headings={props.headings}
         categories={categories}
+        tags={props.tags}
       />
     </main>
   );
 }
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const data = await client.get({ endpoint: "blog" });
-
-  const paths = data.contents.map((content: Blog) => `/blog/${content.id}`);
+  const blogs = await client.get({ endpoint: "blog" });
+  const paths = blogs.contents.map((blog: Blog) => `/blog/${blog.id}`);
   return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps<Props, Params> = async (context) => {
-  const id = context.params!.id
+  const id = context.params!.blogId
   const data = await client.get({ endpoint: "blog", contentId: id }) as Blog
   const categories = await client.get({ endpoint: "categories" })
+  const tags = (await client.get({ endpoint: "tags" })).contents as Tag[]
+  let propTags = []
+  for (const tag of tags) {
+    const tagBlogs = await client.get({ endpoint: "blog", queries: { filters: `tags[contains]${tag.id}` } })
+    const tagTotalCount = tagBlogs.totalCount
+    propTags.push({
+      ...tag,
+      tagTotalCount: tagTotalCount
+    })
+  }
+
   const bodyList = data.body.map(value => {
     switch (value.fieldId) {
       case "paragraph":
@@ -81,7 +93,8 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
     props: {
       blog: {...data, body: body},
       headings: heading,
-      categories: categories.contents
+      categories: categories.contents as Category[],
+      tags: propTags as Tag[]
     },
   }
 }

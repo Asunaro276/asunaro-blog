@@ -1,4 +1,4 @@
-import { Category, Heading, ParsedBlog } from "types";
+import { Category, Heading, ParsedBlog, Tag } from "types";
 import Box from "@mui/material/Box"
 import Header from "components/common/Header";
 import PostBody from "./PostBody";
@@ -9,6 +9,7 @@ type Props = {
   blog: ParsedBlog
   headings: Heading[]
   categories: Category[]
+  tags: Tag[]
 }
 
 const PostPage = (props: Props) => {
@@ -28,6 +29,7 @@ const PostPage = (props: Props) => {
         </Box>
         <Box className="mt-32" sx={{ marginX: "2%", width: { md: "25%" } }}>
           <SideBar
+            tags={props.tags}
             headings={props.headings}
           />
         </Box>

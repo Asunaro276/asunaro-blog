@@ -12,9 +12,10 @@ type Props = {
   blogs: Blog[]
   categories: Category[]
   tags: Tag[]
+  tag: Tag
 }
 
-const CategoryPage = (props: Props) => {
+const TagPage = (props: Props) => {
   return (
     <div className="bg-slate-100">
       <div>
@@ -27,20 +28,19 @@ const CategoryPage = (props: Props) => {
           <Box className="text-center my-12">
             {props.blogs.length === 0
             ? (<Typography className="">
-                該当するカテゴリーの記事はありません
+                該当するタグの記事はありません
               </Typography>)
               : (<Typography>
-                  {props.blogs[0].category.displayedName}カテゴリの記事一覧
+                  {props.tag.tag}に関する記事一覧
                 </Typography>)
             }
           </Box>
           <PostsList
             blogs={props.blogs}
           />
-          {props.blogs.length !== 0 &&
           <Box className="flex justify-center mb-10">
-            <Pagination dir={`/category/${props.blogs[0].category.id}`} pageNumber={props.pageNumber} totalCount={props.totalCount} />
-          </Box>}
+            <Pagination dir={`/tag/${props.tag.id}`} pageNumber={props.pageNumber} totalCount={props.totalCount} />
+          </Box>
         </Box>
         <Box className="mt-32 w-3/12" sx={{ marginX: "3%", display: { xs: "none", md: "block" }}}>
           <SideBar tags={props.tags} />
@@ -55,4 +55,4 @@ const CategoryPage = (props: Props) => {
   )
 }
 
-export default CategoryPage
+export default TagPage

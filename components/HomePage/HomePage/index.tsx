@@ -2,14 +2,15 @@ import { Box } from "@mui/material";
 import Footer from "components/common/Footer";
 import Header from "components/common/Header";
 import SideBar from "components/common/SideBar";
-import { Blog, Category } from "types";
-import PaginationButton from "../elements/PaginationButton";
+import { Blog, Category, Tag } from "types";
+import Pagination from "../elements/Pagination";
 import PostsList from "../elements/PostsList";
 
 type Props = {
   pageNumber: number
   blogs: Blog[]
   categories: Category[]
+  tags: Tag[]
   totalCount: number
 }
 
@@ -29,11 +30,11 @@ const HomePage = (props: Props) => {
             />
           </Box>
           <Box className="flex justify-center mb-10">
-            <PaginationButton pageNumber={props.pageNumber} totalCount={props.totalCount} />
+            <Pagination dir="" pageNumber={props.pageNumber} totalCount={props.totalCount} />
           </Box>
         </Box>
         <Box className="" sx={{ marginTop: { xs: "30px", md: "40px"}, marginX: "3%", width: { xs: "90%", md: "25%" } }}>
-          <SideBar />
+          <SideBar tags={props.tags} />
         </Box>
       </Box>
       <div>

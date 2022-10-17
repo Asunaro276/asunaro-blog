@@ -6,7 +6,7 @@ type Props = {
   heading: {
     text: string
     id: string
-    tag: string
+    htmlTag: string
   }[]
 }
 
@@ -24,7 +24,7 @@ export const TableOfContents = (props: Props) => {
             if (data.text === undefined) {
               return <div key={index}></div>
             }
-            if (data.tag === "h1") {
+            if (data.htmlTag === "h1") {
               tocCount[0] += 1
               tocCount[1] = 1
               return (
@@ -40,7 +40,7 @@ export const TableOfContents = (props: Props) => {
                 </li>
               )
             }
-            if (data.tag === "h2") {
+            if (data.htmlTag === "h2") {
               tocCount[1] += 1
               tocCount[2] = 1
               return (

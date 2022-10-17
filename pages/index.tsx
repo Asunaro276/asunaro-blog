@@ -1,18 +1,20 @@
 import { client } from "libs/client";
-import { Blog, Category } from "types";
+import { Blog, Category, Tag } from "types";
 import CodeIcon from '@mui/icons-material/Code';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import BusinessIcon from '@mui/icons-material/Business';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import HomePage from "components/HomePage/HomePage";
-import { PER_PAGE } from "components/HomePage/elements/PaginationButton";
 
 type Props = {
   blogs: Blog[]
   categories: Category[]
+  tags: Tag[]
   totalCount: number
 }
+
+export const PER_PAGE = 10
 
 export const pageIcons = [<HomeOutlinedIcon key={0} />, <CodeIcon key={1} />, <BusinessIcon key={2} />, <QueryStatsIcon key={3} />, <MoreHorizIcon key={4} />]
 
@@ -22,7 +24,7 @@ export default function Home(props: Props) {
     homeCategory,
     ...props.categories.map((category) => ({
       ...category,
-      id: `/blog/category/${category.id}`,
+      id: `/category/${category.id}`,
     }))
   ]
   return (
@@ -31,6 +33,7 @@ export default function Home(props: Props) {
         pageNumber={1}
         blogs={props.blogs}
         categories={categories}
+        tags={props.tags}
         totalCount={props.totalCount}
       />
     </main>
@@ -41,12 +44,14 @@ export default function Home(props: Props) {
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async () => {
   const data = await client.get({ endpoint: "blog", queries: { offset: 0, limit: PER_PAGE} })
-  const categoryData = await client.get({ endpoint: "categories" })
+  const categories = await client.get({ endpoint: "categories" })
+  const tags = await client.get({ endpoint: "tags" })
 
   return {
     props: {
       blogs: data.contents,
-      categories: categoryData.contents,
+      categories: categories.contents,
+      tags: tags.contents,
       totalCount: data.totalCount
     },
   };

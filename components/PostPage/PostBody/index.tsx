@@ -1,5 +1,5 @@
 import { Box, Card } from "@mui/material"
-import { Heading, ParsedBlog } from "types"
+import { Heading, ParsedBlog, Tag } from "types"
 import Caption from "./Caption"
 import { TableOfContents } from "./TableOfContents";
 
@@ -15,6 +15,8 @@ const PostBody = (props: Props) => {
       <Caption
         title={props.blog.title}
         publishedAt={props.blog.publishedAt}
+        tagsOfPost={props.blog.tags}
+        categoryOfPost={props.blog.category}
         imageUrl={props.blog.image.url}
         imageAlt={props.blog.imageAlt}
       />

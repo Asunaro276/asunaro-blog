@@ -2,9 +2,10 @@ import { Box, Card, Typography } from "@mui/material"
 import { Link as Scroll } from "react-scroll"
 
 type Props = {
-  heading: { text: string
+  heading: {
+    text: string
     id: string
-    tag: string
+    htmlTag: string
   }[]
 }
 
@@ -19,7 +20,7 @@ const SideToc = (props: Props) => {
             if (data.text === undefined) {
               return <div key={data.id}></div>
             }
-            if (data.tag === "h1") {
+            if (data.htmlTag === "h1") {
               tocCount[0] += 1
               return (
                 <li key={data.id} className="mt-4 list-none">
@@ -36,7 +37,7 @@ const SideToc = (props: Props) => {
                 </li>
               )
             }
-            if (data.tag === "h2" && tocCount[0] === 1) {
+            if (data.htmlTag === "h2" && tocCount[0] === 1) {
               tocCount[1] += 1
               return (
                 <li key={data.id} className="my-2 list-none">
