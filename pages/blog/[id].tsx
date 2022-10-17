@@ -56,7 +56,6 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   const data = await client.get({ endpoint: "blog", contentId: id }) as Blog
   const categories = await client.get({ endpoint: "categories" })
   const bodyList = data.body.map(value => {
-    console.log(value)
     switch (value.fieldId) {
       case "paragraph":
         return parseParagraph((value as Paragraph).paragraph)
