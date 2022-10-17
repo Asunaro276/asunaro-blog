@@ -29,6 +29,16 @@ Primary.args = {
       name: "category1",
       displayedName: "カテゴリ1"
     },
+    tags: [
+      {
+        id: "",
+        tag: "tag1"
+      },
+      {
+        id: "",
+        tag: "tag2"
+      }
+    ],
     publishedAt: "",
     image: {
       url: "/logo.png", 
