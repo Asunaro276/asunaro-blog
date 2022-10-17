@@ -15,14 +15,16 @@ type Props = {
 
 
 const SideBar = (props: Props) => {
-  const profileHeight = 30
+  const profileHeight = 60
   return (
     <Box className="h-full">
-      <Box className="mb-8" sx={{ height: {md: `calc(${profileHeight}rem)` }}}>
-        <SideProfile />
-      </Box>
-      <Box className="mb-8">
-        <SideCategory tags={props.tags} />
+      <Box sx={{ height: `calc(${profileHeight}rem)` }}>
+        <Box className="mb-8">
+          <SideProfile />
+        </Box>
+        <Box className="mb-8">
+          <SideCategory tags={props.tags} />
+        </Box>
       </Box>
       {props.headings !== undefined &&
       (<Box className="box-border" sx={{ display: {xs: "none", md: "block"}, height: `calc(100% - ${profileHeight}rem)` }}>
