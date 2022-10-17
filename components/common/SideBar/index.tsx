@@ -15,10 +15,10 @@ type Props = {
 
 
 const SideBar = (props: Props) => {
-  const profileHeight = 26
+  const profileHeight = 30
   return (
     <Box className="h-full">
-      <Box className="mb-8" sx={{ height: `calc(${profileHeight}rem)` }}>
+      <Box className="mb-8" sx={{ height: {md: `calc(${profileHeight}rem)` }}}>
         <SideProfile />
       </Box>
       <Box className="mb-8">

@@ -73,6 +73,8 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
       tagTotalCount: tagTotalCount
     })
   }
+  propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
+
   return {
     props: {
       blogs: blogs.contents as Blog[],

@@ -45,13 +45,23 @@ export default function Home(props: Props) {
 export const getStaticProps = async () => {
   const data = await client.get({ endpoint: "blog", queries: { offset: 0, limit: PER_PAGE} })
   const categories = await client.get({ endpoint: "categories" })
-  const tags = await client.get({ endpoint: "tags" })
+  const tags = (await client.get({ endpoint: "tags" })).contents as Tag[]
+  let propTags = []
+  for (const tag of tags) {
+    const tagBlogs = await client.get({ endpoint: "blog", queries: { filters: `tags[contains]${tag.id}` } })
+    const tagTotalCount = tagBlogs.totalCount
+    propTags.push({
+      ...tag,
+      tagTotalCount: tagTotalCount
+    })
+  }
+  propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
 
   return {
     props: {
-      blogs: data.contents,
-      categories: categories.contents,
-      tags: tags.contents,
+      blogs: data.contents as Blog[],
+      categories: categories.contents as Category[],
+      tags: propTags as Tag[],
       totalCount: data.totalCount
     },
   };

@@ -2,6 +2,7 @@ import { Link as MuiLink, Box, Card, CardContent, Button } from "@mui/material"
 import NextLink from "next/link"
 import LocalOfferIcon from '@mui/icons-material/LocalOffer'
 import { Tag } from "types"
+import { TagSharp } from "@mui/icons-material"
 
 type Props = {
   tags: Tag[]

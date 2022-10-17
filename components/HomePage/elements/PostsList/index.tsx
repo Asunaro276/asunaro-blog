@@ -18,16 +18,7 @@ const PostsList = (props: Props) => {
           className="mb-8"
         >
           <PostCard
-            blog={{
-                id: post.id,
-                title: post.title,
-                description: post.description,
-                body: post.body,
-                category: post.category,
-                publishedAt: post.publishedAt,
-                image: post.image,
-                imageAlt: post.imageAlt,
-            }}            
+            blog={post}        
           />
         </Box>
         )
