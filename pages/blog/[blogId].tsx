@@ -72,11 +72,14 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   const bodyList = data.body.map(value => {
     switch (value.fieldId) {
       case "paragraph":
+        console.log((value as Paragraph).paragraph)
         const paragraph = parseParagraph((value as Paragraph).paragraph)
         .replaceAll(/\$\$[^\$]*\$\$/g, (substring) =>
-        katex.renderToString(substring.replaceAll("$", ""), { output: "mathml", displayMode: true, strict: "ignored" }))
+        katex.renderToString(substring.replaceAll("$", "").replaceAll(/(<br>|<\\br>|&nbsp;|amp;)/g, ""),
+        { output: "mathml", displayMode: true, strict: "ignore" }))
         .replaceAll(/\$[^\$]*\$/g, (substring) =>
-        katex.renderToString(substring.replaceAll("$", ""), { output: "mathml", strict: "ignored" }))
+        katex.renderToString(substring.replaceAll("$", ""),
+        { output: "mathml", strict: "ignore" }))
 
         return paragraph
       case "code":

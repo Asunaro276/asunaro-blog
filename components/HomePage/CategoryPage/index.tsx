@@ -39,7 +39,7 @@ const CategoryPage = (props: Props) => {
           />
           {props.blogs.length !== 0 &&
           <Box className="flex justify-center mb-10">
-            <Pagination dir={`/category/${props.blogs[0].category.id}`} pageNumber={props.pageNumber} totalCount={props.totalCount} />
+            <Pagination dir={`category/${props.blogs[0].category.id}`} pageNumber={props.pageNumber} totalCount={props.totalCount} />
           </Box>}
         </Box>
         <Box className="mt-32 w-3/12" sx={{ marginX: "3%", display: { xs: "none", md: "block" }}}>

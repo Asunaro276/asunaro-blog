@@ -39,7 +39,7 @@ const TagPage = (props: Props) => {
             blogs={props.blogs}
           />
           <Box className="flex justify-center mb-10">
-            <Pagination dir={`/tag/${props.tag.id}`} pageNumber={props.pageNumber} totalCount={props.totalCount} />
+            <Pagination dir={`tag/${props.tag.id}`} pageNumber={props.pageNumber} totalCount={props.totalCount} />
           </Box>
         </Box>
         <Box className="mt-32 w-3/12" sx={{ marginX: "3%", display: { xs: "none", md: "block" }}}>
