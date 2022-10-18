@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material"
+import { Box, List, ListItem, Typography } from "@mui/material"
 import TocIcon from '@mui/icons-material/Toc';
 import { Link as Scroll } from "react-scroll"
 
@@ -19,7 +19,7 @@ export const TableOfContents = (props: Props) => {
         <Typography className="">目次</Typography>
       </Box>
       <Box className="py-10 flex flex-col justify-center items-center">
-        <ul className="w-7/12 pl-2">
+        <List className="pl-2" sx={{ width: { xs: "80%", md: "60%" } }}>
           {props.heading.map((data, index) => {
             if (data.text === undefined) {
               return <div key={index}></div>
@@ -28,7 +28,7 @@ export const TableOfContents = (props: Props) => {
               tocCount[0] += 1
               tocCount[1] = 1
               return (
-                <li key={index} className="list-none ml-6 my-4">
+                <ListItem key={index} className="list-none ml-6 my-4">
                   <Scroll to={`${data.id}`} smooth={true} className="relative hover:opacity-50 cursor-pointer flex" id={`l${index}`} duration={400}>
                     <Box className="absolute -left-10 border-solid border border-slate-400 w-8 sm:w-10 aspect-square flex justify-center items-center rounded-full bg-slate-200 ">
                       {(tocCount[0] - 1).toString()}
@@ -37,7 +37,7 @@ export const TableOfContents = (props: Props) => {
                       {data.text}
                     </Box>
                   </Scroll>
-                </li>
+                </ListItem>
               )
             }
             if (data.htmlTag === "h2") {
@@ -75,7 +75,7 @@ export const TableOfContents = (props: Props) => {
             //   )
             // }
         })}
-        </ul>
+        </List>
       </Box>
     </Box>
   )

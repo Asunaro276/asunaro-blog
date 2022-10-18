@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { client } from "../../libs/client"
-import { Blog, Category, Code, Heading, Link, Math, Paragraph, ParsedBlog, Tag } from "types"
+import { Blog, Category, Code, Heading, Link, Paragraph, ParsedBlog, Tag } from "types"
 import { NextSeo } from "next-seo"
 import PostPage from "components/PostPage"
 import { parseParagraph } from "libs/parse/parseParagraph"
@@ -72,16 +72,15 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   const bodyList = data.body.map(value => {
     switch (value.fieldId) {
       case "paragraph":
-        console.log((value as Paragraph).paragraph)
         const paragraph = parseParagraph((value as Paragraph).paragraph)
-        .replaceAll(/\$\$[^\$]*\$\$/g, (substring) =>
+        .replaceAll(/(?!")\$\$(?!")[^\$]*(?!")\$\$(?!")/g, (substring) =>
         katex.renderToString(substring.replaceAll("$", "").replaceAll(/(<br>|<\\br>|&nbsp;|amp;)/g, ""),
         { output: "mathml", displayMode: true, strict: "ignore" }))
-        .replaceAll(/\$[^\$]*\$/g, (substring) =>
+        .replaceAll(/(?!")\$(?!")[^\$]*(?!")\$(?!")/g, (substring) =>
         katex.renderToString(substring.replaceAll("$", ""),
         { output: "mathml", strict: "ignore" }))
-
         return paragraph
+
       case "code":
         return parseCode((value as Code).code, (value as Code).fileName)
 

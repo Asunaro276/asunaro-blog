@@ -1,4 +1,5 @@
 import cheerio from 'cheerio'
+import hljs from 'highlight.js/lib/common'
 
 export const parseParagraph = (paragraph: string) => {
   const $ = cheerio.load(paragraph)
@@ -27,5 +28,12 @@ export const parseParagraph = (paragraph: string) => {
     $(element).wrap('<div class="flex"></div>')
     $(element).parent().prepend('<div class="w-2 bg-slate-200"></div>')
   })
+  $('pre code').each((_, element) => {
+    const result = hljs.highlightAuto($(element).text()).value
+    $(element).html(result)
+    $(element).parent().addClass("shadow-md")
+    $(element).addClass(`hljs mb-10`)
+  })
+
   return $("body").html() as string
 }
