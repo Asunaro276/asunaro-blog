@@ -22,8 +22,8 @@ const Caption = (props: Props) => {
           {convertDateFormat(props.publishedAt)}
         </Typography>
       </Box>
-      <Box className="text-center mt-10 mb-4">
-        <Typography className="font-title text-2xl font-bold text-slate-600">
+      <Box className="flex justify-center mt-10 mb-4">
+        <Typography className="w-9/12 font-title text-2xl font-bold text-slate-600">
           {props.title}
         </Typography>
       </Box>

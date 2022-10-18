@@ -67,6 +67,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
       tagTotalCount: tagTotalCount
     })
   }
+  console.log(propTags)
   propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
 
   const bodyList = data.body.map(value => {
@@ -76,9 +77,11 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
         .replaceAll(/(?!")\$\$(?!")[^\$]*(?!")\$\$(?!")/g, (substring) =>
         katex.renderToString(substring.replaceAll("$", "").replaceAll(/(<br>|<\\br>|&nbsp;|amp;)/g, ""),
         { output: "mathml", displayMode: true, strict: "ignore" }))
-        .replaceAll(/(?!")\$(?!")[^\$]*(?!")\$(?!")/g, (substring) =>
-        katex.renderToString(substring.replaceAll("$", ""),
-        { output: "mathml", strict: "ignore" }))
+        .replaceAll(/(?!")\$(?!")[^\$]*(?!")\$(?!")/g, (substring) => {
+          console.log(substring)
+          return katex.renderToString(substring.replaceAll("$", ""),
+          { output: "mathml", strict: "ignore" })
+        })
         return paragraph
 
       case "code":
