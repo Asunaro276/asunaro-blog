@@ -61,7 +61,6 @@ export const NavigationBar = (props: Props) => {
                 <MenuItem key={index} onClick={handleCloseNavMenu} className='text-lg hover:bg-slate-200 ease-out duration-100'>
                   <NextLink
                     href={category.id}
-                    as={[...category.id.split("/").slice(0, -1), category.name].join("/")}
                     passHref
                   >
                     <MuiLink

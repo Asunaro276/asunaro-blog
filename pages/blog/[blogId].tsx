@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   const id = context.params!.blogId
   const data = await client.get({ endpoint: "blog", contentId: id }) as Blog
   const categories = await client.get({ endpoint: "categories" })
-  const tags = (await client.get({ endpoint: "tags" })).contents as Tag[]
+  const tags = (await client.get({ endpoint: "tags", queries: { limit: 100 }})).contents as Tag[]
   let propTags = []
   for (const tag of tags) {
     const tagBlogs = await client.get({ endpoint: "blog", queries: { filters: `tags[contains]${tag.id}` } })
@@ -67,8 +67,8 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
       tagTotalCount: tagTotalCount
     })
   }
-  console.log(propTags)
   propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
+  propTags = propTags.slice(0, 10)
 
   const bodyList = data.body.map(value => {
     switch (value.fieldId) {

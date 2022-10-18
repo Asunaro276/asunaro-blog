@@ -43,7 +43,7 @@ export default function CategoryId(props: Props) {
 
 // 静的生成のためのパスを指定します
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const tags = (await client.get({ endpoint: "tags" })).contents as Tag[]
+  const tags = (await client.get({ endpoint: "tags", queries: { limit: 100 }})).contents as Tag[]
   const range = (start: number, end: number) => [...Array(end - start + 1)].map((_, i) => start + i)
   let paths = []
   for (const tag in tags) {
