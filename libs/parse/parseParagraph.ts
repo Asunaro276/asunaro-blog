@@ -12,10 +12,9 @@ export const parseParagraph = (paragraph: string) => {
     $(element).wrap('<div class="mb-5 flex"></div>')
     $(element).parent().prepend('<div class="w-2 bg-yellow-400"></div>')
   })
-
   $('p').each((_, element) => {
     $(element).addClass('text-lg font-body leading-loose')
-    $(element).wrap('<div class="mt-5 mb-20"></div>')
+    $(element).wrap('<div class="mt-5 mb-10"></div>')
   })
 
   $('ul').each((_, element) => {
@@ -28,5 +27,5 @@ export const parseParagraph = (paragraph: string) => {
     $(element).wrap('<div class="flex"></div>')
     $(element).parent().prepend('<div class="w-2 bg-slate-200"></div>')
   })
-  return $("body").html()
+  return $("body").html() as string
 }

@@ -8,7 +8,8 @@ import { parseParagraph } from "libs/parse/parseParagraph"
 import { parseCode } from "libs/parse/parseCode"
 import { parseLink } from "libs/parse/parseLink"
 import { parseHeading } from "libs/parse/parseHeading"
-import { parseMath } from "libs/parse/parseMath"
+import 'highlight.js/styles/monokai.css'
+import katex from "katex"
 
 type Props = {
   blog: ParsedBlog
@@ -71,17 +72,18 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   const bodyList = data.body.map(value => {
     switch (value.fieldId) {
       case "paragraph":
-        return parseParagraph((value as Paragraph).paragraph)
+        const paragraph = parseParagraph((value as Paragraph).paragraph)
+        .replaceAll(/\$\$[^\$]*\$\$/g, (substring) =>
+        katex.renderToString(substring.replaceAll("$", ""), { output: "mathml", displayMode: true, strict: "ignored" }))
+        .replaceAll(/\$[^\$]*\$/g, (substring) =>
+        katex.renderToString(substring.replaceAll("$", ""), { output: "mathml", strict: "ignored" }))
 
+        return paragraph
       case "code":
         return parseCode((value as Code).code, (value as Code).fileName)
 
       case "link":
         return parseLink((value as Link).url, (value as Link).image.url, (value as Link).title)
-
-      case "math":
-        return parseMath((value as Math).formula)
-
 
       default:
         return String.raw``
