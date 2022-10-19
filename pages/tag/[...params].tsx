@@ -1,6 +1,7 @@
 import TagPage from "components/HomePage/TagPage";
 import { client } from "libs/client";
 import { GetStaticProps, GetStaticPaths } from "next";
+import { NextSeo } from "next-seo";
 import { PER_PAGE } from "pages";
 import { ParsedUrlQuery } from "querystring";
 import { Blog, Category, Tag } from "types"
@@ -29,6 +30,9 @@ export default function CategoryId(props: Props) {
   ]
   return (
     <div>
+      <NextSeo
+        title={props.tag.tag}
+      />
       <TagPage
         pageNumber={props.pageNumber}
         totalCount={props.totalCount}

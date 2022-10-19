@@ -31,7 +31,8 @@ export default function Home(props: Props) {
   return (
     <main>
       <NextSeo
-        titleTemplate=""
+        title="Asunaro Blog"
+        titleTemplate="%s"
       />
       <HomePage
         pageNumber={1}

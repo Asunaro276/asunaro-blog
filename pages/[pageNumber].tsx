@@ -1,6 +1,7 @@
 import HomePage from 'components/HomePage/HomePage';
 import { client } from 'libs/client';
 import { GetStaticProps } from 'next';
+import { NextSeo } from 'next-seo';
 import { PER_PAGE } from 'pages';
 import { Blog, Category, Tag } from 'types';
 
@@ -29,6 +30,10 @@ export default function BlogPageId(props: Props) {
   ]
   return (
     <main>
+      <NextSeo
+        title="Asunaro Blog"
+        titleTemplate="%s"
+      />
       <HomePage
         pageNumber={props.pageNumber}
         blogs={props.blogs}

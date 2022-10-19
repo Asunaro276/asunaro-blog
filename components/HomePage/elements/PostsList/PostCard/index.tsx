@@ -30,7 +30,7 @@ export default function PostCard(props: Props) {
         </MuiLink>
       </NextLink>
       <CardContent className='h-1/2 p-1' >
-        <Typography gutterBottom component="div" className='ml-5' sx={{ fontSize: 20 }}>
+        <Typography gutterBottom component="div" className='mx-5' sx={{ fontSize: 20 }}>
           <NextLink href={`/blog/${props.blog.id}`} passHref>
             <MuiLink color="inherit" underline='hover' className=''>
               {props.blog.title}

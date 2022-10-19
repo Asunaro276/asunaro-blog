@@ -1,6 +1,5 @@
 export default {
-  title: 'Asunaro Blog',
-  titleTemplate: '%s | Asunaro Blog',
+  titleTemplate: `%s | Asunaro Blog`,
   description:
   `新米エンジニアの技術ブログです。
   主にWeb技術やデータサイエンスについての情報を発信しています。
