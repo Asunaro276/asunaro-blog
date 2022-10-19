@@ -48,7 +48,7 @@ export default function BlogId(props: Props) {
 }
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const blogs = await client.get({ endpoint: "blog" });
+  const blogs = await client.get({ endpoint: "blog", queries: { limit: 100 } });
   const paths = blogs.contents.map((blog: Blog) => `/blog/${blog.id}`);
   return { paths, fallback: false };
 };
