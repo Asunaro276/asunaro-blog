@@ -6,6 +6,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import BusinessIcon from '@mui/icons-material/Business';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import HomePage from "components/HomePage/HomePage";
+import { NextSeo } from "next-seo";
 
 type Props = {
   blogs: Blog[]
@@ -29,6 +30,9 @@ export default function Home(props: Props) {
   ]
   return (
     <main>
+      <NextSeo
+        titleTemplate=""
+      />
       <HomePage
         pageNumber={1}
         blogs={props.blogs}
