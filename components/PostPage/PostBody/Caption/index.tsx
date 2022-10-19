@@ -1,4 +1,4 @@
-import { Box, Button, CardMedia, IconButton, Link as MuiLink, Typography } from "@mui/material"
+import { Box, Button, CardMedia, Link as MuiLink, Typography } from "@mui/material"
 import { convertDateFormat } from "libs/convertDateFormat"
 import Image from "next/image"
 import NextLink from "next/link"
@@ -29,7 +29,7 @@ const Caption = (props: Props) => {
       </Box>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box className="w-9/12">
-          <Box className="space-x-2 mb-10" sx={{ display: "flex", flexWrap: "wrap", alignItems: "center" }}>
+          <Box className="mb-10 space-y-2" sx={{ display: "flex", flexWrap: "wrap", alignItems: "center" }}>
             <NextLink href={`/category/${props.categoryOfPost.id}`} passHref>
               <Button className="mr-2" variant="outlined" sx={{ textTransform: "none", display: "flex" }} size="small">
                 {props.categoryOfPost.displayedName}
@@ -37,7 +37,7 @@ const Caption = (props: Props) => {
             </NextLink>
             {props.tagsOfPost.map(tag => (
               <NextLink href={`/tag/${tag.id}`} key={tag.id} passHref>
-                <MuiLink className="text-sm" sx={{ textTransform: "none", display: "flex" }}>
+                <MuiLink className="text-sm mr-2" sx={{ textTransform: "none", display: "flex" }}>
                   <LocalOfferIcon fontSize="small" />
                   {tag.tag}
                 </MuiLink>

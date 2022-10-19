@@ -68,7 +68,6 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
     })
   }
   propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
-  propTags = propTags.slice(0, 10)
 
   const bodyList = data.body.map(value => {
     switch (value.fieldId) {
@@ -78,7 +77,6 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
         katex.renderToString(substring.replaceAll("$", "").replaceAll(/(<br>|<\\br>|&nbsp;|amp;)/g, ""),
         { output: "mathml", displayMode: true, strict: "ignore" }))
         .replaceAll(/(?!")\$(?!")[^\$]*(?!")\$(?!")/g, (substring) => {
-          console.log(substring)
           return katex.renderToString(substring.replaceAll("$", ""),
           { output: "mathml", strict: "ignore" })
         })

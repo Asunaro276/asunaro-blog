@@ -1,7 +1,7 @@
 import { Box } from "@mui/material"
 import { Tag } from "types"
 import SideProfile from "./SideProfile"
-import SideCategory from "./SideTags"
+import SideTag from "./SideTags"
 import SideToc from "./SideToc"
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 
 
 const SideBar = (props: Props) => {
-  const profileHeight = 60
+  const profileHeight = 61
   return (
     <Box className="h-full">
       <Box sx={{ height: `calc(${profileHeight}rem)` }}>
@@ -23,7 +23,7 @@ const SideBar = (props: Props) => {
           <SideProfile />
         </Box>
         <Box className="mb-8">
-          <SideCategory tags={props.tags} />
+          <SideTag tags={props.tags} />
         </Box>
       </Box>
       {props.headings !== undefined &&

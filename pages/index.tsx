@@ -56,7 +56,6 @@ export const getStaticProps = async () => {
     })
   }
   propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
-  console.log(propTags)
 
   return {
     props: {
