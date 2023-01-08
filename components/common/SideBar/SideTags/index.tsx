@@ -10,8 +10,8 @@ type Props = {
 
 const SideTag = (props: Props) => {
   return (
-    <Card>
-      <CardContent className="space-y-4" sx={{ display: "flex", flexWrap: "wrap" }}>
+    <Card >
+      <CardContent className="space-y-4" sx={{ display: "flex", flexWrap: "wrap", }}>
         {props.tags.map(tag => (
           <NextLink href={`/tag/${tag.id}`} key={tag.id} passHref>
             <Button variant="contained" size="small" className="mr-4 text-xs" sx={{ textTransform: "none", display: "flex" }}>

@@ -1,10 +1,8 @@
-import { Avatar, Card, CardContent, Divider, Typography } from "@mui/material"
+import { Card, CardContent, Divider, Typography } from "@mui/material"
 import Box from "@mui/material/Box"
 import Image from "next/image"
 
-type Props = {}
-
-const SideProfile = (props: Props) => {
+const SideProfile = () => {
   return (
     <Box className="h-full justify-end">
       <Card className="h-full">

@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import Header from '.'
 
 export default {
-  title: 'Organisms/Header',
+  title: 'common/Header',
   component: Header,
   argTypes: {
     backgroundColor: { control: 'color' },

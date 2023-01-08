@@ -7,7 +7,7 @@ export type Blog = {
   tags: Tag[]
   publishedAt: string
   image: Image
-  imageAlt: string
+  imageAlt?: string
 }
 
 export type ParsedBlog = {
@@ -19,7 +19,7 @@ export type ParsedBlog = {
   tags: Tag[]
   publishedAt: string
   image: Image
-  imageAlt: string
+  imageAlt?: string
 }
 
 export type BlogBody = (Paragraph | Link | Code | Math)[]

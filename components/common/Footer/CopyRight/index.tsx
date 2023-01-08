@@ -1,10 +1,9 @@
-type Props = {
-}
+import { Typography } from "@mui/material"
 
-export const CopyRight = (props: Props) => {
+export const CopyRight = () => {
   return (
-    <div className="bg-slate-900 h-8 pt-1 text-center text-white">
+    <Typography className="bg-slate-800 h-8 pt-1 text-center text-white">
       © Asunaro 2022
-    </div>
+    </Typography>
   )
 }

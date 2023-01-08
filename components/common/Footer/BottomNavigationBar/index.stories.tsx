@@ -3,11 +3,8 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { BottomNavigationBar } from '.'
 
 export default {
-  title: 'molecules/BottomNavigationBar',
+  title: 'common/Footer/BottomNavigationBar',
   component: BottomNavigationBar,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
 } as ComponentMeta<typeof BottomNavigationBar>;
 
 const Template: ComponentStory<typeof BottomNavigationBar> = (args) => <BottomNavigationBar {...args} />;

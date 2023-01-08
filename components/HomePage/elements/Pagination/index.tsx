@@ -10,13 +10,11 @@ type Props = {
   totalCount: number
 }
 
-
 const Pagination = ({ dir, pageNumber, totalCount }: Props) => {
   return (
     <MuiPagination
       page={pageNumber}
       count={Math.ceil(totalCount/PER_PAGE)}
-      // count={10}
       renderItem={(item) => {
         return (
           <Link href={item.page === 1 ? `/${dir}` : `${dir}/${item.page}`} passHref>

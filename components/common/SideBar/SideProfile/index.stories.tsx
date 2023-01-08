@@ -3,13 +3,10 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import SideProfile from '.'
 
 export default {
-  title: 'molecule/SideProfile',
+  title: 'common/SideBar/SideProfile',
   component: SideProfile,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
 } as ComponentMeta<typeof SideProfile>;
 
-const Template: ComponentStory<typeof SideProfile> = (args) => <SideProfile {...args} />;
+const Template: ComponentStory<typeof SideProfile> = () => <SideProfile />;
 
 export const Primary = Template.bind({});

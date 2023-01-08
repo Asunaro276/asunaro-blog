@@ -1,4 +1,13 @@
+const path = require('path');
+
 module.exports = {
+  webpackFinal: async (config) => {
+    config.resolve.modules = [
+    ...(config.resolve.modules || []),
+    path.resolve(__dirname, '../'),
+  ]
+    return config
+  },
   "stories": [
     "../components/**/*.stories.mdx",
     "../components/**/*.stories.@(js|jsx|ts|tsx)",

@@ -68,7 +68,6 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
     })
   }
   propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
-  propTags = propTags.slice(0, 10)
 
   const bodyList = data.body.map(value => {
     switch (value.fieldId) {

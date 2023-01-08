@@ -11,7 +11,7 @@ if (process.env.ANALYZE === 'true') {
 module.exports = withPlugins(
   plugins,
   {
-    pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+    // pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
     reactStrictMode: true,
     images: {
       domains: ["images.microcms-assets.io"],

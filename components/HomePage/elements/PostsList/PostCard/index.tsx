@@ -6,7 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { Blog } from "types"
-import { Box, createStyles, Link as MuiLink, makeStyles } from '@mui/material';
+import { Box, Link as MuiLink } from '@mui/material';
 import { convertDateFormat } from 'libs/convertDateFormat';
 import Image from 'next/image';
 import NextLink from 'next/link';

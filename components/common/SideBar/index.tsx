@@ -22,7 +22,7 @@ const SideBar = (props: Props) => {
         <Box className="mb-8">
           <SideProfile />
         </Box>
-        <Box className="mb-8">
+        <Box className="mb-8" sx={{ overflowY: "scroll", height: "400px" }}>
           <SideTag tags={props.tags} />
         </Box>
       </Box>

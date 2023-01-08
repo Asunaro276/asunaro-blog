@@ -18,7 +18,11 @@ const PostBody = (props: Props) => {
         tagsOfPost={props.blog.tags}
         categoryOfPost={props.blog.category}
         imageUrl={props.blog.image.url}
-        imageAlt={props.blog.imageAlt}
+        imageAlt={
+          props.blog.imageAlt === undefined
+          ? ""
+          : props.blog.imageAlt
+        }
       />
     </Box>
     <Box className="flex justify-center mb-20">

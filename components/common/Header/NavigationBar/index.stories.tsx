@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { NavigationBar } from '.';
 
 export default {
-  title: 'molecules/NavigationBar',
+  title: 'common/Header/NavigationBar',
   component: NavigationBar,
   argTypes: {
     backgroundColor: { control: 'color' },
