@@ -13,6 +13,7 @@ module.exports = {
         title: ['Arial', 'Meiryo'],
         body: [
           'Meiryo',
+          'Arial',
           'Yu Gothic',
           'Roboto',
         ],

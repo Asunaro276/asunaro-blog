@@ -11,6 +11,7 @@ import { convertDateFormat } from 'libs/convertDateFormat';
 import Image from 'next/image';
 import NextLink from 'next/link';
 import { LocalOffer } from '@mui/icons-material';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 type Props = {
   blog: Blog
@@ -18,58 +19,42 @@ type Props = {
 
 export default function PostCard(props: Props) {
   return (
-    <Card className='flex flex-col' sx={{ height: {sm: "27rem", lg: "30rem"} }}>
+    <Card className='flex flex-col hover:brightness-[0.8] duration-[1000ms]' sx={{ height: {xs: "30rem", lg: "32rem"} }}>
       <NextLink href={`/blog/${props.blog.id}`} passHref>
-        <MuiLink underline="none" className='h-1/2'>
-          <CardMedia
-            className="hover:brightness-[0.7] duration-[300ms]"
-            sx={{ height: "100%" }}
-          >
+        <MuiLink underline="none" className='relative h-full'>
+          <CardMedia>
             <Image src={props.blog.image.url} alt={props.blog.imageAlt} width="550" height="300" objectFit='fill' />
           </CardMedia>
+          <CardContent className='h-1/2 p-1' >
+            <Typography gutterBottom component="div" className='mx-5' sx={{ fontSize: 20 }}>
+              <Typography className="text-black text-lg">
+                {props.blog.title}
+              </Typography>
+              <Box className="" sx={{ display: "flex", flexDirection: "column",  alignItems: "start" }}>
+                <Button className="my-2 text-xs" variant="outlined" sx={{ textTransform: "none", display: "flex" }} size="small">
+                  {props.blog.category.displayedName}
+                </Button>
+                <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+                  {props.blog.tags.map((tag, index) => (
+                    <Box sx={{ display: "flex", marginRight: "0.5em" }} key={index}>
+                      <LocalOffer sx={{ fontSize: "1.25rem", marginRight: "0.05rem" }} />
+                      <Typography sx={{ display: "inline-block" }}>
+                        {tag.tag}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Box>
+              </Box>
+            </Typography>
+          </CardContent>
+          <CardContent className="p-1 pl-5 flex opacity-80 absolute bottom-2">
+            <AccessTimeIcon fontSize='small' className='opacity-80' />
+            <Typography color="text.secondary" sx={{ display: 'inline-block', marginLeft: "2px" }}>
+              {convertDateFormat(props.blog.publishedAt)}
+            </Typography>
+          </CardContent>
         </MuiLink>
       </NextLink>
-      <CardContent className='h-1/2 p-1' >
-        <Typography gutterBottom component="div" className='mx-5' sx={{ fontSize: 20 }}>
-          <NextLink href={`/blog/${props.blog.id}`} passHref>
-            <MuiLink color="inherit" underline='hover' className=''>
-              {props.blog.title}
-            </MuiLink>
-          </NextLink>
-          <Box className="" sx={{ display: "flex", flexDirection: "column",  alignItems: "start" }}>
-            <NextLink href={`/category/${props.blog.category.id}`} passHref>
-              <Button className="my-1.5 text-xs" variant="outlined" sx={{ textTransform: "none", display: "flex" }} size="small">
-                {props.blog.category.displayedName}
-              </Button>
-            </NextLink>
-            <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-              {props.blog.tags.map(tag => (
-                <NextLink href={`/tag/${tag.id}`} key={tag.id} passHref>
-                  <MuiLink className='mr-1' sx={{ textTransform: "none", display: "flex", fontSize: "0.8rem" }}>
-                    <LocalOffer sx={{ fontSize: "1.2rem", marginRight: "0.05rem" }} />
-                    {tag.tag}
-                  </MuiLink>
-                </NextLink>
-              ))}
-            </Box>
-          </Box>
-        </Typography>
-        {/* <Typography variant="body1" color="text.secondary" className='ml-5 text-ellipsis overflow-y-hidden'>
-          {props.blog.description}
-        </Typography> */}
-      </CardContent>
-      <CardContent className="p-1">
-        <Typography variant="body2" color="text.secondary" className='ml-5'>
-          {convertDateFormat(props.blog.publishedAt)}
-        </Typography>
-      </CardContent>
-      <CardActions className='justify-center p-1'>
-        <NextLink href={`/blog/${props.blog.id}`} passHref>
-          <MuiLink color="inherit" underline='none'>
-            <Button size="small" variant="outlined" color="inherit">Read More</Button>
-          </MuiLink>
-        </NextLink>
-      </CardActions>
     </Card>
   );
 }

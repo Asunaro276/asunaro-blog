@@ -23,12 +23,12 @@ export const basicTheme = createTheme({
   typography: {
     fontFamily: [
       'Meiryo',
+      'Arial',
       '-apple-system',
       'BlinkMacSystemFont',
       '"Segoe UI"',
       'Roboto',
       '"Helvetica Neue"',
-      'Arial',
       'sans-serif',
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',

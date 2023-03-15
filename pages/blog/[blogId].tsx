@@ -69,7 +69,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   }
   propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
 
-  const bodyList = data.body.map(value => {
+  const bodyList = data.body.map(async value => {
     switch (value.fieldId) {
       case "paragraph":
         const paragraph = parseParagraph((value as Paragraph).paragraph)
@@ -86,18 +86,22 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
         return parseCode((value as Code).code, (value as Code).fileName)
 
       case "link":
-        return parseLink((value as Link).url, (value as Link).image.url, (value as Link).title)
+        return await parseLink((value as Link).url, (value as Link).image.url, (value as Link).title)
 
       default:
         return String.raw``
       }
     }
   )
-  const body = bodyList.join("")
-  const heading = parseHeading(body)
+  let bodyStringList: string[] = []
+  for (const val of bodyList) {
+    bodyStringList.push(String(await val))
+  }
+  const body = bodyStringList.join("")
+  const heading = parseHeading(body as string)
   return {
     props: {
-      blog: {...data, body: body},
+      blog: {...data, body: body as string},
       headings: heading,
       categories: categories.contents as Category[],
       tags: propTags as Tag[]

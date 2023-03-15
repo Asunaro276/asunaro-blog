@@ -13,7 +13,7 @@ const PostsList = (props: Props) => {
         return (
         <Box
           key={index}
-          sx={{ marginRight: index % 2 === 0 ? "3%" : "0",
+          sx={{ marginRight: { sm: index % 2 === 0 ? "3%" : "0", xs: "3%" },
                 width: { xs: "100%", sm: "48%" } }}
           className="mb-8"
         >

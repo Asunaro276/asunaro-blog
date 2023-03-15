@@ -71,3 +71,10 @@ export type Heading = {
   htmlTag: string
   id: string
 }
+
+export type OGP = {
+  title: string
+  description: string
+  image: string
+  [key: string]: string
+}
