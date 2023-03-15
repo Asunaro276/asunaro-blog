@@ -21,13 +21,13 @@ const PostPage = (props: Props) => {
         />
       </div>
       <Box className="flex justify-between" sx={{ flexDirection: {xs: "column", md: "row"} }}>
-        <Box className="" sx={{ marginX: "2%", width: { xs: "95%", md: "75%" } }}>
+        <Box className="" sx={{ marginX: "2%", width: { xs: "95%", md: "70%" } }}>
           <PostBody
             blog={props.blog}
             headings={props.headings}
           />
         </Box>
-        <Box className="mt-32" sx={{ marginX: "2%", width: { md: "25%" } }}>
+        <Box className="mt-32" sx={{ marginX: "2%", width: { md: "30%" } }}>
           <SideBar
             tags={props.tags}
             headings={props.headings}

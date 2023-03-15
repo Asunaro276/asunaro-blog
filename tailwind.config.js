@@ -10,9 +10,9 @@ module.exports = {
     extend: {
       fontFamily: {
         logo: ['Montserrat Subrayada'],
-        title: ['Noto Serif', 'Helvetica', 'Arial', 'Verdana'],
+        title: ['Arial', 'Meiryo'],
         body: [
-          'Noto Serif',
+          'Meiryo',
           'Yu Gothic',
           'Roboto',
         ],

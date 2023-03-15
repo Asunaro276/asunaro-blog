@@ -18,9 +18,25 @@ export const parseParagraph = (paragraph: string) => {
     $(element).wrap('<div class="mt-5 mb-10"></div>')
   })
 
-  $('ul').each((_, element) => {
-    $(element).addClass('list-disc list-inside text-lg space-y-2 ml-6 pl-4 indent-[-1em]')
-    $(element).children().addClass('font-thin')
+  $('li').each((_, element) => {
+    $(element).addClass('font-body')
+  })
+
+  $('ol').each((_, element) => {
+    $(element).addClass('list-inside text-lg space-y-2 ml-6 pl-8 indent-[-1em]')
+  })
+
+  $('ul:not(ul ul)').each((_, element) => {
+    $(element).addClass('list-disc list-inside text-lg space-y-2 ml-6 pl-8 py-6 indent-[-1em] border-dotted border-gray-500')
+  })
+
+  $('ul ul').each((_, element) => {
+    $(element).addClass('list-inside text-lg space-y-2 ml-6 pl-4 indent-[-1em]')
+    $(element).attr("style", "list-style-type: circle;")
+  })
+
+  $('code:not(pre code)').each((_, element) => {
+    $(element).addClass("bg-slate-200 p-0.5 rounded text-red-500 font-thin")
   })
 
   $('blockquote').each((_, element) => {
@@ -28,6 +44,11 @@ export const parseParagraph = (paragraph: string) => {
     $(element).wrap('<div class="flex"></div>')
     $(element).parent().prepend('<div class="w-2 bg-slate-200"></div>')
   })
+
+  $('img').each((_, element) => {
+    $(element).attr("width", "90%")
+  })
+
   $('pre code').each((_, element) => {
     const result = hljs.highlightAuto($(element).text()).value
     $(element).html(result)

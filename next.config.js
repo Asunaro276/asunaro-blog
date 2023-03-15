@@ -1,4 +1,3 @@
-const withPlugins = require('next-compose-plugins')
 let plugins = []
 
 const withExportImages = require('next-export-optimize-images')
@@ -8,13 +7,17 @@ if (process.env.ANALYZE === 'true') {
   plugins.push(withBundleAnalyzer)
 }
 
-module.exports = withPlugins(
-  plugins,
-  {
-    // pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-    reactStrictMode: true,
-    images: {
-      domains: ["images.microcms-assets.io"],
-    },
-  }
-)
+const config = {
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  reactStrictMode: true,
+  images: {
+    domains: ["images.microcms-assets.io"],
+  },
+}
+
+module.exports = (_phase, { defaultConfig }) => {
+  return plugins.reduce((acc, plugin) => plugin(acc), {
+    ...defaultConfig,
+    ...config,
+  })
+}

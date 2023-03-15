@@ -22,6 +22,7 @@ export const basicTheme = createTheme({
   },
   typography: {
     fontFamily: [
+      'Meiryo',
       '-apple-system',
       'BlinkMacSystemFont',
       '"Segoe UI"',
