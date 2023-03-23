@@ -1,4 +1,4 @@
-import HomePage from 'components/HomePage/HomePage';
+import HomePage from 'components/HomePage';
 import { client } from 'libs/client';
 import { GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
@@ -10,13 +10,13 @@ type Props = {
   blogs: Blog[]
   categories: Category[]
   tags: Tag[]
+  years: { [key: number]: number }
   totalCount: number
 }
 
 type Params = {
   pageNumber: string
 }
-
 
 // pages/blog/[id].js
 export default function BlogPageId(props: Props) {
@@ -39,6 +39,7 @@ export default function BlogPageId(props: Props) {
         blogs={props.blogs}
         categories={categories}
         tags={props.tags}
+        years={props.years}
         totalCount={props.totalCount}
       />
     </main>
@@ -59,16 +60,21 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   const blogs = await client.get({ endpoint: "blog", queries: { offset: (pageNumber - 1) * PER_PAGE, limit: PER_PAGE } });
   const categories = await client.get({ endpoint: "categories" })
   const tags = (await client.get({ endpoint: "tags", queries: { limit: 100 }})).contents as Tag[]
+  // タグごとのポスト数を入手
   let propTags = []
   for (const tag of tags) {
-    const tagBlogs = await client.get({ endpoint: "blog", queries: { filters: `tags[contains]${tag.id}` } })
-    const tagTotalCount = tagBlogs.totalCount
+    const countTag = (await client.get({ endpoint: "blog", queries: { filters: `tags[contains]${tag.id}`, fields: "totalCount" }})).totalCount
     propTags.push({
       ...tag,
-      tagTotalCount: tagTotalCount
+      tagTotalCount: countTag 
     })
   }
   propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
+  // 年ごとのポスト数を入手
+  let years: { [key: number]: number } = { 2022: 0, 2023: 0 }
+  for (const y in years) {
+    years[y] = (await client.get({ endpoint: "blog", queries: { filters: `publishedAt[contains]${y}`, fields: "totalCount" }})).totalCount
+  }
 
   return {
     props: {
@@ -77,6 +83,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
       categories: categories.contents as Category[],
       totalCount: blogs.totalCount,
       tags: propTags as Tag[],
+      years: years,
     },
   };
 };

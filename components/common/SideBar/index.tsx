@@ -3,6 +3,7 @@ import { Tag } from "types"
 import SideProfile from "./SideProfile"
 import SideTag from "./SideTags"
 import SideToc from "./SideToc"
+import ArchivePerYear from "./ArchivePerYear"
 
 type Props = {
   headings?: {
@@ -11,23 +12,26 @@ type Props = {
     htmlTag: string
   }[]
   tags: Tag[]
+  years: { [key: number]: number }
 }
 
 
 const SideBar = (props: Props) => {
-  const profileHeight = 61
   return (
     <Box className="h-full">
-      <Box sx={{ height: `calc(${profileHeight}rem)` }}>
+      <Box>
         <Box className="mb-8">
           <SideProfile />
         </Box>
-        <Box className="mb-8" sx={{ overflowY: "scroll", height: "400px" }}>
+        <Box className="mb-8" sx={{ height: "400px" }}>
           <SideTag tags={props.tags} />
+        </Box>
+        <Box className="mb-8">
+          <ArchivePerYear years={props.years} />
         </Box>
       </Box>
       {props.headings !== undefined &&
-      (<Box className="box-border" sx={{ display: {xs: "none", md: "block"}, height: `calc(100% - ${profileHeight}rem)` }}>
+      (<Box className="box-border" sx={{ display: { xs: "none", md: "block" } }}>
           <Box className="sticky top-4">
             <SideToc
               heading={props.headings}

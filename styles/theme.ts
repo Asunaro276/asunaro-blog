@@ -14,7 +14,7 @@ export const titleFontTheme = createTheme({
 export const basicTheme = createTheme({
   palette: {
     primary: {
-      main: blueGrey[300],
+      main: blueGrey[400],
       dark: blueGrey[600],
       light: blueGrey[100],
       contrastText: "#fff",

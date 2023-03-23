@@ -1,4 +1,4 @@
-import TagPage from "components/HomePage/TagPage";
+import HomePage from "components/HomePage";
 import { client } from "libs/client";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { NextSeo } from "next-seo";
@@ -10,6 +10,7 @@ type Props = {
   blogs: Blog[]
   categories: Category[]
   tags: Tag[]
+  years: { [key: number]: number }
   tag: Tag
   pageNumber: number
   totalCount: number
@@ -19,7 +20,7 @@ interface Params extends ParsedUrlQuery {
   params: string[]
 }
 
-export default function CategoryId(props: Props) {
+export default function TagId(props: Props) {
   const homeCategory: Category = { id: "/", displayedName: "Home", name: "home" }
   const categories = [
     homeCategory,
@@ -33,12 +34,13 @@ export default function CategoryId(props: Props) {
       <NextSeo
         title={props.tag.tag}
       />
-      <TagPage
+      <HomePage
         pageNumber={props.pageNumber}
         totalCount={props.totalCount}
         blogs={props.blogs}
         categories={categories}
         tags={props.tags}
+        years={props.years}
         tag={props.tag}
       />
     </div>
@@ -51,10 +53,9 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const range = (start: number, end: number) => [...Array(end - start + 1)].map((_, i) => start + i)
   let paths = []
   for (const tag in tags) {
-    const blogs = await client.get({ endpoint: "blog", queries: { filters: `tags[contains]${tags[tag].id}` }})
+    const countEachTag = (await client.get({ endpoint: "blog", queries: { filters: `tags[contains]${tags[tag].id}`, fields: "totalCount" }})).totalCount
     paths.push(`/tag/${tags[tag].id}`)
-    // paths.push(...range(1, 10)
-    paths.push(...range(1, Math.ceil(blogs.totalCount / PER_PAGE))
+    paths.push(...range(1, Math.ceil(countEachTag / PER_PAGE))
     .map((pageNumber) => `/tag/${tags[tag].id}/${pageNumber}`))
   }
   return { paths, fallback: false };
@@ -64,26 +65,32 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 export const getStaticProps: GetStaticProps<Props, Params> = async (context) => {
   const tagId = context.params!.params[0]
   const pageNumber = context.params?.params.length === 1 ? 1 : Number(context.params!.params[1])
-  const blogs = await client.get({ endpoint: "blog", queries: { filters: `tags[contains]${tagId}` } })
+  const blogs = await client.get({ endpoint: "blog", queries: { filters: `tags[contains]${tagId}`, offset: (pageNumber - 1) * PER_PAGE, limit: PER_PAGE }})
   const categories = await client.get({ endpoint: "categories" })
   const tags = (await client.get({ endpoint: "tags", queries: { limit: 100 } })).contents as Tag[]
   const tag = tags.filter(tag => tag.id === tagId).pop()
+  // タグごとのポスト数を入手
   let propTags = []
   for (const tag of tags) {
-    const tagBlogs = await client.get({ endpoint: "blog", queries: { filters: `tags[contains]${tag.id}` } })
-    const tagTotalCount = tagBlogs.totalCount
+    const countTag = (await client.get({ endpoint: "blog", queries: { filters: `tags[contains]${tag.id}`, fields: "totalCount" }})).totalCount
     propTags.push({
       ...tag,
-      tagTotalCount: tagTotalCount
+      tagTotalCount: countTag 
     })
   }
   propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
+  // 年ごとのポスト数を入手
+  let years: { [key: number]: number } = { 2022: 0, 2023: 0 }
+  for (const y in years) {
+    years[y] = (await client.get({ endpoint: "blog", queries: { filters: `publishedAt[contains]${y}`, fields: "totalCount" }})).totalCount
+  }
 
   return {
     props: {
       blogs: blogs.contents as Blog[],
       categories: categories.contents as Category[],
       tags: propTags as Tag[],
+      years: years,
       tag: tag as Tag, 
       pageNumber: pageNumber,
       totalCount: blogs.totalCount,

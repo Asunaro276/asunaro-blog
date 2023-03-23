@@ -5,13 +5,14 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import BusinessIcon from '@mui/icons-material/Business';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
-import HomePage from "components/HomePage/HomePage";
+import HomePage from "components/HomePage";
 import { NextSeo } from "next-seo";
 
 type Props = {
   blogs: Blog[]
   categories: Category[]
   tags: Tag[]
+  years: { [key: number]: number }
   totalCount: number
 }
 
@@ -39,6 +40,7 @@ export default function Home(props: Props) {
         blogs={props.blogs}
         categories={categories}
         tags={props.tags}
+        years={props.years}
         totalCount={props.totalCount}
       />
     </main>
@@ -48,26 +50,32 @@ export default function Home(props: Props) {
 
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async () => {
-  const data = await client.get({ endpoint: "blog", queries: { offset: 0, limit: PER_PAGE} })
+  const blogs = await client.get({ endpoint: "blog", queries: { offset: 0, limit: PER_PAGE} })
   const categories = await client.get({ endpoint: "categories" })
   const tags = (await client.get({ endpoint: "tags", queries: { limit: 100 }})).contents as Tag[]
+  // タグごとのポスト数を入手
   let propTags = []
   for (const tag of tags) {
-    const tagBlogs = await client.get({ endpoint: "blog", queries: { filters: `tags[contains]${tag.id}` } })
-    const tagTotalCount = tagBlogs.totalCount
+    const countTag = (await client.get({ endpoint: "blog", queries: { filters: `tags[contains]${tag.id}`, fields: "totalCount" }})).totalCount
     propTags.push({
       ...tag,
-      tagTotalCount: tagTotalCount
+      tagTotalCount: countTag 
     })
   }
   propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
+  // 年ごとのポスト数を入手
+  let years: { [key: number]: number } = { 2022: 0, 2023: 0 }
+  for (const y in years) {
+    years[y] = (await client.get({ endpoint: "blog", queries: { filters: `publishedAt[contains]${y}`, fields: "totalCount" }})).totalCount
+  }
 
   return {
     props: {
-      blogs: data.contents as Blog[],
+      blogs: blogs.contents as Blog[],
       categories: categories.contents as Category[],
       tags: propTags as Tag[],
-      totalCount: data.totalCount
+      years: years,
+      totalCount: blogs.totalCount
     },
   };
 };

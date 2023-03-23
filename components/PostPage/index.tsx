@@ -10,6 +10,7 @@ type Props = {
   headings: Heading[]
   categories: Category[]
   tags: Tag[]
+  years: { [key: number]: number }
 }
 
 const PostPage = (props: Props) => {
@@ -30,6 +31,7 @@ const PostPage = (props: Props) => {
         <Box className="mt-32" sx={{ marginX: "2%", width: { md: "30%" } }}>
           <SideBar
             tags={props.tags}
+            years={props.years}
             headings={props.headings}
           />
         </Box>

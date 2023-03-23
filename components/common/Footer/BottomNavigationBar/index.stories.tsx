@@ -16,3 +16,14 @@ Primary.args = {
     {id: "", name: "category2", displayedName: "カテゴリ2"},
   ]
 };
+
+export const Real = Template.bind({});
+Real.args = {
+  categories: [
+    {id: "", name: "Home", displayedName: "Home"},
+    {id: "", name: "programming", displayedName: "プログラミング"},
+    {id: "", name: "business", displayedName: "ビジネス"},
+    {id: "", name: "data_sciense", displayedName: "データサイエンス"},
+    {id: "", name: "other", displayedName: "その他"},
+  ]
+};

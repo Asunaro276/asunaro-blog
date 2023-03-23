@@ -16,6 +16,7 @@ type Props = {
   headings: Heading[]
   categories: Category[]
   tags: Tag[]
+  years: { [key: number]: number }
 }
 
 interface Params extends ParsedUrlQuery {
@@ -42,6 +43,7 @@ export default function BlogId(props: Props) {
         headings={props.headings}
         categories={categories}
         tags={props.tags}
+        years={props.years}
       />
     </main>
   );
@@ -58,16 +60,23 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   const data = await client.get({ endpoint: "blog", contentId: id }) as Blog
   const categories = await client.get({ endpoint: "categories" })
   const tags = (await client.get({ endpoint: "tags", queries: { limit: 100 }})).contents as Tag[]
+
+  // タグごとのポスト数を入手
   let propTags = []
   for (const tag of tags) {
-    const tagBlogs = await client.get({ endpoint: "blog", queries: { filters: `tags[contains]${tag.id}` } })
-    const tagTotalCount = tagBlogs.totalCount
+    const countTag = (await client.get({ endpoint: "blog", queries: { filters: `tags[contains]${tag.id}`, fields: "totalCount" }})).totalCount
     propTags.push({
       ...tag,
-      tagTotalCount: tagTotalCount
+      tagTotalCount: countTag 
     })
   }
   propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
+
+  // 年ごとのポスト数を入手
+  let years: { [key: number]: number } = { 2022: 0, 2023: 0 }
+  for (const y in years) {
+    years[y] = (await client.get({ endpoint: "blog", queries: { filters: `publishedAt[contains]${y}`, fields: "totalCount" }})).totalCount
+  }
 
   const bodyList = data.body.map(async value => {
     switch (value.fieldId) {
@@ -101,10 +110,11 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   const heading = parseHeading(body as string)
   return {
     props: {
-      blog: {...data, body: body as string},
+      blog: {...data, body: body },
       headings: heading,
       categories: categories.contents as Category[],
-      tags: propTags as Tag[]
+      tags: propTags as Tag[],
+      years: years,
     },
   }
 }

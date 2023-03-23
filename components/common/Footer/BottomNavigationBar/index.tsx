@@ -8,12 +8,12 @@ type Props = {
 
 export const BottomNavigationBar = (props: Props) => {
   return (
-    <Box className="bg-slate-500" sx={{ height: { xs: "50", sm: "20" } }}>
+    <Box className="bg-slate-500" sx={{ height: { xs: "50", sm: "50" } }}>
       <Box className="flex justify-center pt-5" sx={{ flexDirection: { xs: "column", sm: "row" } }}>
         {props.categories.map((category, index) => {
           return (
             <Box key={index}>
-              <div className="text-white mx-4 md:mx-6 my-2">
+              <div className="text-white mx-4 md:mx-6 my-6">
                 <NextLink
                  href={category.id}
                  passHref
