@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof NavigationBar> = (args) => <NavigationBar 
 export const Primary = Template.bind({});
 Primary.args = {
   categories: [
-    {id: "", name: "category1", displayedName: "カテゴリ1"},
-    {id: "", name: "category2", displayedName: "カテゴリ2"},
+    {_id: "", name: "category1", displayedName: "カテゴリ1"},
+    {_id: "", name: "category2", displayedName: "カテゴリ2"},
   ]
 };

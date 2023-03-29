@@ -1,75 +1,58 @@
-export type Blog = {
-  id: string
+export type Article = {
+  _id: string
+  _sys: Sys
   title: string
   description: string
-  body: BlogBody
+  coverImage: CoverImage
   category: Category
   tags: Tag[]
-  publishedAt: string
-  image: Image
-  imageAlt?: string
-}
-
-export type ParsedBlog = {
-  id: string
-  title: string
-  description: string
   body: string
-  category: Category
-  tags: Tag[]
-  publishedAt: string
-  image: Image
-  imageAlt?: string
-}
-
-export type BlogBody = (Paragraph | Link | Code | Math)[]
-
-export type Paragraph = {
-  fieldId: string
-  paragraph: string
-}
-
-export type Link = {
-  fieldId: string
-  url: string
-  title: string
-  image: Image
-  linkTo?: string
-}
-
-export type Code = {
-  fieldId: string
-  code: string
-  fileName: string
-}
-
-export type Math = {
-  fieldId: string
-  formula: string
-}
-
-export type Image = {
-  url: string
-  width: number
-  height: number
 }
 
 export type Tag = {
-  id: string
+  _id: string
+  _sys: Sys
   tag: string
   tagTotalCount?: number
 }
 
 export type Category = {
-  id: string
-  name: string
+  _id: string
+  _sys?: Sys
   displayedName: string
+  name: string
+}
+
+export type CoverImage = {
+  _id: string
+  altText: string
+  description: string
+  fileName: string
+  fileSize: number
+  fileType: string
+  height: number
+  metadata: object
+  src: string
+  title: string
+  width: number
+}
+
+export type Sys = {
+  raw: {
+    createdAt: string
+    updatedAt: string
+    firstPublishedAt: string
+    publishedAt: string
+  }
+  customOrder: number
+  createdAt: string
+  updatedAt: string
 }
 
 export type Heading = {
   text: string
   htmlTag: string
-  id: string
+  _id: string
 }
 
 export type OGP = {

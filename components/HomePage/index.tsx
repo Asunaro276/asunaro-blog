@@ -2,13 +2,13 @@ import { Box, Typography } from "@mui/material";
 import Footer from "components/common/Footer";
 import Header from "components/common/Header";
 import SideBar from "components/common/SideBar";
-import { Blog, Category, Tag } from "types";
+import { Article, Category, Tag } from "types";
 import Pagination from "./Pagination";
 import PostsList from "./PostsList";
 
 type Props = {
   pageNumber: number
-  blogs: Blog[]
+  blogs: Article[]
   categories: Category[]
   tags: Tag[]
   years: { [key: number]: number }
@@ -21,9 +21,9 @@ type Props = {
 const HomePage = (props: Props) => {
   let dir = ""
   if (props.tag) {
-    dir = `tag/${props.tag.id}`
+    dir = `tag/${props.tag._id}`
   } else if (props.category) {
-    dir = `category/${props.category.id}`
+    dir = `category/${props.category._id}`
   } else if (props.year) {
     dir = `year/${props.year}`
   } else {

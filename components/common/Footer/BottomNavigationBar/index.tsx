@@ -15,7 +15,7 @@ export const BottomNavigationBar = (props: Props) => {
             <Box key={index}>
               <div className="text-white mx-4 md:mx-6 my-6">
                 <NextLink
-                 href={category.id}
+                 href={category._id}
                  passHref
                 >
                   <MuiLink color="inherit" underline="hover" className="hover:text-slate-200" rel="noopener noreferrer">

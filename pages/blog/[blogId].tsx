@@ -1,18 +1,16 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
-import { client } from "../../libs/client"
-import { Blog, Category, Code, Heading, Link, Paragraph, ParsedBlog, Tag } from "types"
+import { newtClient } from "../../libs/client"
+import { Article, Category, Heading, Tag } from "types"
 import { NextSeo } from "next-seo"
 import PostPage from "components/PostPage"
-import { parseParagraph } from "libs/parse/parseParagraph"
-import { parseCode } from "libs/parse/parseCode"
-import { parseLink } from "libs/parse/parseLink"
+import { parseBody } from "libs/parse/parseBody"
 import { parseHeading } from "libs/parse/parseHeading"
 import 'highlight.js/styles/monokai.css'
 import katex from "katex"
 
 type Props = {
-  blog: ParsedBlog
+  blog: Article
   headings: Heading[]
   categories: Category[]
   tags: Tag[]
@@ -24,12 +22,12 @@ interface Params extends ParsedUrlQuery {
 }
 
 export default function BlogId(props: Props) {
-  const homeCategory: Category = { id: "/", displayedName: "Home", name: "home" }
+  const homeCategory: Category = { _id: "/", displayedName: "Home", name: "home" }
   const categories = [
     homeCategory,
     ...props.categories.map((category) => ({
       ...category,
-      id: `/category/${category.id}`,
+      _id: `/category/${category._id}`,
     }))
   ]
   return (
@@ -50,70 +48,49 @@ export default function BlogId(props: Props) {
 }
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const blogs = await client.get({ endpoint: "blog", queries: { limit: 100 } });
-  const paths = blogs.contents.map((blog: Blog) => `/blog/${blog.id}`);
+  const blogs = await newtClient.getContents<Article>({ appUid: "asunaroblog", modelUid: "article", query: { limit: 100 } })
+  const paths = blogs.items.map(blog => `/blog/${blog._id}`);
   return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps<Props, Params> = async (context) => {
   const id = context.params!.blogId
-  const data = await client.get({ endpoint: "blog", contentId: id }) as Blog
-  const categories = await client.get({ endpoint: "categories" })
-  const tags = (await client.get({ endpoint: "tags", queries: { limit: 100 }})).contents as Tag[]
+  const data = await newtClient.getContent<Article>({ appUid: "asunaroblog", modelUid: "article", contentId: id })
+  const categories = await newtClient.getContents<Category>({ appUid: "asunaroblog", modelUid: "category", query: { order: ["-_sys.customOrder"] }})
+  const tags = (await newtClient.getContents<Tag>({ appUid: "asunaroblog", modelUid: "tag", query: { limit: 100 }})).items
 
   // タグごとのポスト数を入手
-  let propTags = []
+  let propTags: Tag[] = []
   for (const tag of tags) {
-    const countTag = (await client.get({ endpoint: "blog", queries: { filters: `tags[contains]${tag.id}`, fields: "totalCount" }})).totalCount
+    const countTag = (await newtClient.getContents<Article>({ appUid: "asunaroblog", modelUid: "article", query: { tags: { in: [tag._id] } , field: "total" }})).total
     propTags.push({
       ...tag,
       tagTotalCount: countTag 
     })
   }
   propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
-
   // 年ごとのポスト数を入手
   let years: { [key: number]: number } = { 2022: 0, 2023: 0 }
   for (const y in years) {
-    years[y] = (await client.get({ endpoint: "blog", queries: { filters: `publishedAt[contains]${y}`, fields: "totalCount" }})).totalCount
+    years[y] = (await newtClient.getContents<Article>({ appUid: "asunaroblog", modelUid: "article", query: { "_sys.raw.firstPublishedAt": { lt: String(Number(y) + 1), gte: y }, select: ["total"] }})).total
   }
 
-  const bodyList = data.body.map(async value => {
-    switch (value.fieldId) {
-      case "paragraph":
-        const paragraph = parseParagraph((value as Paragraph).paragraph)
-        .replaceAll(/(?!")\$\$(?!")[^\$]*(?!")\$\$(?!")/g, (substring) =>
-        katex.renderToString(substring.replaceAll("$", "").replaceAll(/(<br>|<\\br>|&nbsp;|amp;)/g, ""),
-        { output: "mathml", displayMode: true, strict: "ignore" }))
-        .replaceAll(/(?!")\$(?!")[^\$]*(?!")\$(?!")/g, (substring) => {
-          return katex.renderToString(substring.replaceAll("$", ""),
-          { output: "mathml", strict: "ignore" })
-        })
-        return paragraph
+  const body = parseBody(data.body)
+  .replaceAll(/(?!")\$\$(?!")[^\$]*(?!")\$\$(?!")/g, (substring) =>
+  katex.renderToString(substring.replaceAll("$", "").replaceAll(/(<br>|<\\br>|&nbsp;|amp;)/g, ""),
+  { output: "mathml", displayMode: true, strict: "ignore" }))
+  .replaceAll(/(?!")\$(?!")[^\$]*(?!")\$(?!")/g, (substring) => {
+    return katex.renderToString(substring.replaceAll("$", ""),
+    { output: "mathml", strict: "ignore" })
+  })
 
-      case "code":
-        return parseCode((value as Code).code, (value as Code).fileName)
-
-      case "link":
-        return await parseLink((value as Link).url, (value as Link).image.url, (value as Link).title)
-
-      default:
-        return String.raw``
-      }
-    }
-  )
-  let bodyStringList: string[] = []
-  for (const val of bodyList) {
-    bodyStringList.push(String(await val))
-  }
-  const body = bodyStringList.join("")
-  const heading = parseHeading(body as string)
+  const headings = parseHeading(body)
   return {
     props: {
       blog: {...data, body: body },
-      headings: heading,
-      categories: categories.contents as Category[],
-      tags: propTags as Tag[],
+      headings: headings,
+      categories: categories.items,
+      tags: propTags,
       years: years,
     },
   }

@@ -60,7 +60,7 @@ export const NavigationBar = (props: Props) => {
               {props.categories.map((category, index) => (
                 <MenuItem key={index} onClick={handleCloseNavMenu} className='text-lg hover:bg-slate-200 ease-out duration-100'>
                   <NextLink
-                    href={category.id}
+                    href={category._id}
                     passHref
                   >
                     <MuiLink
@@ -97,7 +97,7 @@ export const NavigationBar = (props: Props) => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {props.categories.map((category, index) => (
               <NextLink
-                href={category.id}
+                href={category._id}
                 passHref
                 key={index}
               >

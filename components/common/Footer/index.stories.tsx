@@ -12,18 +12,18 @@ const Template: ComponentStory<typeof Footer> = (args) => <Footer {...args} />;
 export const Primary = Template.bind({});
 Primary.args = {
   categories: [
-    {id: "", name: "category1", displayedName: "カテゴリ1"},
-    {id: "", name: "category2", displayedName: "カテゴリ2"},
+    {_id: "", name: "category1", displayedName: "カテゴリ1"},
+    {_id: "", name: "category2", displayedName: "カテゴリ2"},
   ]
 };
 
 export const Real = Template.bind({});
 Real.args = {
   categories: [
-    {id: "", name: "Home", displayedName: "Home"},
-    {id: "", name: "programming", displayedName: "プログラミング"},
-    {id: "", name: "business", displayedName: "ビジネス"},
-    {id: "", name: "data_sciense", displayedName: "データサイエンス"},
-    {id: "", name: "other", displayedName: "その他"},
+    {_id: "", name: "Home", displayedName: "Home"},
+    {_id: "", name: "programming", displayedName: "プログラミング"},
+    {_id: "", name: "business", displayedName: "ビジネス"},
+    {_id: "", name: "data_sciense", displayedName: "データサイエンス"},
+    {_id: "", name: "other", displayedName: "その他"},
   ]
 };

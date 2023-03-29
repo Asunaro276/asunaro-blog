@@ -25,6 +25,7 @@
     "highlight.js": "^11.5.1",
     "katex": "^0.16.2",
     "microcms-js-sdk": "^2.0.0",
+    "newt-client-js": "^3.2.4",
     "next": "^12.1.5",
     "next-seo": "^5.4.0",
     "next-sitemap": "^2.5.20",

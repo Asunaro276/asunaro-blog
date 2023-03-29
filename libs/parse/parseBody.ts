@@ -1,14 +1,16 @@
 import cheerio from 'cheerio'
 import hljs from 'highlight.js/lib/common'
 
-export const parseParagraph = (paragraph: string) => {
-  const $ = cheerio.load(paragraph)
+export const parseBody = (body: string) => {
+  const $ = cheerio.load(body)
   $("h1").each((_, element) => {
+    $(element).attr("id", $(element).text() + "h1")
     $(element).addClass('ml-8 my-5 text-3xl font-semibold font-body')
     $(element).wrap('<div class="bg-slate-100 mb-5 mt-20 flex"></div>')
     $(element).parent().prepend('<div class="w-2 bg-yellow-400"></div>')
   })
   $("h2").each((_, element) => {
+    $(element).attr("id", $(element).text() + "H2")
     $(element).addClass('ml-4 my-2 text-xl font-semibold font-body')
     $(element).wrap('<div class="mb-5 flex"></div>')
     $(element).parent().prepend('<div class="w-2 bg-yellow-400"></div>')

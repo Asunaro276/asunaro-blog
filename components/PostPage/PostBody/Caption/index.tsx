@@ -30,13 +30,13 @@ const Caption = (props: Props) => {
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box className="w-9/12">
           <Box className="mb-10 space-y-2" sx={{ display: "flex", flexWrap: "wrap", alignItems: "center" }}>
-            <NextLink href={`/category/${props.categoryOfPost.id}`} passHref>
+            <NextLink href={`/category/${props.categoryOfPost._id}`} passHref>
               <Button className="mr-2" variant="outlined" sx={{ textTransform: "none", display: "flex" }} size="small">
                 {props.categoryOfPost.displayedName}
               </Button>
             </NextLink>
             {props.tagsOfPost.map(tag => (
-              <NextLink href={`/tag/${tag.id}`} key={tag.id} passHref>
+              <NextLink href={`/tag/${tag._id}`} key={tag._id} passHref>
                 <MuiLink className="text-sm mr-2" sx={{ textTransform: "none", display: "flex" }}>
                   <LocalOfferIcon fontSize="small" />
                   {tag.tag}
