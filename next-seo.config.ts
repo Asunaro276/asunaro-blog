@@ -1,7 +1,6 @@
 export default {
-  titleTemplate: `%s | Asunaro Blog`,
-  description:
-  `新米エンジニアの技術ブログです。
+  titleTemplate: `%s | asunaroblog`,
+  description: `新米エンジニアの技術ブログです。
   主にWeb技術やデータサイエンスについての情報を発信しています。
   日々楽しみながらブログづくりに励んでいます。`,
   additionalMetaTags: [
@@ -11,10 +10,9 @@ export default {
     },
   ],
   openGraph: {
-    title: 'Asunaro Blog',
+    title: 'asunaroblog｜Web技術で遊ぶブログ',
     site_name: 'asunaroblog',
-    description: 
-      `新米エンジニアの技術ブログです。
+    description: `新米エンジニアの技術ブログです。
       主にWeb技術やデータサイエンスについての情報を発信しています。
       日々楽しみながらブログづくりに励んでいます。`,
     url: 'https://asunaroblog.net/',

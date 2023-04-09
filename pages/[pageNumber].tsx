@@ -31,7 +31,7 @@ export default function BlogPageId(props: Props) {
   return (
     <main>
       <NextSeo
-        title="Asunaro Blog"
+        title="asunaroblog"
         titleTemplate="%s"
       />
       <HomePage

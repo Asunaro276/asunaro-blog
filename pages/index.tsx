@@ -32,7 +32,7 @@ export default function Home(props: Props) {
   return (
     <main>
       <NextSeo
-        title="Asunaro Blog"
+        title="asunaroblog｜Web技術で遊ぶブログ"
         titleTemplate="%s"
       />
       <HomePage

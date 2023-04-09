@@ -1,5 +1,5 @@
-# Asunaro Blog
-This is my personal blog ([Asunaro blog](https://asunaroblog.net/)) repository. It's built with Next.js and microCMS (Jamstack).
+# asunaroblog
+This is my personal blog ([asunaroblog](https://asunaroblog.net/)) repository. It's built with Next.js and microCMS (Jamstack).
 
 ## UI design
 - MUI

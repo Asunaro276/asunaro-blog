@@ -1,7 +1,10 @@
 import { Box, Card } from "@mui/material"
-import { Article, Heading, Tag } from "types"
+import { Article, Heading } from "types"
 import Caption from "./Caption"
 import { TableOfContents } from "./TableOfContents";
+import { useEffect } from "react";
+import renderMathInElement from "katex/contrib/auto-render";
+import 'katex/dist/katex.min.css'
 
 type Props = {
   blog: Article
@@ -9,6 +12,17 @@ type Props = {
 }
 
 const PostBody = (props: Props) => {
+  useEffect(() => {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\[", right: "\]", display: true }
+      ],
+      ignoredTags: ["code"]
+    })
+  }, [])
   return (
   <Card className="my-10">
     <Box className="my-10">
