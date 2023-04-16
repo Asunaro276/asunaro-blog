@@ -34,6 +34,13 @@ export default function BlogId(props: Props) {
       <NextSeo
         title={props.blog.title}
         description={props.blog.description}
+        openGraph={{
+          title: props.blog.title,
+          description: props.blog.description,
+          images: [{
+            url: props.blog.coverImage.src
+          }],
+        }}
       />
       <PostPage
         blog={props.blog}
