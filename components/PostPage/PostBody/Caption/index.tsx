@@ -45,7 +45,7 @@ const Caption = (props: Props) => {
             ))}
           </Box>
           <CardMedia>
-            <Image src={props.imageUrl} alt={props.imageAlt} width="800" height="350" objectPosition="50% 50%" objectFit="contain" />
+            <img src={props.imageUrl} alt={props.imageAlt} width="600" height="350" />
           </CardMedia>
         </Box>
       </Box>

@@ -1,13 +1,11 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { Box, Link as MuiLink } from '@mui/material';
 import { convertDateFormat } from 'libs/convertDateFormat';
-import Image from 'next/image';
 import NextLink from 'next/link';
 import { LocalOffer } from '@mui/icons-material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -23,7 +21,8 @@ export default function PostCard(props: Props) {
       <NextLink href={`/blog/${props.blog._id}`} passHref>
         <MuiLink underline="none" className='relative h-full'>
           <CardMedia>
-            <Image src={props.blog.coverImage.src} alt={props.blog.coverImage.altText} width="550" height="300" objectFit='fill' />
+            {/* <Image src={props.blog.coverImage.src} alt={props.blog.coverImage.altText} width="550" height="300" objectFit='fill' /> */}
+            <img src={props.blog.coverImage.src} alt={props.blog.coverImage.altText} width="415" height="230" loading="lazy" decoding="async" />
           </CardMedia>
           <CardContent className='h-1/2 p-1' >
             <Typography gutterBottom component="div" className='mx-5' sx={{ fontSize: 20 }}>
