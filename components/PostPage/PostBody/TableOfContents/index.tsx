@@ -1,13 +1,10 @@
 import { Box, List, ListItem, Typography } from "@mui/material"
 import TocIcon from '@mui/icons-material/Toc';
 import { Link as Scroll } from "react-scroll"
+import { Heading } from "types";
 
 type Props = {
-  heading: {
-    text: string
-    id: string
-    htmlTag: string
-  }[]
+  heading: Heading[]
 }
 
 export const TableOfContents = (props: Props) => {
@@ -29,7 +26,7 @@ export const TableOfContents = (props: Props) => {
               tocCount[1] = 1
               return (
                 <ListItem key={index} className="list-none ml-6 my-4">
-                  <Scroll to={`${data.id}`} smooth={true} className="relative hover:opacity-50 cursor-pointer flex" id={`l${index}`} duration={400}>
+                  <Scroll to={`${data._id}`} smooth={true} className="relative hover:opacity-50 cursor-pointer flex" id={`l${index}`} duration={400}>
                     <Box className="absolute -left-10 border-solid border border-slate-400 w-8 sm:w-10 aspect-square flex justify-center items-center rounded-full bg-slate-200 ">
                       {(tocCount[0] - 1).toString()}
                     </Box>
@@ -45,7 +42,7 @@ export const TableOfContents = (props: Props) => {
               tocCount[2] = 1
               return (
                 <li key={index} className="my-2 list-none">
-                  <Scroll to={`${data.id}`} smooth={true} className="hover:opacity-50 cursor-pointer flex" id={`${index}`} duration={400}>
+                  <Scroll to={`${data._id}`} smooth={true} className="hover:opacity-50 cursor-pointer flex" id={`${index}`} duration={400}>
                     <Box className="sm:ml-5 sm:mr-5 text-md">
                         {tocCount[0] > 1 ? 
                           `${(tocCount[0] - 1)}.${tocCount[1] - 1}` :

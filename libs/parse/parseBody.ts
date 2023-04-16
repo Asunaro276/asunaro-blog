@@ -1,14 +1,17 @@
 import cheerio from 'cheerio'
 import hljs from 'highlight.js/lib/common'
+import axios from 'axios'
 
-export const parseParagraph = (paragraph: string) => {
-  const $ = cheerio.load(paragraph)
+export const parseBody = async (body: string) => {
+  const $ = cheerio.load(body)
   $("h1").each((_, element) => {
+    $(element).attr("id", $(element).text() + "h1")
     $(element).addClass('ml-8 my-5 text-3xl font-semibold font-body')
     $(element).wrap('<div class="bg-slate-100 mb-5 mt-20 flex"></div>')
     $(element).parent().prepend('<div class="w-2 bg-yellow-400"></div>')
   })
   $("h2").each((_, element) => {
+    $(element).attr("id", $(element).text() + "H2")
     $(element).addClass('ml-4 my-2 text-xl font-semibold font-body')
     $(element).wrap('<div class="mb-5 flex"></div>')
     $(element).parent().prepend('<div class="w-2 bg-yellow-400"></div>')
@@ -55,6 +58,45 @@ export const parseParagraph = (paragraph: string) => {
     $(element).parent().addClass("shadow-md")
     $(element).addClass(`hljs mb-10`)
   })
+
+  const links = $('a')
+  for (let i = 0; i < links.length; i++) {
+    const element = $(links[i])
+    if ($(element).text() === "linkCard") {
+      let og: { [key: string]: string } = {}
+      const linkUrl = $(element).attr("href") as string
+      const res = await axios.get(linkUrl)
+      const data = await res.data
+      const $link = cheerio.load(data)
+      $link('meta[property^="og"]').each((_, element) => {
+        og[$link(element).attr("property")?.replace("og:", "") as string] = ($link(element).attr("content") as string)
+      })
+      $link('meta[name]').each((_, element) => {
+        if (og[$link(element).attr("name") as string] === undefined) {
+          og[$link(element).attr("name") as string] = ($link(element).attr("content") as string)
+        }
+      })
+      const amazonImage = $link('img.frontImage').attr("src")
+      $(element).replaceWith(`
+        <div class="shadow-md shadow-outline bg-slate-100 mt-4 mb-20 hover:brightness-[0.9] duration-300 ease-out">
+          <a class="p-4 no-underline" href=${linkUrl} target="_blank" rel="noopener noreferrer">
+            <div class="flex justify-evenly flex-wrap">
+              <img src=${og["image"] === undefined ? amazonImage : og["image"]} class="h-[12rem] mr-2 aspect" />
+              <div class="flex flex-col w-7/12 justify-center items-center">
+                <p class="text-xl font-bold my-3">
+                  ${og["title"]}
+                </p> 
+                <p class="text-black my-1">
+                  ${og["description"]}
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
+        `
+      )
+    }
+  }
 
   return $("body").html() as string
 }

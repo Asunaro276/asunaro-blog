@@ -8,7 +8,7 @@ type Props = {
 }
 
 const Header = (props: Props) => {
-  const logo = "Asunaro Blog"
+  const logo = "ASUNAROBLOG"
   return (
     <div>
       <Typography className="py-5 ml-10 font-logo" sx={{flexGrow: 1, display: { xs: 'none', md: 'block' }, fontSize: { xs: 30, md: 40 }}}>

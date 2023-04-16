@@ -1,4 +1,4 @@
-import { Category, Heading, ParsedBlog, Tag } from "types";
+import { Article, Category, Heading, Tag } from "types";
 import Box from "@mui/material/Box"
 import Header from "components/common/Header";
 import PostBody from "./PostBody";
@@ -6,7 +6,7 @@ import Footer from "components/common/Footer";
 import SideBar from "components/common/SideBar";
 
 type Props = {
-  blog: ParsedBlog
+  blog: Article
   headings: Heading[]
   categories: Category[]
   tags: Tag[]

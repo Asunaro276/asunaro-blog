@@ -1,16 +1,12 @@
 import { Box } from "@mui/material"
-import { Tag } from "types"
+import { Heading, Tag } from "types"
 import SideProfile from "./SideProfile"
 import SideTag from "./SideTags"
 import SideToc from "./SideToc"
 import ArchivePerYear from "./ArchivePerYear"
 
 type Props = {
-  headings?: {
-    text: string
-    id: string
-    htmlTag: string
-  }[]
+  headings?: Heading[]
   tags: Tag[]
   years: { [key: number]: number }
 }
@@ -31,12 +27,10 @@ const SideBar = (props: Props) => {
         </Box>
       </Box>
       {props.headings !== undefined &&
-      (<Box className="box-border" sx={{ display: { xs: "none", md: "block" } }}>
-          <Box className="sticky top-4">
-            <SideToc
-              heading={props.headings}
-            />
-          </Box>
+      (<Box className="box-border sticky top-4" sx={{ display: { xs: "none", md: "block" } }}>
+        <SideToc
+          heading={props.headings}
+        />
       </Box>)}
     </Box>
   )

@@ -2,7 +2,7 @@ import cheerio from "cheerio"
 import { OGP } from "types"
 
 
-export const parseLink = async (linkUrl: string, imageUrl: string, title: string) => {
+export const parseLink = async (linkUrl: string) => {
   let og: { [key: string]: string } = {}
   const res = await fetch(linkUrl)
   const text = await res.text()
@@ -19,7 +19,7 @@ export const parseLink = async (linkUrl: string, imageUrl: string, title: string
   <div class="shadow-md shadow-outline bg-slate-50 mt-4 mb-20 hover:brightness-[0.9] duration-300 ease-out">
     <a class="p-4 no-underline" href=${linkUrl} target="_blank" rel="noopener noreferrer">
       <div class="flex justify-evenly flex-wrap">
-        <img src=${og["image"] === undefined ? imageUrl : og["image"]} class="max-w-[14rem] mr-2" />
+        <img src=${og["image"]} class="max-w-[14rem] mr-2" />
         <div class="flex flex-col w-7/12 justify-center items-center">
           <p class="text-xl font-bold my-3">
             ${og["title"]}

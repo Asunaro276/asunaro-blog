@@ -1,29 +1,28 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import { Blog } from "types"
 import { Box, Link as MuiLink } from '@mui/material';
 import { convertDateFormat } from 'libs/convertDateFormat';
-import Image from 'next/image';
 import NextLink from 'next/link';
 import { LocalOffer } from '@mui/icons-material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { Article } from 'types';
 
 type Props = {
-  blog: Blog
+  blog: Article
 }
 
 export default function PostCard(props: Props) {
   return (
     <Card className='flex flex-col hover:brightness-[0.8] duration-[1000ms]' sx={{ height: {xs: "30rem", lg: "32rem"} }}>
-      <NextLink href={`/blog/${props.blog.id}`} passHref>
+      <NextLink href={`/blog/${props.blog._id}`} passHref>
         <MuiLink underline="none" className='relative h-full'>
           <CardMedia>
-            <Image src={props.blog.image.url} alt={props.blog.imageAlt} width="550" height="300" objectFit='fill' />
+            {/* <Image src={props.blog.coverImage.src} alt={props.blog.coverImage.altText} width="550" height="300" objectFit='fill' /> */}
+            <img src={props.blog.coverImage.src} alt={props.blog.coverImage.altText} width="415" height="230" loading="lazy" decoding="async" />
           </CardMedia>
           <CardContent className='h-1/2 p-1' >
             <Typography gutterBottom component="div" className='mx-5' sx={{ fontSize: 20 }}>
@@ -50,7 +49,7 @@ export default function PostCard(props: Props) {
           <CardContent className="p-1 pl-5 flex opacity-80 absolute bottom-2">
             <AccessTimeIcon fontSize='small' className='opacity-80' />
             <Typography color="text.secondary" sx={{ display: 'inline-block', marginLeft: "2px" }}>
-              {convertDateFormat(props.blog.publishedAt)}
+              {convertDateFormat(props.blog._sys.updatedAt)}
             </Typography>
           </CardContent>
         </MuiLink>

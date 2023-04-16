@@ -1,13 +1,13 @@
 import HomePage from 'components/HomePage';
-import { client } from 'libs/client';
+import { newtClient } from 'libs/client';
 import { GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { PER_PAGE } from 'pages';
-import { Blog, Category, Tag } from 'types';
+import { Article, Category, Tag } from 'types';
 
 type Props = {
   pageNumber: number
-  blogs: Blog[]
+  blogs: Article[]
   categories: Category[]
   tags: Tag[]
   years: { [key: number]: number }
@@ -20,18 +20,18 @@ type Params = {
 
 // pages/blog/[id].js
 export default function BlogPageId(props: Props) {
-  const homeCategory: Category = { id: "/", displayedName: "Home", name: "home" }
+  const homeCategory: Category = { _id: "/", displayedName: "Home", name: "home" }
   const categories = [
     homeCategory,
     ...props.categories.map((category) => ({
       ...category,
-      id: `/category/${category.id}`,
+      _id: `/category/${category._id}`,
     }))
   ]
   return (
     <main>
       <NextSeo
-        title="Asunaro Blog"
+        title="asunaroblog"
         titleTemplate="%s"
       />
       <HomePage
@@ -48,22 +48,22 @@ export default function BlogPageId(props: Props) {
 
 // 動的なページを作成
 export const getStaticPaths = async () => {
-  const blogs = await client.get({ endpoint: "blog" });
+  const blogs = await newtClient.getContents({ appUid: "asunaroblog", modelUid: "article" });
   const range = (start: number, end: number) => [...Array(end - start + 1)].map((_, i) => start + i)
-  const paths = range(1, Math.ceil(blogs.totalCount / PER_PAGE)).map((pageNumber) => `/${pageNumber}`)
+  const paths = range(1, Math.ceil(blogs.total/ PER_PAGE)).map((pageNumber) => `/${pageNumber}`)
   return { paths, fallback: false }
 };
 
 // データを取得
 export const getStaticProps: GetStaticProps<Props, Params> = async (context) => {
   const pageNumber = Number(context.params!.pageNumber)
-  const blogs = await client.get({ endpoint: "blog", queries: { offset: (pageNumber - 1) * PER_PAGE, limit: PER_PAGE } });
-  const categories = await client.get({ endpoint: "categories" })
-  const tags = (await client.get({ endpoint: "tags", queries: { limit: 100 }})).contents as Tag[]
+  const blogs = await newtClient.getContents<Article>({ appUid: "asunaroblog", modelUid: "article", query: { skip: (pageNumber - 1) * PER_PAGE, limit: PER_PAGE } });
+  const categories = await newtClient.getContents<Category>({ appUid: "asunaroblog", modelUid: "category", query: { order: ["-_sys.customOrder"] }})
+  const tags = (await newtClient.getContents<Tag>({ appUid: "asunaroblog", modelUid: "tag", query: { limit: 100 }})).items
   // タグごとのポスト数を入手
-  let propTags = []
+  let propTags: Tag[] = []
   for (const tag of tags) {
-    const countTag = (await client.get({ endpoint: "blog", queries: { filters: `tags[contains]${tag.id}`, fields: "totalCount" }})).totalCount
+    const countTag = (await newtClient.getContents<Article>({ appUid: "asunaroblog", modelUid: "article", query: { tags: { in: [tag._id] } , field: "total" }})).total
     propTags.push({
       ...tag,
       tagTotalCount: countTag 
@@ -73,15 +73,15 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   // 年ごとのポスト数を入手
   let years: { [key: number]: number } = { 2022: 0, 2023: 0 }
   for (const y in years) {
-    years[y] = (await client.get({ endpoint: "blog", queries: { filters: `publishedAt[contains]${y}`, fields: "totalCount" }})).totalCount
+    years[y] = (await newtClient.getContents<Article>({ appUid: "asunaroblog", modelUid: "article", query: { "_sys.raw.firstPublishedAt": { lt: String(Number(y) + 1), gte: y }, select: ["total"] }})).total
   }
 
   return {
     props: {
       pageNumber: pageNumber,
-      blogs: blogs.contents as Blog[],
-      categories: categories.contents as Category[],
-      totalCount: blogs.totalCount,
+      blogs: blogs.items,
+      categories: categories.items,
+      totalCount: blogs.total,
       tags: propTags as Tag[],
       years: years,
     },
