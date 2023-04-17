@@ -44,9 +44,7 @@ const Caption = (props: Props) => {
               </NextLink>
             ))}
           </Box>
-          <CardMedia>
-            <img src={props.imageUrl} alt={props.imageAlt} width="600" height="350" />
-          </CardMedia>
+          <CardMedia component="img" width="80%" image={props.imageUrl} alt={props.imageAlt} />
         </Box>
       </Box>
     </Box>

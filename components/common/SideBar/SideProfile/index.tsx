@@ -20,7 +20,7 @@ const SideProfile = () => {
               <Divider className="w-20" />
             </Box>
             <Typography className="my-10 px-10">
-              都内の大学生。2023年度からWeb広告企業に就職予定。Next.js, MUI中心に勉強中
+              Web系新米エンジニア。主にWeb系の技術やデータサイエンス、ブログ作りについて発信しています。
             </Typography>
         </CardContent>
       </Card>
