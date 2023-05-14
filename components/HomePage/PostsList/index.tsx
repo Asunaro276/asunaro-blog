@@ -8,7 +8,7 @@ type Props = {
 
 const PostsList = (props: Props) => {
   return (
-    <Box className="flex flex-wrap" sx={{ marginLeft: "3%"}}>
+    <Box className="flex flex-wrap">
       {props.blogs.map((post, index) => {
         return (
         <Box
