@@ -99,7 +99,7 @@ export const parseBody = async (body: string) => {
         return $("body").html() as string
       } catch (error) {
         if (error instanceof AxiosError) {
-          console.log("Error", error.message)
+          throw error
         }
       }
     }
