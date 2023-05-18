@@ -65,9 +65,8 @@ export const parseBody = async (body: string) => {
     if ($(element).text() === "linkCard") {
       let og: { [key: string]: string } = {}
       const linkUrl = $(element).attr("href") as string
-      try {
-        const res = await axios.get(linkUrl)
-        const data = await res.data
+        const res = await fetch(linkUrl)
+        const data = await res.text()
         const $link = cheerio.load(data)
         $link('meta[property^="og"]').each((_, element) => {
           og[$link(element).attr("property")?.replace("og:", "") as string] = ($link(element).attr("content") as string)
@@ -96,13 +95,7 @@ export const parseBody = async (body: string) => {
           </div>
           `
         )
-        return $("body").html() as string
-      } catch (error) {
-        if (error instanceof AxiosError) {
-          throw error
-        }
       }
     }
+    return $("body").html() as string
   }
-
-}
