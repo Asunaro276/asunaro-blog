@@ -24,8 +24,8 @@ export const NavigationBar = (props: Props) => {
 
   return (
     <AppBar position="static" className="bg-slate-500" sx={{ paddingY: {xs: 1, sm: 2, md:0} }}>
-        <Toolbar disableGutters>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, justifyContent: "center", }}>
+        <Toolbar disableGutters sx={{ position: "relative" }}>
+          <Box sx={{ display: { xs: 'flex', md: 'none' }, position: {sm: "absolute"}, left: "30px" }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -33,7 +33,6 @@ export const NavigationBar = (props: Props) => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
-              className=''
             >
               <MenuIcon />
             </IconButton>
@@ -85,7 +84,7 @@ export const NavigationBar = (props: Props) => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, fontSize: { xs: 25, md: 60 } }}
+            sx={{ width: "100%", display: { xs: 'flex', md: 'none' }, fontSize: { xs: 25, md: 60 }, justifyContent: "center"}}
           >
             <NextLink href="/" passHref>
               <MuiLink underline="none" color="inherit" rel="noopener noreferrer">
@@ -93,8 +92,8 @@ export const NavigationBar = (props: Props) => {
               </MuiLink>
             </NextLink>
           </Typography>
-          <Box sx={{ width: "100%", display: { xs: "none", md: "flex" }, justifyContent: "center", marginLeft: "20px" }}>
-            <Box sx={{ maxWidth: "1200px", width: "100%", display: "flex" }}>
+          <Box sx={{ width: "100%", display: { xs: "none", md: "flex" }, justifyContent: "center", marginLeft: "30px" }}>
+            <Box sx={{ maxWidth: "1300px", width: "100%", display: "flex" }}>
               {props.categories.map((category, index) => (
                 <Box key={index} sx={{ marginRight: "20px" }}>
                   <NextLink

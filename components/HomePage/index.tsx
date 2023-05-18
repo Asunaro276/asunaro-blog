@@ -37,9 +37,9 @@ const HomePage = (props: Props) => {
         />
       </div>
       <Box className="flex justify-center">
-        <Box sx={{ maxWidth: "1200px", display: "flex", flexDirection: { xs: "column", md: "row" }, }}>
+        <Box sx={{ maxWidth: "1300px", display: "flex", flexDirection: { xs: "column", md: "row" }, }}>
           <Box className="flex flex-col" sx={{ width: { xs: "100%", md: "75%" }}}>
-            <Box sx={{ marginTop: "40px", marginLeft: "20px", marginRight: { xs: "20px", md: "0px" } }}>
+            <Box sx={{ marginTop: "40px", marginLeft: "30px", marginRight: { xs: "20px", md: "0px" } }}>
               {props.tag &&
               (<Box className="text-center my-12">
                 {props.blogs.length === 0
