@@ -23,7 +23,7 @@ Real.args = {
     {_id: "", name: "Home", displayedName: "Home"},
     {_id: "", name: "programming", displayedName: "プログラミング"},
     {_id: "", name: "business", displayedName: "ビジネス"},
-    {_id: "", name: "data_sciense", displayedName: "データサイエンス"},
+    {_id: "", name: "math", displayedName: "数学"},
     {_id: "", name: "other", displayedName: "その他"},
   ]
 };
