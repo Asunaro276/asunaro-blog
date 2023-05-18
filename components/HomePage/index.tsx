@@ -36,52 +36,54 @@ const HomePage = (props: Props) => {
           categories={props.categories}
         />
       </div>
-      <Box className="flex justify-between" sx={{ flexDirection: { xs: "column", md: "row" }}}>
-        <Box className="flex flex-col" sx={{ width: { xs: "100%", md: "75%" }}}>
-          <Box className="mt-10">
-            {props.tag &&
-            (<Box className="text-center my-12">
-              {props.blogs.length === 0
-              ? (<Typography className="">
-                  該当するタグの記事はありません
-                </Typography>)
-                : (<Typography>
-                    {props.tag.tag}に関する記事一覧
+      <Box className="flex justify-center">
+        <Box sx={{ maxWidth: "1200px", display: "flex", flexDirection: { xs: "column", md: "row" }, }}>
+          <Box className="flex flex-col" sx={{ width: { xs: "100%", md: "75%" }}}>
+            <Box sx={{ marginTop: "40px", marginLeft: "20px", marginRight: { xs: "20px", md: "0px" } }}>
+              {props.tag &&
+              (<Box className="text-center my-12">
+                {props.blogs.length === 0
+                ? (<Typography className="">
+                    該当するタグの記事はありません
                   </Typography>)
-              }
-            </Box>)}
-            {props.category &&
-            (<Box className="text-center my-12">
-              {props.blogs.length === 0
-              ? (<Typography className="">
-                  該当するカテゴリーの記事はありません
-                </Typography>)
-                : (<Typography>
-                    {props.blogs[0].category.displayedName}カテゴリの記事一覧
+                  : (<Typography>
+                      {props.tag.tag}に関する記事一覧
+                    </Typography>)
+                }
+              </Box>)}
+              {props.category &&
+              (<Box className="text-center my-12">
+                {props.blogs.length === 0
+                ? (<Typography className="">
+                    該当するカテゴリーの記事はありません
                   </Typography>)
-              }
-            </Box>)}
-            {props.year &&
-            (<Box className="text-center my-12">
-              {props.blogs.length === 0
-              ? (<Typography className="">
-                  該当する年の記事はありません
-                </Typography>)
-                : (<Typography>
-                    {props.year}年の記事一覧
+                  : (<Typography>
+                      {props.blogs[0].category.displayedName}カテゴリの記事一覧
+                    </Typography>)
+                }
+              </Box>)}
+              {props.year &&
+              (<Box className="text-center my-12">
+                {props.blogs.length === 0
+                ? (<Typography className="">
+                    該当する年の記事はありません
                   </Typography>)
-              }
-            </Box>)}
-            <PostsList
-              blogs={props.blogs}
-            />
+                  : (<Typography>
+                      {props.year}年の記事一覧
+                    </Typography>)
+                }
+              </Box>)}
+              <PostsList
+                blogs={props.blogs}
+              />
+            </Box>
+            <Box className="flex justify-center mb-10">
+              <Pagination dir={dir} pageNumber={props.pageNumber} totalCount={props.totalCount} />
+            </Box>
           </Box>
-          <Box className="flex justify-center mb-10">
-            <Pagination dir={dir} pageNumber={props.pageNumber} totalCount={props.totalCount} />
+          <Box className="" sx={{ marginTop: { xs: "30px", md: "40px"}, marginX: "3%", width: { xs: "90%", md: "25%" } }}>
+            <SideBar years={props.years} tags={props.tags} />
           </Box>
-        </Box>
-        <Box className="" sx={{ marginTop: { xs: "30px", md: "40px"}, marginX: "3%", width: { xs: "90%", md: "25%" } }}>
-          <SideBar years={props.years} tags={props.tags} />
         </Box>
       </Box>
       <div>
