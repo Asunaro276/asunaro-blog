@@ -1,5 +1,4 @@
 import cheerio from "cheerio"
-import { OGP } from "types"
 
 
 export const parseLink = async (linkUrl: string) => {
