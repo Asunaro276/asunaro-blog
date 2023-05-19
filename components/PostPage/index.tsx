@@ -22,7 +22,7 @@ const PostPage = (props: Props) => {
         />
       </div>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Box className="flex justify-between" sx={{ maxWidth: "1300px", flexDirection: {xs: "column", md: "row"} }}>
+        <Box className="flex justify-between" sx={{ maxWidth: "1300px", width: "90%", flexDirection: {xs: "column", md: "row"} }}>
           <Box className="" sx={{ marginX: "2%", width: { xs: "95%", md: "70%" } }}>
             <PostBody
               blog={props.blog}

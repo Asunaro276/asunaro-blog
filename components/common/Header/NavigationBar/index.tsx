@@ -2,7 +2,7 @@ import * as React from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
-import { Container, IconButton, Link as MuiLink, Menu, MenuItem, Typography, Grid } from '@mui/material'
+import { IconButton, Link as MuiLink, Menu, MenuItem, Typography, Grid } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { pageIcons } from 'pages'
 import { Category } from 'types'
@@ -21,7 +21,6 @@ export const NavigationBar = (props: Props) => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   };
-
   return (
     <AppBar position="static" className="bg-slate-500" sx={{ paddingY: {xs: 1, sm: 2, md:0} }}>
         <Toolbar disableGutters sx={{ position: "relative" }}>
