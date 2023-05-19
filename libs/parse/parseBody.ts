@@ -79,10 +79,10 @@ export const parseBody = async (body: string) => {
         const amazonImage = $link('img.frontImage').attr("src")
         $(element).replaceWith(`
           <div class="shadow-md shadow-outline bg-slate-100 mt-4 mb-20 hover:brightness-[0.9] duration-300 ease-out">
-            <a class="p-4 no-underline" href=${linkUrl} target="_blank" rel="noopener noreferrer">
-              <div class="flex flex-col md:flex-row justify-center">
-                <img src=${og["image"] === undefined ? amazonImage : og["image"]} class="self-center w-[95%] md:w-1/2 px-3" />
-                <div class="flex flex-col w-[95%] mx-3 md:w-5/12 justify-center items-center">
+            <a class="no-underline" href=${linkUrl} target="_blank" rel="noopener noreferrer">
+              <div class="flex flex-col lg:flex-row justify-center p-4">
+                <img src=${og["image"] === undefined ? amazonImage : og["image"]} class="self-center px-3 max-w-[14rem] max-h-[20rem] object-scale-down" />
+                <div class="flex flex-col w-[90%] mx-3 lg:w-1/2 justify-center items-center">
                   <p class="text-xl font-bold my-3 w-full break-words">
                     ${og["title"]}
                   </p> 
