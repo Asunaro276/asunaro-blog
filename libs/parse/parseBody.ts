@@ -49,7 +49,8 @@ export const parseBody = async (body: string) => {
   })
 
   $('img').each((_, element) => {
-    $(element).attr("width", "90%")
+    $(element).addClass('max-w-[90%]')
+
   })
 
   $('pre code').each((_, element) => {
