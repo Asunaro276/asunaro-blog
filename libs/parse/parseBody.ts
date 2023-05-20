@@ -1,23 +1,23 @@
 import cheerio from 'cheerio'
 import hljs from 'highlight.js/lib/common'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 
 export const parseBody = async (body: string) => {
   const $ = cheerio.load(body)
   $("h1").each((_, element) => {
     $(element).attr("id", $(element).text() + "h1")
-    $(element).addClass('ml-8 my-5 text-3xl font-semibold font-body')
+    $(element).addClass('ml-8 my-3 md:my-5 text-lg md:text-xl font-semibold font-body')
     $(element).wrap('<div class="bg-slate-100 mb-5 mt-20 flex"></div>')
     $(element).parent().prepend('<div class="w-2 bg-yellow-400"></div>')
   })
   $("h2").each((_, element) => {
     $(element).attr("id", $(element).text() + "H2")
-    $(element).addClass('ml-4 my-2 text-xl font-semibold font-body')
+    $(element).addClass('ml-4 my-2 text-base md:text-lg font-semibold font-body')
     $(element).wrap('<div class="mb-5 flex"></div>')
     $(element).parent().prepend('<div class="w-2 bg-yellow-400"></div>')
   })
   $('p').each((_, element) => {
-    $(element).addClass('text-lg font-body leading-loose')
+    $(element).addClass('md:text-lg font-body leading-loose')
     $(element).wrap('<div class="mt-5 mb-10"></div>')
   })
 
@@ -26,15 +26,15 @@ export const parseBody = async (body: string) => {
   })
 
   $('ol').each((_, element) => {
-    $(element).addClass('list-inside text-lg space-y-2 ml-6 pl-8 indent-[-1em]')
+    $(element).addClass('md:text-lg list-inside space-y-2 ml-2 pl-8 indent-[-1em]')
   })
 
   $('ul:not(ul ul)').each((_, element) => {
-    $(element).addClass('list-disc list-inside text-lg space-y-2 ml-6 pl-8 py-6 indent-[-1em] border-dotted border-gray-500')
+    $(element).addClass('md:text-lg list-disc list-inside space-y-2 ml-2 pl-8 pr-4 py-6 indent-[-1em] border-dotted border-gray-500')
   })
 
   $('ul ul').each((_, element) => {
-    $(element).addClass('list-inside text-lg space-y-2 ml-6 pl-4 indent-[-1em]')
+    $(element).addClass('md:text-lg list-inside space-y-2 ml-2 pl-4 indent-[-1em]')
     $(element).attr("style", "list-style-type: circle;")
   })
 
@@ -55,7 +55,7 @@ export const parseBody = async (body: string) => {
   $('pre code').each((_, element) => {
     const result = hljs.highlightAuto($(element).text()).value
     $(element).html(result)
-    $(element).parent().addClass("shadow-md")
+    $(element).parent().addClass("shadow-md text-sm md:text-base")
     $(element).addClass(`hljs mb-10`)
   })
 
@@ -65,38 +65,37 @@ export const parseBody = async (body: string) => {
     if ($(element).text() === "linkCard") {
       let og: { [key: string]: string } = {}
       const linkUrl = $(element).attr("href") as string
-      const res = await axios.get(linkUrl)
-      const data = await res.data
-      const $link = cheerio.load(data)
-      $link('meta[property^="og"]').each((_, element) => {
-        og[$link(element).attr("property")?.replace("og:", "") as string] = ($link(element).attr("content") as string)
-      })
-      $link('meta[name]').each((_, element) => {
-        if (og[$link(element).attr("name") as string] === undefined) {
-          og[$link(element).attr("name") as string] = ($link(element).attr("content") as string)
-        }
-      })
-      const amazonImage = $link('img.frontImage').attr("src")
-      $(element).replaceWith(`
-        <div class="shadow-md shadow-outline bg-slate-100 mt-4 mb-20 hover:brightness-[0.9] duration-300 ease-out">
-          <a class="p-4 no-underline" href=${linkUrl} target="_blank" rel="noopener noreferrer">
-            <div class="flex justify-evenly flex-wrap">
-              <img src=${og["image"] === undefined ? amazonImage : og["image"]} class="h-[12rem] mr-2 aspect" />
-              <div class="flex flex-col w-7/12 justify-center items-center">
-                <p class="text-xl font-bold my-3">
-                  ${og["title"]}
-                </p> 
-                <p class="text-black my-1">
-                  ${og["description"]}
-                </p>
+        const res = await fetch(linkUrl)
+        const data = await res.text()
+        const $link = cheerio.load(data)
+        $link('meta[property^="og"]').each((_, element) => {
+          og[$link(element).attr("property")?.replace("og:", "") as string] = ($link(element).attr("content") as string)
+        })
+        $link('meta[name]').each((_, element) => {
+          if (og[$link(element).attr("name") as string] === undefined) {
+            og[$link(element).attr("name") as string] = ($link(element).attr("content") as string)
+          }
+        })
+        const amazonImage = $link('img.frontImage').attr("src")
+        $(element).replaceWith(`
+          <div class="shadow-md shadow-outline bg-slate-100 mt-4 mb-20 hover:brightness-[0.9] duration-300 ease-out">
+            <a class="no-underline" href=${linkUrl} target="_blank" rel="noopener noreferrer">
+              <div class="flex flex-col lg:flex-row justify-center p-2">
+                <img src=${og["image"] === undefined ? amazonImage : og["image"]} class="self-center max-w-[12rem] max-h-[20rem] object-scale-down" />
+                <div class="flex flex-col w-[90%] mx-3 lg:w-1/2 justify-center items-center">
+                  <p class="text-xl font-bold my-3 w-full break-words">
+                    ${og["title"]}
+                  </p> 
+                  <p class="text-black my-1 w-full break-words">
+                    ${og["description"]}
+                  </p>
+                </div>
               </div>
-            </div>
-          </a>
-        </div>
-        `
-      )
+            </a>
+          </div>
+          `
+        )
+      }
     }
+    return $("body").html() as string
   }
-
-  return $("body").html() as string
-}

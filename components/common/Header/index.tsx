@@ -1,4 +1,4 @@
-import { Link, Typography } from "@mui/material"
+import { Box, Link, Typography } from "@mui/material"
 import { Category } from "types"
 import { NavigationBar } from "./NavigationBar"
 
@@ -11,11 +11,13 @@ const Header = (props: Props) => {
   const logo = "ASUNAROBLOG"
   return (
     <div>
-      <Typography className="py-5 ml-10 font-logo" sx={{flexGrow: 1, display: { xs: 'none', md: 'block' }, fontSize: { xs: 30, md: 40 }}}>
-        <Link href="/" underline="none" className="text-slate-700" >
-          {logo}
-        </Link> 
-      </Typography>
+      <Box className="flex justify-center" sx={{ marginLeft: "30px" }}>
+        <Typography className="py-5 font-logo" sx={{ maxWidth: "1300px", flexGrow: 1, display: { xs: 'none', md: 'block' }, fontSize: { xs: 30, md: 40 }}}>
+          <Link href="/" underline="none" className="text-slate-700" >
+            {logo}
+          </Link> 
+        </Typography>
+      </Box>
       <NavigationBar
         logo={logo}
         categories={props.categories}

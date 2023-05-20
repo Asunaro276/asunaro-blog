@@ -4,7 +4,7 @@ import CodeIcon from '@mui/icons-material/Code';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import BusinessIcon from '@mui/icons-material/Business';
-import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import FunctionsIcon from '@mui/icons-material/Functions';
 import HomePage from "components/HomePage";
 import { NextSeo } from "next-seo";
 
@@ -18,7 +18,7 @@ type Props = {
 
 export const PER_PAGE = 10
 
-export const pageIcons = [<HomeOutlinedIcon key={0} />, <CodeIcon key={1} />, <BusinessIcon key={2} />, <QueryStatsIcon key={3} />, <MoreHorizIcon key={4} />]
+export const pageIcons = [<HomeOutlinedIcon key={0} />, <CodeIcon key={1} />, <BusinessIcon key={2} />, <FunctionsIcon key={3} />, <MoreHorizIcon key={4} />]
 
 export default function Home(props: Props) {
   const homeCategory: Category = { _id: "/", displayedName: "Home", name: "home" }
@@ -64,7 +64,7 @@ export const getStaticProps = async () => {
   }
   propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
   // 年ごとのポスト数を入手
-  let years: { [key: number]: number } = { 2022: 0, 2023: 0 }
+  let years: { [key: number]: number } = { 2023: 0 }
   for (const y in years) {
     years[y] = (await newtClient.getContents<Article>({ appUid: "asunaroblog", modelUid: "article", query: { "_sys.raw.firstPublishedAt": { lt: String(Number(y) + 1), gte: y }, select: ["total"] }})).total
   }

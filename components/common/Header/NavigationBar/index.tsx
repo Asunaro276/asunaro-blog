@@ -2,7 +2,7 @@ import * as React from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
-import { Container, IconButton, Link as MuiLink, Menu, MenuItem, Typography } from '@mui/material'
+import { IconButton, Link as MuiLink, Menu, MenuItem, Typography, Grid } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { pageIcons } from 'pages'
 import { Category } from 'types'
@@ -21,12 +21,10 @@ export const NavigationBar = (props: Props) => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   };
-
   return (
     <AppBar position="static" className="bg-slate-500" sx={{ paddingY: {xs: 1, sm: 2, md:0} }}>
-      <Container>
-        <Toolbar disableGutters>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+        <Toolbar disableGutters sx={{ position: "relative" }}>
+          <Box sx={{ display: { xs: 'flex', md: 'none' }, position: {sm: "absolute"}, left: "30px" }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -34,7 +32,6 @@ export const NavigationBar = (props: Props) => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
-              className=''
             >
               <MenuIcon />
             </IconButton>
@@ -86,7 +83,7 @@ export const NavigationBar = (props: Props) => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, fontSize: { xs: 25, md: 60 } }}
+            sx={{ width: "100%", display: { xs: 'flex', md: 'none' }, fontSize: { xs: 25, md: 60 }, justifyContent: "center"}}
           >
             <NextLink href="/" passHref>
               <MuiLink underline="none" color="inherit" rel="noopener noreferrer">
@@ -94,34 +91,36 @@ export const NavigationBar = (props: Props) => {
               </MuiLink>
             </NextLink>
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {props.categories.map((category, index) => (
-              <NextLink
-                href={category._id}
-                passHref
-                key={index}
-              >
-                <MuiLink
-                  onClick={handleCloseNavMenu}
-                  sx={{ mx: {md: 1, lg: 3}, my: 1, display: 'block' }}
-                  underline="none"
-                  color="inherit"
-                  className='flex text-lg hover:bg-slate-400 ease-out duration-100 p-3'
-                  variant="button"
-                  rel="noopener noreferrer"
-                >
-                  <Box className="mr-1 pt-0.5">
-                    {pageIcons[index]}
-                  </Box>
-                  <Box>
-                    {category.displayedName}
-                  </Box>
-                </MuiLink>
-              </NextLink>
-            ))}
+          <Box sx={{ width: "100%", display: { xs: "none", md: "flex" }, justifyContent: "center", marginLeft: "30px" }}>
+            <Box sx={{ maxWidth: "1300px", width: "100%", display: "flex" }}>
+              {props.categories.map((category, index) => (
+                <Box key={index} sx={{ marginRight: "20px" }}>
+                  <NextLink
+                    href={category._id}
+                    passHref
+                  >
+                    <MuiLink
+                      onClick={handleCloseNavMenu}
+                      sx={{ display: 'block', padding: "10px" }}
+                      underline="none"
+                      color="inherit"
+                      className='flex text-lg hover:bg-slate-400 ease-out duration-100'
+                      variant="button"
+                      rel="noopener noreferrer"
+                    >
+                      <Box className="mr-1 pt-0.5">
+                        {pageIcons[index]}
+                      </Box>
+                      <Box>
+                        {category.displayedName}
+                      </Box>
+                    </MuiLink>
+                  </NextLink>
+                </Box>
+              ))}
+            </Box>
           </Box>
         </Toolbar>
-      </Container>
     </AppBar>
   );
 };
