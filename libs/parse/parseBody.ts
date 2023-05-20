@@ -80,13 +80,13 @@ export const parseBody = async (body: string) => {
         $(element).replaceWith(`
           <div class="shadow-md shadow-outline bg-slate-100 mt-4 mb-20 hover:brightness-[0.9] duration-300 ease-out">
             <a class="no-underline" href=${linkUrl} target="_blank" rel="noopener noreferrer">
-              <div class="flex flex-col lg:flex-row justify-center p-2">
-                <img src=${og["image"] === undefined ? amazonImage : og["image"]} class="self-center max-w-[12rem] max-h-[20rem] object-scale-down" />
-                <div class="flex flex-col w-[90%] mx-3 lg:w-1/2 justify-center items-center">
-                  <p class="text-xl font-bold my-3 w-full break-words">
+              <div class="flex flex-col lg:flex-row items-center p-2">
+                <img src=${og["image"] === undefined ? amazonImage : og["image"]} class="self-center w-[90%] max-w-[20rem] max-h-[20rem] mt-2 lg:mt-2 lg:mr-3" />
+                <div class="flex flex-col w-[90%] lg:w-1/2 justify-center items-center">
+                  <p class="font-bold my-3 w-full break-words">
                     ${og["title"]}
                   </p> 
-                  <p class="text-black my-1 w-full break-words">
+                  <p class="text-sm text-black m-0 w-full break-words">
                     ${og["description"]}
                   </p>
                 </div>
