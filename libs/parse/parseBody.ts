@@ -72,7 +72,12 @@ export const parseBody = async (body: string) => {
         $link('meta[property^="og"]').each((_, element) => {
           og[$link(element).attr("property")?.replace("og:", "") as string] = ($link(element).attr("content") as string)
         })
-        $link('meta[name]').each((_, element) => {
+        $link('meta[name="title"]').each((_, element) => {
+          if (og[$link(element).attr("name") as string] === undefined) {
+            og[$link(element).attr("name") as string] = ($link(element).attr("content") as string)
+          }
+        })
+        $link('meta[name="description"]').each((_, element) => {
           if (og[$link(element).attr("name") as string] === undefined) {
             og[$link(element).attr("name") as string] = ($link(element).attr("content") as string)
           }
