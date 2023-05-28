@@ -5,6 +5,7 @@ import SideBar from "components/common/SideBar";
 import { Article, Category, Tag } from "types";
 import Pagination from "./Pagination";
 import PostsList from "./PostsList";
+import Error from "next/error";
 
 type Props = {
   pageNumber: number
@@ -16,6 +17,7 @@ type Props = {
   category?: Category
   tag?: Tag
   year?: number
+  statusCode?: number
 }
 
 const HomePage = (props: Props) => {
@@ -73,13 +75,18 @@ const HomePage = (props: Props) => {
                     </Typography>)
                 }
               </Box>)}
+              {props.statusCode &&
+              (<Box className="text-center my-12" sx={{ height: '100%' }}>
+                <Error statusCode={props.statusCode as number} />
+              </Box>)}
               <PostsList
                 blogs={props.blogs}
               />
             </Box>
+            {!(props.statusCode) &&
             <Box className="flex justify-center mb-10">
               <Pagination dir={dir} pageNumber={props.pageNumber} totalCount={props.totalCount} />
-            </Box>
+            </Box>}
           </Box>
           <Box className="" sx={{ marginTop: { xs: "30px", md: "40px"}, marginX: "3%", width: { xs: "90%", md: "25%" } }}>
             <SideBar years={props.years} tags={props.tags} />
