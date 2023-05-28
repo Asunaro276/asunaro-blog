@@ -74,6 +74,9 @@ export const parseBody = async (body: string) => {
           if (ogData.result[key as keyof typeof ogData.result] !== undefined) {
             if (key === 'ogImage') {
               og['image'] = (ogData.result[key as keyof typeof ogData.result] as ImageObject[])[0].url as string
+              if (og['title'].match(/Amazon/)) {
+                og["image"] = (ogData.result[key as keyof typeof ogData.result] as ImageObject[]).find(value => value.url.match(/media-amazon.com\/images\/I/))?.url as string
+              }
               if (!og['image'].startsWith('http')) {
                 og['image'] = `${linkUrl.split('/').slice(0,3).join('/')}${og['image']}`
               }
@@ -117,18 +120,11 @@ export const parseBody = async (body: string) => {
           }
         })
       }
-      let amazonImage = ""
-      if (og['title'].match(/Amazon/)) {
-        const res = await fetch(linkUrl)
-        const data = await res.text()
-        const $link = cheerio.load(data)
-        amazonImage = $link('img.frontImage').attr("src") as string
-      }
       $(element).replaceWith(`
         <div class="shadow-md shadow-outline bg-slate-100 mt-4 mb-20 hover:brightness-[0.9] duration-300 ease-out">
           <a class="no-underline" href=${linkUrl} target="_blank" rel="noopener noreferrer">
             <div class="flex flex-col lg:flex-row items-center justify-center p-2">
-              <img src=${amazonImage !== "" ? amazonImage : og["image"]} class="self-center w-[90%] max-w-[12rem] max-h-[20rem] mt-2 lg:mt-2 lg:mr-3" />
+              <img src=${og["image"] === undefined ? "" : og["image"]} class="self-center w-[90%] max-w-[12rem] max-h-[20rem] mt-2 lg:mt-2 lg:mr-3" />
               <div class="flex flex-col w-[90%] lg:w-1/2 justify-center items-center">
                 <p class="font-bold my-3 w-full break-words">
                   ${og["title"] === undefined ? "" : og["title"]}
