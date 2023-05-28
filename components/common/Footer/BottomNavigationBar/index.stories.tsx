@@ -20,7 +20,7 @@ Primary.args = {
 export const Real = Template.bind({});
 Real.args = {
   categories: [
-    {_id: "", name: "Home", displayedName: "Home"},
+    {_id: "", name: "Home", displayedName: "HOME"},
     {_id: "", name: "programming", displayedName: "プログラミング"},
     {_id: "", name: "business", displayedName: "ビジネス"},
     {_id: "", name: "math", displayedName: "数学"},

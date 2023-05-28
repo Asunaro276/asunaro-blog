@@ -55,7 +55,7 @@ export const NavigationBar = (props: Props) => {
               }}
             >
               {props.categories.map((category, index) => (
-                <MenuItem key={index} onClick={handleCloseNavMenu} className='text-lg hover:bg-slate-200 ease-out duration-100'>
+                <MenuItem key={index} onClick={handleCloseNavMenu} className='text-lg hover:bg-slate-200 ease-out duration-100' sx={{ paddingTop: '10px' }}>
                   <NextLink
                     href={category._id}
                     passHref
@@ -69,7 +69,7 @@ export const NavigationBar = (props: Props) => {
                       <Box className="mr-1 pt-0.5">
                         {pageIcons[index]}
                       </Box>
-                      <Box className=''>
+                      <Box sx={{ paddingTop: '1px'}}>
                         {category.displayedName}
                       </Box>
                     </MuiLink>
@@ -101,7 +101,7 @@ export const NavigationBar = (props: Props) => {
                   >
                     <MuiLink
                       onClick={handleCloseNavMenu}
-                      sx={{ display: 'block', padding: "10px" }}
+                      sx={{ display: 'block', padding: "10px", paddingTop: '14px' }}
                       underline="none"
                       color="inherit"
                       className='flex text-lg hover:bg-slate-400 ease-out duration-100'
@@ -111,7 +111,7 @@ export const NavigationBar = (props: Props) => {
                       <Box className="mr-1 pt-0.5">
                         {pageIcons[index]}
                       </Box>
-                      <Box>
+                      <Box sx={{ paddingTop: '1px' }}>
                         {category.displayedName}
                       </Box>
                     </MuiLink>

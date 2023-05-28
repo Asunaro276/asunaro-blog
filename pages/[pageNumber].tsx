@@ -20,7 +20,7 @@ type Params = {
 
 // pages/blog/[id].js
 export default function BlogPageId(props: Props) {
-  const homeCategory: Category = { _id: "/", displayedName: "Home", name: "home" }
+  const homeCategory: Category = { _id: "/", displayedName: "HOME", name: "home" }
   const categories = [
     homeCategory,
     ...props.categories.map((category) => ({
