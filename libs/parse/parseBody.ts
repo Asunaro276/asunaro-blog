@@ -70,7 +70,6 @@ export const parseBody = async (body: string) => {
       const linkUrl = $(element).attr("href") as string
       try {
         const ogData = await openGraphScraper({ url: linkUrl })
-        console.log(ogData.result)
         for (const key in ogData.result) {
           if (ogData.result[key as keyof typeof ogData.result] !== undefined) {
             if (key === 'ogImage') {
@@ -132,10 +131,10 @@ export const parseBody = async (body: string) => {
               <img src=${amazonImage !== "" ? amazonImage : og["image"]} class="self-center w-[90%] max-w-[12rem] max-h-[20rem] mt-2 lg:mt-2 lg:mr-3" />
               <div class="flex flex-col w-[90%] lg:w-1/2 justify-center items-center">
                 <p class="font-bold my-3 w-full break-words">
-                  ${og["title"]}
+                  ${og["title"] === undefined ? "" : og["title"]}
                 </p> 
                 <p class="text-sm text-black m-0 w-full break-words">
-                  ${og["description"]}
+                  ${og["description"] === undefined ? "" : og["description"]}
                 </p>
               </div>
             </div>
