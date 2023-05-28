@@ -21,7 +21,7 @@ interface Params extends ParsedUrlQuery {
 }
 
 export default function CategoryId(props: Props) {
-  const homeCategory: Category = { _id: "/", displayedName: "Home", name: "home" }
+  const homeCategory: Category = { _id: "/", displayedName: "HOME", name: "home" }
   const categories = [
     homeCategory,
     ...props.categories.map((category) => ({

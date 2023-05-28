@@ -1,12 +1,14 @@
-import HomePage from 'components/HomePage';
-import { newtClient } from 'libs/client';
-import { GetStaticProps } from 'next';
-import { NextSeo } from 'next-seo';
-import { PER_PAGE } from 'pages';
-import { Article, Category, Tag } from 'types';
+import { newtClient } from "libs/client";
+import { Article, Category, Tag } from "types";
+import CodeIcon from '@mui/icons-material/Code';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import BusinessIcon from '@mui/icons-material/Business';
+import FunctionsIcon from '@mui/icons-material/Functions';
+import HomePage from "components/HomePage";
+import { NextSeo } from "next-seo";
 
 type Props = {
-  pageNumber: number
   blogs: Article[]
   categories: Category[]
   tags: Tag[]
@@ -14,12 +16,11 @@ type Props = {
   totalCount: number
 }
 
-type Params = {
-  pageNumber: string
-}
+export const PER_PAGE = 10
 
-// pages/blog/[id].js
-export default function BlogPageId(props: Props) {
+export const pageIcons = [<HomeOutlinedIcon key={0} />, <CodeIcon key={1} />, <BusinessIcon key={2} />, <FunctionsIcon key={3} />, <MoreHorizIcon key={4} />]
+
+export default function Custom404(props: Props) {
   const homeCategory: Category = { _id: "/", displayedName: "HOME", name: "home" }
   const categories = [
     homeCategory,
@@ -31,33 +32,29 @@ export default function BlogPageId(props: Props) {
   return (
     <main>
       <NextSeo
-        title="asunaroblog"
+        title="asunaroblog｜Web技術で遊ぶブログ"
         titleTemplate="%s"
       />
       <HomePage
-        pageNumber={props.pageNumber}
+        pageNumber={1}
         blogs={props.blogs}
         categories={categories}
         tags={props.tags}
         years={props.years}
         totalCount={props.totalCount}
+        statusCode={404}
       />
     </main>
-  )
+  );
 }
 
-// 動的なページを作成
-export const getStaticPaths = async () => {
-  const blogs = await newtClient.getContents({ appUid: "asunaroblog", modelUid: "article" });
-  const range = (start: number, end: number) => [...Array(end - start + 1)].map((_, i) => start + i)
-  const paths = range(1, Math.ceil(blogs.total/ PER_PAGE)).map((pageNumber) => `/${pageNumber}`)
-  return { paths, fallback: false }
-};
 
-// データを取得
-export const getStaticProps: GetStaticProps<Props, Params> = async (context) => {
-  const pageNumber = Number(context.params!.pageNumber)
-  const blogs = await newtClient.getContents<Article>({ appUid: "asunaroblog", modelUid: "article", query: { skip: (pageNumber - 1) * PER_PAGE, limit: PER_PAGE } });
+// データをテンプレートに受け渡す部分の処理を記述します
+export const getStaticProps = async () => {
+  if (process.env.NODE_ENV === "development") {
+    
+  }
+  // const blogs = await newtClient.getContents<Article>({ appUid: "asunaroblog", modelUid: "article", query: { skip: 0, limit: PER_PAGE} })
   const categories = await newtClient.getContents<Category>({ appUid: "asunaroblog", modelUid: "category", query: { order: ["-_sys.customOrder"] }})
   const tags = (await newtClient.getContents<Tag>({ appUid: "asunaroblog", modelUid: "tag", query: { limit: 100 }})).items
   // タグごとのポスト数を入手
@@ -71,19 +68,18 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   }
   propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
   // 年ごとのポスト数を入手
-  let years: { [key: number]: number } = { 2022: 0, 2023: 0 }
+  let years: { [key: number]: number } = { 2023: 0 }
   for (const y in years) {
     years[y] = (await newtClient.getContents<Article>({ appUid: "asunaroblog", modelUid: "article", query: { "_sys.raw.firstPublishedAt": { lt: String(Number(y) + 1), gte: y }, select: ["total"] }})).total
   }
 
   return {
     props: {
-      pageNumber: pageNumber,
-      blogs: blogs.items,
+      blogs: [],
       categories: categories.items,
-      totalCount: blogs.total,
-      tags: propTags as Tag[],
+      tags: propTags,
       years: years,
+      totalCount: 1,
     },
   };
 };

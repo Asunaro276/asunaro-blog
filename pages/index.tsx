@@ -21,7 +21,7 @@ export const PER_PAGE = 10
 export const pageIcons = [<HomeOutlinedIcon key={0} />, <CodeIcon key={1} />, <BusinessIcon key={2} />, <FunctionsIcon key={3} />, <MoreHorizIcon key={4} />]
 
 export default function Home(props: Props) {
-  const homeCategory: Category = { _id: "/", displayedName: "Home", name: "home" }
+  const homeCategory: Category = { _id: "/", displayedName: "HOME", name: "home" }
   const categories = [
     homeCategory,
     ...props.categories.map((category) => ({
