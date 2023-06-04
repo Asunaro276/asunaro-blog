@@ -70,27 +70,20 @@ export const parseBody = async (body: string) => {
       const linkUrl = $(element).attr("href") as string
       try {
         const ogData = await openGraphScraper({ url: linkUrl })
-        for (const key in ogData.result) {
-          if (ogData.result[key as keyof typeof ogData.result] !== undefined) {
-            if (key === 'ogImage') {
-              og['image'] = (ogData.result[key as keyof typeof ogData.result] as ImageObject[])[0].url as string
-              if (og['title'].match(/Amazon/)) {
-                og["image"] = (ogData.result[key as keyof typeof ogData.result] as ImageObject[]).find(value => value.url.match(/media-amazon.com\/images\/I/))?.url as string
-              }
-              if (!og['image'].startsWith('http')) {
-                og['image'] = `${linkUrl.split('/').slice(0,3).join('/')}${og['image']}`
-              }
-            } else {
-              og[key.replace('og', '').toLowerCase()] = ogData.result[key as keyof typeof ogData.result]?.toString() as string
-            }
-          }
+        console.log(ogData.result)
+        og['title'] = ogData.result['ogTitle'] as string
+        if (og['title'].match(/Amazon/)) {
+          og["image"] = (ogData.result["ogImage"] as ImageObject[]).find(value => value.url.match(/media-amazon.com\/images\/I/))?.url as string
+        } else {
+          og['image'] = (ogData.result["ogImage"] as ImageObject[])[0].url as string
         }
         if (og['image'] === undefined) {
           og['image'] = ogData.result['favicon'] as string
         }
         if (!og['image'].startsWith('http')) {
-          og['image'] = `${linkUrl.split('/').slice(0,3).join('/')}/${og['image']}`
+          og['image'] = `${linkUrl.split('/').slice(0,3).join('/')}${og['image']}`
         }
+        og['description'] = ogData.result['ogDescription'] as string
       } catch (error) {
         console.log(error)
       }
