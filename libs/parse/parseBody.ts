@@ -1,6 +1,8 @@
 import cheerio from 'cheerio'
+import openGraphScraper from 'open-graph-scraper'
 import hljs from 'highlight.js/lib/common'
 import axios, { AxiosError } from 'axios'
+import { ImageObject } from 'open-graph-scraper/dist/lib/types'
 
 export const parseBody = async (body: string) => {
   const $ = cheerio.load(body)
@@ -66,40 +68,68 @@ export const parseBody = async (body: string) => {
     if ($(element).text() === "linkCard") {
       let og: { [key: string]: string } = {}
       const linkUrl = $(element).attr("href") as string
+      try {
+        const ogData = await openGraphScraper({ url: linkUrl })
+        console.log(ogData.result)
+        og['title'] = ogData.result['ogTitle'] as string
+        if (og['title'].match(/Amazon/)) {
+          og["image"] = (ogData.result["ogImage"] as ImageObject[]).find(value => value.url.match(/media-amazon.com\/images\/I/))?.url as string
+        } else {
+          og['image'] = (ogData.result["ogImage"] as ImageObject[])[0].url as string
+        }
+        if (og['image'] === undefined) {
+          og['image'] = ogData.result['favicon'] as string
+        }
+        if (!og['image'].startsWith('http')) {
+          og['image'] = `${linkUrl.split('/').slice(0,3).join('/')}${og['image']}`
+        }
+        og['description'] = ogData.result['ogDescription'] as string
+      } catch (error) {
+        console.log(error)
+      }
+      if (og["title"] === undefined) {
         const res = await fetch(linkUrl)
         const data = await res.text()
         const $link = cheerio.load(data)
         $link('meta[property^="og"]').each((_, element) => {
           og[$link(element).attr("property")?.replace("og:", "") as string] = ($link(element).attr("content") as string)
         })
+        if (og["image"] === undefined) {
+          og["image"] = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${linkUrl}`
+        }
         $link('meta[name="title"]').each((_, element) => {
           if (og[$link(element).attr("name") as string] === undefined) {
             og[$link(element).attr("name") as string] = ($link(element).attr("content") as string)
           }
         })
+        if (og["title"] === undefined) {
+          $link('title').each((_, element) => {
+            og["title"] = $link(element).text() as string
+          })
+        }
         $link('meta[name="description"]').each((_, element) => {
           if (og[$link(element).attr("name") as string] === undefined) {
             og[$link(element).attr("name") as string] = ($link(element).attr("content") as string)
           }
         })
-        const amazonImage = $link('img.frontImage').attr("src")
-        $(element).replaceWith(`
-          <div class="shadow-md shadow-outline bg-slate-100 mt-4 mb-20 hover:brightness-[0.9] duration-300 ease-out">
-            <a class="no-underline" href=${linkUrl} target="_blank" rel="noopener noreferrer">
-              <div class="flex flex-col lg:flex-row items-center justify-center p-2">
-                <img src=${og["image"] === undefined ? amazonImage : og["image"]} class="self-center w-[90%] max-w-[12rem] max-h-[20rem] mt-2 lg:mt-2 lg:mr-3" />
-                <div class="flex flex-col w-[90%] lg:w-1/2 justify-center items-center">
-                  <p class="font-bold my-3 w-full break-words">
-                    ${og["title"]}
-                  </p> 
-                  <p class="text-sm text-black m-0 w-full break-words">
-                    ${og["description"]}
-                  </p>
-                </div>
+      }
+      $(element).replaceWith(`
+        <div class="shadow-md shadow-outline bg-slate-100 mt-4 mb-20 hover:brightness-[0.9] duration-300 ease-out">
+          <a class="no-underline" href=${linkUrl} target="_blank" rel="noopener noreferrer">
+            <div class="flex flex-col lg:flex-row items-center justify-center p-2">
+              <img src=${og["image"] === undefined ? "" : og["image"]} class="self-center w-[90%] max-w-[12rem] max-h-[20rem] mt-2 lg:mt-2 lg:mr-3" />
+              <div class="flex flex-col w-[90%] lg:w-1/2 justify-center items-center">
+                <p class="font-bold my-3 w-full break-words">
+                  ${og["title"] === undefined ? "" : og["title"]}
+                </p> 
+                <p class="text-sm text-black m-0 w-full break-words">
+                  ${og["description"] === undefined ? "" : og["description"]}
+                </p>
               </div>
-            </a>
-          </div>
-          `
+            </div>
+          </a>
+        </div>
+        `
         )
       }
     }
