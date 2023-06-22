@@ -61,3 +61,10 @@ export type OGP = {
   image: string
   [key: string]: string
 }
+
+export type NewtResponse = {
+  skip: number,
+  limit: number,
+  total: number,
+  items: Article[]
+}
