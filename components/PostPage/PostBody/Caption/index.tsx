@@ -3,13 +3,13 @@ import { convertDateFormat } from "libs/convertDateFormat"
 import Image from "next/image"
 import NextLink from "next/link"
 import LocalOfferIcon from '@mui/icons-material/LocalOffer'
-import { Category, Tag } from "types"
+import { CategoryResponse, TagResponse } from "types"
 
 type Props = {
   title: string
   publishedAt: string
-  tagsOfPost: Tag[]
-  categoryOfPost: Category
+  tagsOfPost: TagResponse[]
+  categoryOfPost: CategoryResponse
   imageUrl: string
   imageAlt: string
 }

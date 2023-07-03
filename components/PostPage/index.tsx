@@ -1,4 +1,4 @@
-import { Article, Category, Heading, Tag } from "types";
+import { ArticleResponse, CategoryResponse, Heading, TagResponse } from "types";
 import Box from "@mui/material/Box"
 import Header from "components/common/Header";
 import PostBody from "./PostBody";
@@ -6,10 +6,10 @@ import Footer from "components/common/Footer";
 import SideBar from "components/common/SideBar";
 
 type Props = {
-  blog: Article
+  blog: ArticleResponse
   headings: Heading[]
-  categories: Category[]
-  tags: Tag[]
+  categories: CategoryResponse[]
+  tags: TagResponse[]
   years: { [key: number]: number }
 }
 

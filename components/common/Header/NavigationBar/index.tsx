@@ -5,12 +5,12 @@ import Toolbar from '@mui/material/Toolbar'
 import { IconButton, Link as MuiLink, Menu, MenuItem, Typography, Grid } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { pageIcons } from 'pages'
-import { Category } from 'types'
+import { CategoryResponse } from 'types'
 import NextLink from 'next/link'
 
 type Props = {
   logo: string
-  categories: Category[]
+  categories: CategoryResponse[]
 }
 
 export const NavigationBar = (props: Props) => {

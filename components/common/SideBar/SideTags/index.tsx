@@ -1,18 +1,18 @@
 import { Card, CardContent, Button, Divider, Box } from "@mui/material"
 import NextLink from "next/link"
 import LocalOfferIcon from '@mui/icons-material/LocalOffer'
-import { Tag } from "types"
+import { TagResponse } from "types"
 
 
 type Props = {
-  tags: Tag[]
+  tags: TagResponse[]
 }
 
 const SideTag = (props: Props) => {
   return (
     <Card sx={{ height: "100%" }}>
       <CardContent sx={{ paddingBottom: "1.5em", fontWeight: 600 }}>
-        Tags
+        TagResponses
       </CardContent>
       <CardContent className="" sx={{ display: "flex", flexWrap: "wrap", overflowY: "scroll", height: "70%" }}>
         {props.tags.map(tag => (
