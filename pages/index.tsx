@@ -7,7 +7,7 @@ import BusinessIcon from '@mui/icons-material/Business';
 import FunctionsIcon from '@mui/icons-material/Functions';
 import HomePage from "components/HomePage";
 import { NextSeo } from "next-seo";
-import { useArticles } from "hooks/useArticles";
+import { fetchArticles } from "libs/fetchArticles";
 
 type Props = {
   blogs: ArticleResponse[]
@@ -70,7 +70,7 @@ export const getStaticProps = async () => {
   //   years[y] = (await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { "_sys.raw.firstPublishedAt": { lt: String(Number(y) + 1), gte: y }, select: ["total"] }})).total
   // }
 
-  const { blogs, categories, tags, years, totalCount } = await useArticles({ pageNumber: 1 })
+  const { blogs, categories, tags, years, totalCount } = await fetchArticles({ pageNumber: 1 })
 
 
   return {

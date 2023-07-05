@@ -1,6 +1,6 @@
 import HomePage from "components/HomePage";
-import { useArticles } from "hooks/useArticles";
 import { newtClient } from "libs/client";
+import { fetchArticles } from "libs/fetchArticles";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { PER_PAGE } from "pages";
 import { ParsedUrlQuery } from "querystring";
@@ -82,7 +82,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   // for (const y in years) {
   //   years[y] = (await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { "_sys.raw.firstPublishedAt": { lt: String(Number(y) + 1), gte: y }, select: ["total"] }})).total
   // }
-  const { blogs, categories, tags, years, totalCount } = await useArticles({ year: year, pageNumber: pageNumber })
+  const { blogs, categories, tags, years, totalCount } = await fetchArticles({ year: year, pageNumber: pageNumber })
 
   return {
     props: {

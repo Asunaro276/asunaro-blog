@@ -1,6 +1,6 @@
 import HomePage from "components/HomePage";
-import { useArticles } from "hooks/useArticles";
 import { newtClient } from "libs/client";
+import { fetchArticles } from "libs/fetchArticles";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { NextSeo } from "next-seo";
 import { PER_PAGE } from "pages";
@@ -50,7 +50,7 @@ export default function CategoryResponseId(props: Props) {
 
 // 静的生成のためのパスを指定します
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const { categories } = await useArticles({ pageNumber: 1 })
+  const { categories } = await fetchArticles({ pageNumber: 1 })
   const range = (start: number, end: number) => [...Array(end - start + 1)].map((_, i) => start + i)
   let paths = []
   for (const category of categories) {
@@ -85,7 +85,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   //   years[y] = (await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { "_sys.raw.firstPublishedAt": { lt: String(Number(y) + 1), gte: y }, select: ["total"] }})).total
   // }
 
-  const { blogs, categories, tags, years, totalCount } = await useArticles({ pageNumber: pageNumber, categoryId: categoryId })
+  const { blogs, categories, tags, years, totalCount } = await fetchArticles({ pageNumber: pageNumber, categoryId: categoryId })
   const category = categories.filter(cat => cat._id === categoryId)[0]
 
   return {

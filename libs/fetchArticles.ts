@@ -13,14 +13,14 @@ import {
   Years,
 } from 'types';
 
-type UseArticleOptions =
+type FetchArticlesOptions =
   | { year: Year; pageNumber?: Page }
   | { tagId: TagId; pageNumber?: Page }
   | { categoryId: CategoryId; pageNumber?: Page }
   | { blogId: BlogId }
   | { pageNumber?: Page };
 
-export const useArticles = async (options: UseArticleOptions) => {
+export const fetchArticles = async (options: FetchArticlesOptions) => {
   const pageNumber = (() => {
     if ('pageNumber' in options) {
       return options.pageNumber;

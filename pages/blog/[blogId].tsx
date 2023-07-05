@@ -7,7 +7,7 @@ import PostPage from "components/PostPage"
 import { parseBody } from "libs/parse/parseBody"
 import { parseHeading } from "libs/parse/parseHeading"
 import 'highlight.js/styles/monokai.css'
-import { useArticles } from "hooks/useArticles"
+import { fetchArticles } from "libs/fetchArticles"
 
 type Props = {
   blog: ArticleResponse
@@ -82,7 +82,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   //   years[y] = (await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { "_sys.raw.firstPublishedAt": { lt: String(Number(y) + 1), gte: y }, select: ["total"] }})).total
   // }
 
-  const { blogs, categories, tags, years } = await useArticles({ blogId: id })
+  const { blogs, categories, tags, years } = await fetchArticles({ blogId: id })
 
   const headings = parseHeading(blogs[0].body)
 

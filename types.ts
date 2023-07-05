@@ -13,7 +13,7 @@ export type TagResponse = {
   _id: TagId;
   _sys: Sys;
   tag: string;
-  totalCount: number;
+  totalCount?: number;
 };
 
 export type CategoryResponse = {
