@@ -13,7 +13,7 @@ export type TagResponse = {
   _id: TagId;
   _sys: Sys;
   tag: string;
-  tagTotalCount?: number;
+  totalCount: number;
 };
 
 export type CategoryResponse = {
@@ -62,12 +62,16 @@ export type OGP = {
   [key: string]: string;
 };
 
-export type Year = number
+export type Years = {
+  2023: Year;
+};
 
-export type TagId = string
+export type Year = number;
 
-export type CategoryId = string
+export type TagId = string;
 
-export type BlogId = string
+export type CategoryId = string;
 
-export type Page = number
+export type BlogId = string;
+
+export type Page = number;

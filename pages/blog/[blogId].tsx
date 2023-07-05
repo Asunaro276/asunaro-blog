@@ -7,6 +7,7 @@ import PostPage from "components/PostPage"
 import { parseBody } from "libs/parse/parseBody"
 import { parseHeading } from "libs/parse/parseHeading"
 import 'highlight.js/styles/monokai.css'
+import { useArticles } from "hooks/useArticles"
 
 type Props = {
   blog: ArticleResponse
@@ -61,36 +62,36 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 
 export const getStaticProps: GetStaticProps<Props, Params> = async (context) => {
   const id = context.params!.blogId
-  const data = await newtClient.getContent<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", contentId: id })
-  const categories = await newtClient.getContents<CategoryResponse>({ appUid: "asunaroblog", modelUid: "category", query: { order: ["-_sys.customOrder"] }})
-  const tags = (await newtClient.getContents<TagResponse>({ appUid: "asunaroblog", modelUid: "tag", query: { limit: 100 }})).items
+  // const data = await newtClient.getContent<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", contentId: id })
+  // const categories = await newtClient.getContents<CategoryResponse>({ appUid: "asunaroblog", modelUid: "category", query: { order: ["-_sys.customOrder"] }})
+  // const tags = (await newtClient.getContents<TagResponse>({ appUid: "asunaroblog", modelUid: "tag", query: { limit: 100 }})).items
 
-  // タグごとのポスト数を入手
-  let propTags: TagResponse[] = []
-  for (const tag of tags) {
-    const countTag = (await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { tags: { in: [tag._id] } , field: "total" }})).total
-    propTags.push({
-      ...tag,
-      tagTotalCount: countTag 
-    })
-  }
-  propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
-  // 年ごとのポスト数を入手
-  let years: { [key: number]: number } = { 2022: 0, 2023: 0 }
-  for (const y in years) {
-    years[y] = (await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { "_sys.raw.firstPublishedAt": { lt: String(Number(y) + 1), gte: y }, select: ["total"] }})).total
-  }
+  // // タグごとのポスト数を入手
+  // let propTags: TagResponse[] = []
+  // for (const tag of tags) {
+  //   const countTag = (await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { tags: { in: [tag._id] } , field: "total" }})).total
+  //   propTags.push({
+  //     ...tag,
+  //     totalCount: countTag 
+  //   })
+  // }
+  // propTags.sort((a, b) => Number(a.totalCount) < Number(b.totalCount) ? 1 : -1)
+  // // 年ごとのポスト数を入手
+  // let years: { [key: number]: number } = { 2022: 0, 2023: 0 }
+  // for (const y in years) {
+  //   years[y] = (await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { "_sys.raw.firstPublishedAt": { lt: String(Number(y) + 1), gte: y }, select: ["total"] }})).total
+  // }
 
-  const body = (await parseBody(data.body)).replace("\n", "")
+  const { blogs, categories, tags, years } = await useArticles({ blogId: id })
 
-  const headings = parseHeading(body)
+  const headings = parseHeading(blogs[0].body)
 
   return {
     props: {
-      blog: {...data, body: body },
+      blog: blogs[0],
       headings: headings,
-      categories: categories.items,
-      tags: propTags,
+      categories: categories,
+      tags: tags,
       years: years,
     },
   }

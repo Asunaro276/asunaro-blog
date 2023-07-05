@@ -63,10 +63,10 @@ export const getStaticProps = async () => {
     const countTag = (await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { tags: { in: [tag._id] } , field: "total" }})).total
     propTags.push({
       ...tag,
-      tagTotalCount: countTag 
+      totalCount: countTag 
     })
   }
-  propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
+  propTags.sort((a, b) => Number(a.totalCount) < Number(b.totalCount) ? 1 : -1)
   // 年ごとのポスト数を入手
   let years: { [key: number]: number } = { 2023: 0 }
   for (const y in years) {
