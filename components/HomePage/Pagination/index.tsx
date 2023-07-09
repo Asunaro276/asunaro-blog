@@ -14,14 +14,13 @@ const Pagination = ({ dir, pageNumber, totalCount }: Props) => {
   return (
     <MuiPagination
       page={pageNumber}
-      count={Math.ceil(totalCount/PER_PAGE)}
+      count={Math.ceil(totalCount / PER_PAGE)}
       renderItem={(item) => {
         return (
           <Link href={item.page === 1 ? `/${dir}` : `${dir}/${item.page}`} passHref>
             <MuiPaginationItem
               {...item}
               component={"a"}
-              disabled={item.page === pageNumber}
             />
           </Link>
           )        

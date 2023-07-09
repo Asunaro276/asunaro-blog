@@ -21,16 +21,17 @@ type Props = {
 }
 
 const HomePage = (props: Props) => {
-  let dir = ""
-  if (props.tag) {
-    dir = `tag/${props.tag._id}`
+  const dir = (() => {
+    if (props.tag) {
+      return `tag/${props.tag._id}`
   } else if (props.category) {
-    dir = `category/${props.category._id}`
+      return `category/${props.category._id}`
   } else if (props.year) {
-    dir = `year/${props.year}`
+      return `year/${props.year}`
   } else {
-    dir = ""
-  }
+      return ""
+  }})()
+  console.log(dir)
   return (
     <div className="bg-slate-100">
       <div>

@@ -51,7 +51,6 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
   let paths = []
   for (const year of years) {
     const countPerYear = (await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { "_sys.raw.firstPublishedAt": { lt: String(year+1), gte: String(year) }, select: ["total"] }})).total
-
     paths.push(`/year/${year}`)
     paths.push(...range(1, Math.ceil(countPerYear / PER_PAGE))
     .map((pageNumber) => `/year/${year}/${pageNumber}`))

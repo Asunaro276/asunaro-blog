@@ -28,8 +28,9 @@ export const fetchArticles = async (options: FetchArticlesOptions) => {
       return 1;
     }
   })() as number;
+  console.log(pageNumber)
 
-  const blogs = await (async () => {
+  const {blogs, totalCount} = await (async (): Promise<{ blogs: ArticleResponse[], totalCount: number }> => {
     if ('year' in options) {
       const year = options.year;
       const blogs = await newtClient.getContents<ArticleResponse>({
@@ -41,23 +42,40 @@ export const fetchArticles = async (options: FetchArticlesOptions) => {
           limit: PER_PAGE,
         },
       });
-      return blogs.items;
+      return {
+        blogs: blogs.items,
+        totalCount: blogs.total
+      };
     } else if ('tagId' in options) {
       const tagId = options.tagId;
       const blogs = await newtClient.getContents<ArticleResponse>({
         appUid: 'asunaroblog',
         modelUid: 'article',
-        query: { tags: { in: [tagId] }, skip: (pageNumber - 1) * PER_PAGE, limit: PER_PAGE },
+        query: {
+          tags: { in: [tagId] },
+          skip: (pageNumber - 1) * PER_PAGE,
+          limit: PER_PAGE
+        },
       });
-      return blogs.items;
+      return {
+        blogs: blogs.items,
+        totalCount: blogs.total
+      };
     } else if ('categoryId' in options) {
       const categoryId = options.categoryId;
       const blogs = await newtClient.getContents<ArticleResponse>({
         appUid: 'asunaroblog',
         modelUid: 'article',
-        query: { category: categoryId, skip: (pageNumber - 1) * PER_PAGE, limit: PER_PAGE },
+        query: {
+          category: categoryId,
+          skip: (pageNumber - 1) * PER_PAGE,
+          limit: PER_PAGE
+        },
       });
-      return blogs.items;
+      return {
+        blogs: blogs.items,
+        totalCount: blogs.total
+      };
     } else if ('blogId' in options) {
       const blogId = options.blogId;
       const blog = await newtClient.getContent<ArticleResponse>({
@@ -66,14 +84,23 @@ export const fetchArticles = async (options: FetchArticlesOptions) => {
         contentId: blogId,
       });
       const body = (await parseBody(blog.body)).replace('\n', '');
-      return [{ ...blog, body }];
+      return {
+        blogs: [{ ...blog, body }],
+        totalCount: 1
+      };
     } else {
       const blogs = await newtClient.getContents<ArticleResponse>({
         appUid: 'asunaroblog',
         modelUid: 'article',
-        query: { skip: 0, limit: PER_PAGE },
+        query: {
+          skip: (pageNumber - 1) * PER_PAGE,
+          limit: PER_PAGE
+        },
       });
-      return blogs.items;
+      return {
+        blogs: blogs.items,
+        totalCount: blogs.total
+      };
     }
   })();
 
@@ -134,6 +161,6 @@ export const fetchArticles = async (options: FetchArticlesOptions) => {
     categories,
     tags: propTags,
     years,
-    totalCount: blogs.length,
+    totalCount,
   };
 };
