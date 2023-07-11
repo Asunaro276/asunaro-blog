@@ -31,7 +31,6 @@ const HomePage = (props: Props) => {
   } else {
       return ""
   }})()
-  console.log(dir)
   return (
     <div className="bg-slate-100">
       <div>

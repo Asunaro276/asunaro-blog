@@ -50,11 +50,11 @@ export default function CategoryResponseId(props: Props) {
 
 // 静的生成のためのパスを指定します
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const { categories } = await fetchArticles({ pageNumber: 1 })
+  const categories = (await newtClient.getContents<CategoryResponse>({ appUid: "asunaroblog", modelUid: "category", query: { limit: 100 }})).items
   const range = (start: number, end: number) => [...Array(end - start + 1)].map((_, i) => start + i)
   let paths = []
   for (const category of categories) {
-    const countPerCategory = (await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { "category._id": category._id, field: "total" }})).total
+    const countPerCategory = (await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { category: category._id, select: ["total"] }})).total
     paths.push(`/category/${category._id}`)
     paths.push(...range(1, Math.ceil(countPerCategory / PER_PAGE))
     .map((pageNumber) => `/category/${category._id}/${pageNumber}`))
@@ -65,6 +65,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 export const getStaticProps: GetStaticProps<Props, Params> = async (context) => {
   const categoryId = context.params!.params[0]
   const pageNumber = context.params?.params.length === 1 ? 1 : Number(context.params!.params[1])
+  console.log(context.params)
   // const blogs = await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { "category": categoryId, skip: (pageNumber - 1) * PER_PAGE, limit: PER_PAGE }})
   // const categories = (await newtClient.getContents<CategoryResponse>({ appUid: "asunaroblog", modelUid: "category", query: { order: ["-_sys.customOrder"] }})).items
   // const tags = (await newtClient.getContents<TagResponse>({ appUid: "asunaroblog", modelUid: "tag", query: { limit: 100 }})).items

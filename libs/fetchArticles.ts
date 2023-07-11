@@ -28,7 +28,6 @@ export const fetchArticles = async (options: FetchArticlesOptions) => {
       return 1;
     }
   })() as number;
-  console.log(pageNumber)
 
   const {blogs, totalCount} = await (async (): Promise<{ blogs: ArticleResponse[], totalCount: number }> => {
     if ('year' in options) {

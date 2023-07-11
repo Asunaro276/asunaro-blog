@@ -54,7 +54,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const range = (start: number, end: number) => [...Array(end - start + 1)].map((_, i) => start + i)
   let paths = []
   for (const tag of tags) {
-    const countEachTag = (await newtClient.getContents({ appUid: "asunaroblog", modelUid: "article", query: { tags: { in: [tag._id] }, field: "totalCount" }})).total
+    const countEachTag = (await newtClient.getContents({ appUid: "asunaroblog", modelUid: "article", query: { tags: { in: [tag._id] }, select: ["total"] }})).total
     paths.push(`/tag/${tag._id}`)
     paths.push(...range(1, Math.ceil(countEachTag / PER_PAGE))
     .map((pageNumber) => `/tag/${tag._id}/${pageNumber}`))
