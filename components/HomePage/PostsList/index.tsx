@@ -1,9 +1,9 @@
-import { Article } from "types"
+import { ArticleResponse } from "types"
 import { Box } from "@mui/material"
 import PostCard from "./PostCard"
 
 type Props = {
-  blogs: Article[]
+  blogs: ArticleResponse[]
 }
 
 const PostsList = (props: Props) => {

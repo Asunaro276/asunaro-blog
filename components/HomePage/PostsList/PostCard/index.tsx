@@ -9,10 +9,10 @@ import { convertDateFormat } from 'libs/convertDateFormat';
 import NextLink from 'next/link';
 import { LocalOffer } from '@mui/icons-material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import { Article } from 'types';
+import { ArticleResponse } from 'types';
 
 type Props = {
-  blog: Article
+  blog: ArticleResponse
 }
 
 export default function PostCard(props: Props) {

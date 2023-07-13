@@ -1,9 +1,9 @@
-import { Category } from "types"
+import { CategoryResponse } from "types"
 import { BottomNavigationBar } from "./BottomNavigationBar"
 import { CopyRight } from "./CopyRight"
 
 type Props = {
-  categories: Category[]
+  categories: CategoryResponse[]
 }
 
 const Footer = (props: Props) => {
