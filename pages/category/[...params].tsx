@@ -1,6 +1,6 @@
 import HomePage from "components/HomePage";
 import { newtClient } from "libs/client";
-import { fetchArticles } from "libs/fetchArticles";
+import { fetchBlogData } from "libs/fetch/fetchBlogData";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { NextSeo } from "next-seo";
 import { PER_PAGE } from "pages";
@@ -65,28 +65,8 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 export const getStaticProps: GetStaticProps<Props, Params> = async (context) => {
   const categoryId = context.params!.params[0]
   const pageNumber = context.params?.params.length === 1 ? 1 : Number(context.params!.params[1])
-  console.log(context.params)
-  // const blogs = await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { "category": categoryId, skip: (pageNumber - 1) * PER_PAGE, limit: PER_PAGE }})
-  // const categories = (await newtClient.getContents<CategoryResponse>({ appUid: "asunaroblog", modelUid: "category", query: { order: ["-_sys.customOrder"] }})).items
-  // const tags = (await newtClient.getContents<TagResponse>({ appUid: "asunaroblog", modelUid: "tag", query: { limit: 100 }})).items
 
-  // // タグごとのポスト数を入手
-  // let propTags = []
-  // for (const tag of tags) {
-  //   const countTag = (await newtClient.getContents<TagResponse>({ appUid: "asunaroblog", modelUid: "article", query: { tags: { in: [tag._id] }, field: "total" }})).total
-  //   propTags.push({
-  //     ...tag,
-  //     totalCount: countTag 
-  //   })
-  // }
-  // propTags.sort((a, b) => Number(a.totalCount) < Number(b.totalCount) ? 1 : -1)
-  // // 年ごとのポスト数を入手
-  // let years: { [key: number]: number } = { 2022: 0, 2023: 0 }
-  // for (const y in years) {
-  //   years[y] = (await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { "_sys.raw.firstPublishedAt": { lt: String(Number(y) + 1), gte: y }, select: ["total"] }})).total
-  // }
-
-  const { blogs, categories, tags, years, totalCount } = await fetchArticles({ pageNumber: pageNumber, categoryId: categoryId })
+  const { blogs, categories, tags, years, totalCount } = await fetchBlogData({ pageNumber: pageNumber, categoryId: categoryId })
   const category = categories.filter(cat => cat._id === categoryId)[0]
 
   return {

@@ -1,6 +1,6 @@
 import HomePage from 'components/HomePage';
 import { newtClient } from 'libs/client';
-import { fetchArticles } from 'libs/fetchArticles';
+import { fetchBlogData } from 'libs/fetch/fetchBlogData';
 import { GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { PER_PAGE } from 'pages';
@@ -77,7 +77,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   //   years[y] = (await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { "_sys.raw.firstPublishedAt": { lt: String(Number(y) + 1), gte: y }, select: ["total"] }})).total
   // }
 
-  const { blogs, categories, tags, years, totalCount } = await fetchArticles({ pageNumber: pageNumber })
+  const { blogs, categories, tags, years, totalCount } = await fetchBlogData({ pageNumber: pageNumber })
 
   return {
     props: {

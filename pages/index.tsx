@@ -7,7 +7,7 @@ import BusinessIcon from '@mui/icons-material/Business';
 import FunctionsIcon from '@mui/icons-material/Functions';
 import HomePage from "components/HomePage";
 import { NextSeo } from "next-seo";
-import { fetchArticles } from "libs/fetchArticles";
+import { fetchBlogData } from "libs/fetch/fetchBlogData";
 
 type Props = {
   blogs: ArticleResponse[]
@@ -51,28 +51,7 @@ export default function Home(props: Props) {
 
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async () => {
-  // const blogs = await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { skip: 0, limit: PER_PAGE} })
-  // const categories = await newtClient.getContents<CategoryResponse>({ appUid: "asunaroblog", modelUid: "category", query: { order: ["-_sys.customOrder"] }})
-  // const tags = (await newtClient.getContents<TagResponse>({ appUid: "asunaroblog", modelUid: "tag", query: { limit: 100 }})).items
-  // // タグごとのポスト数を入手
-  // let propTags: TagResponse[] = []
-  // for (const tag of tags) {
-  //   const countTag = (await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { tags: { in: [tag._id] } , field: "total" }})).total
-  //   propTags.push({
-  //     ...tag,
-  //     totalCount: countTag 
-  //   })
-  // }
-  // propTags.sort((a, b) => Number(a.totalCount) < Number(b.totalCount) ? 1 : -1)
-  // // 年ごとのポスト数を入手
-  // let years: { [key: number]: number } = { 2023: 0 }
-  // for (const y in years) {
-  //   years[y] = (await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { "_sys.raw.firstPublishedAt": { lt: String(Number(y) + 1), gte: y }, select: ["total"] }})).total
-  // }
-
-  const { blogs, categories, tags, years, totalCount } = await fetchArticles({ pageNumber: 1 })
-
-
+  const { blogs, categories, tags, years, totalCount } = await fetchBlogData({ pageNumber: 1 })
   return {
     props: {
       blogs,

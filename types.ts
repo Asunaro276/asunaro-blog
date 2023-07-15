@@ -63,7 +63,7 @@ export type OGP = {
 };
 
 export type Years = {
-  2023: Year;
+  [key: string]: number;
 };
 
 export type Year = number;
