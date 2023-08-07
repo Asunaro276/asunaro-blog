@@ -20,7 +20,9 @@ const PostBody = (props: Props) => {
         { left: "\\(", right: "\\)", display: false },
         { left: "\[", right: "\]", display: true }
       ],
-      ignoredTags: ["code"]
+      ignoredTags: ["code"],
+      throwOnError: false,
+      strict: false
     })
   }, [])
   return (

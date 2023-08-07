@@ -1,6 +1,4 @@
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
-import Script from 'next/script';
-import renderMathInElement from 'katex/contrib/auto-render'
 
 export default class Document extends NextDocument {
   render() {
