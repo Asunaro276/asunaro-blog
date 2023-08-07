@@ -12,12 +12,19 @@ type Props = {
 }
 
 const Pagination = ({ dir, pageNumber, totalCount }: Props) => {
+  const totalPages = Math.ceil(totalCount / PER_PAGE) 
   return (
     <MuiPagination
       page={pageNumber}
-      count={Math.ceil(totalCount / PER_PAGE)}
+      count={totalPages}
       renderItem={(item) => {
         const to = (() => {
+          if (Number(item.page) < 1) {
+            return "/"
+          }
+          if (Number(item.page) > totalPages) {
+            return `/`
+          }
           if (dir === '' ) {
             return item.page === 1 ? `/` : `/${item.page}`
           } else {
