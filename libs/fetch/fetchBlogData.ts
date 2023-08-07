@@ -22,14 +22,19 @@ type FetchBlogDataOptions =
   | { pageNumber?: Page };
 
 export const fetchBlogData = async (options: FetchBlogDataOptions) => {
-  const { blogs, totalCount } = await fetchArticles(options)
-  const categories = await fetchCategories()
-  const tags = await fetchTags()
+  const results = await Promise.all([
+    fetchArticles(options),
+    fetchCategories(),
+    fetchTags(),
+  ])
+  const [{ blogs, totalCount }, categories, tags] = results
 
-  const propTags = await countTagArticles(tags)
+  const countResults = await Promise.all([
+    countTagArticles(tags),
+    countYearArticles([2023])
+  ])
+  const [propTags, years] = countResults
 
-  // 年ごとのポスト数を入手
-  const years = await countYearArticles([2023])
   return {
     blogs,
     categories,
