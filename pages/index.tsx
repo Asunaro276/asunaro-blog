@@ -50,9 +50,6 @@ export default function Home(props: Props) {
 
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async () => {
-  if (process.env.NODE_ENV === "development") {
-    
-  }
   const blogs = await newtClient.getContents<Article>({ appUid: "asunaroblog", modelUid: "article", query: { skip: 0, limit: PER_PAGE} })
   const categories = await newtClient.getContents<Category>({ appUid: "asunaroblog", modelUid: "category", query: { order: ["-_sys.customOrder"] }})
   const tags = (await newtClient.getContents<Tag>({ appUid: "asunaroblog", modelUid: "tag", query: { limit: 100 }})).items

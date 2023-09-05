@@ -6,7 +6,8 @@ import { ThemeProvider } from '@emotion/react'
 import { basicTheme } from 'styles/theme'
 
 if (process.env.NEXT_PUBLIC_USE_API_MOCKING) {
-  require('../mocks')
+  import('../mocks')
+
 }
 
 function MyApp({ Component, pageProps }: AppProps) {

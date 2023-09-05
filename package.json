@@ -70,5 +70,8 @@
     "singleQuote": true,
     "jsxSingleQuote": true,
     "printWidth": 100
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

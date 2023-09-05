@@ -5,8 +5,7 @@ async function initMocks() {
     console.log('Mocking enabled on server')
   } else {
     const { worker } = await import('./browser')
-    worker.start()
-    console.log('Mocking enabled on browser')
+    worker.start({ onUnhandledRequest: 'bypass' })
   }
 }
 
