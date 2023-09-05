@@ -1,16 +1,17 @@
 import HomePage from "components/HomePage";
 import { newtClient } from "libs/client";
+import { fetchBlogData } from "libs/fetch/fetchBlogData";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { NextSeo } from "next-seo";
 import { PER_PAGE } from "pages";
 import { ParsedUrlQuery } from "querystring";
-import { Article, Category, Tag } from "types"
+import { ArticleResponse, CategoryResponse, TagResponse } from "types"
 
 type Props = {
-  blogs: Article[]
-  categories: Category[]
-  category: Category
-  tags: Tag[]
+  blogs: ArticleResponse[]
+  categories: CategoryResponse[]
+  category: CategoryResponse
+  tags: TagResponse[]
   years: { [key: number]: number }
   totalCount: number
   pageNumber: number
@@ -20,8 +21,8 @@ interface Params extends ParsedUrlQuery {
   params: string[]
 }
 
-export default function CategoryId(props: Props) {
-  const homeCategory: Category = { _id: "/", displayedName: "HOME", name: "home" }
+export default function CategoryResponseId(props: Props) {
+  const homeCategory: CategoryResponse = { _id: "/", displayedName: "HOME", name: "home" }
   const categories = [
     homeCategory,
     ...props.categories.map((category) => ({
@@ -49,11 +50,11 @@ export default function CategoryId(props: Props) {
 
 // 静的生成のためのパスを指定します
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const categories = (await newtClient.getContents<Category>({ appUid: "asunaroblog", modelUid: "category", query: { order: ["-_sys.customOrder"] }})).items
+  const categories = (await newtClient.getContents<CategoryResponse>({ appUid: "asunaroblog", modelUid: "category", query: { limit: 100 }})).items
   const range = (start: number, end: number) => [...Array(end - start + 1)].map((_, i) => start + i)
   let paths = []
   for (const category of categories) {
-    const countPerCategory = (await newtClient.getContents<Article>({ appUid: "asunaroblog", modelUid: "article", query: { "category._id": category._id, field: "total" }})).total
+    const countPerCategory = (await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { category: category._id, select: ["total"] }})).total
     paths.push(`/category/${category._id}`)
     paths.push(...range(1, Math.ceil(countPerCategory / PER_PAGE))
     .map((pageNumber) => `/category/${category._id}/${pageNumber}`))
@@ -64,36 +65,19 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 export const getStaticProps: GetStaticProps<Props, Params> = async (context) => {
   const categoryId = context.params!.params[0]
   const pageNumber = context.params?.params.length === 1 ? 1 : Number(context.params!.params[1])
-  const blogs = await newtClient.getContents<Article>({ appUid: "asunaroblog", modelUid: "article", query: { "category": categoryId, skip: (pageNumber - 1) * PER_PAGE, limit: PER_PAGE }})
-  const categories = (await newtClient.getContents<Category>({ appUid: "asunaroblog", modelUid: "category", query: { order: ["-_sys.customOrder"] }})).items
-  const category = categories.filter(cat => cat._id === categoryId)[0]
-  const tags = (await newtClient.getContents<Tag>({ appUid: "asunaroblog", modelUid: "tag", query: { limit: 100 }})).items
 
-  // タグごとのポスト数を入手
-  let propTags = []
-  for (const tag of tags) {
-    const countTag = (await newtClient.getContents<Tag>({ appUid: "asunaroblog", modelUid: "article", query: { tags: { in: [tag._id] }, field: "total" }})).total
-    propTags.push({
-      ...tag,
-      tagTotalCount: countTag 
-    })
-  }
-  propTags.sort((a, b) => Number(a.tagTotalCount) < Number(b.tagTotalCount) ? 1 : -1)
-  // 年ごとのポスト数を入手
-  let years: { [key: number]: number } = { 2022: 0, 2023: 0 }
-  for (const y in years) {
-    years[y] = (await newtClient.getContents<Article>({ appUid: "asunaroblog", modelUid: "article", query: { "_sys.raw.firstPublishedAt": { lt: String(Number(y) + 1), gte: y }, select: ["total"] }})).total
-  }
+  const { blogs, categories, tags, years, totalCount } = await fetchBlogData({ pageNumber: pageNumber, categoryId: categoryId })
+  const category = categories.filter(cat => cat._id === categoryId)[0]
 
   return {
     props: {
-      blogs: blogs.items,
-      categories: categories,
-      category: category,
-      tags: propTags,
-      years: years,
-      totalCount: blogs.total,
-      pageNumber: pageNumber,
+      blogs,
+      categories,
+      tags,
+      years,
+      totalCount,
+      pageNumber,
+      category,
     },
   };
 };
