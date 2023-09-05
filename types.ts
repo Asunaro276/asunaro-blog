@@ -62,9 +62,9 @@ export type OGP = {
   [key: string]: string
 }
 
-export type NewtResponse = {
+export type NewtResponse<T> = {
   skip: number,
   limit: number,
   total: number,
-  items: Article[]
+  items: T[]
 }
