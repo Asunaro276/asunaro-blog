@@ -1,6 +1,5 @@
 import { Box, Button, CardMedia, Link as MuiLink, Typography } from "@mui/material"
 import { convertDateFormat } from "libs/convertDateFormat"
-import Image from "next/image"
 import NextLink from "next/link"
 import LocalOfferIcon from '@mui/icons-material/LocalOffer'
 import { CategoryResponse, TagResponse } from "types"

@@ -1,12 +1,9 @@
-import { newtClient } from 'libs/client';
 import {
-  ArticleResponse,
   BlogId,
   CategoryId,
   Page,
   TagId,
   Year,
-  Years,
 } from 'types';
 import { fetchArticles } from './fetchArticles';
 import { fetchCategories } from './fetchCategories';

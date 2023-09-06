@@ -21,21 +21,13 @@ interface Params extends ParsedUrlQuery {
 }
 
 export default function YearId(props: Props) {
-  const homeCategory: CategoryResponse = { _id: "/", displayedName: "HOME", name: "home" }
-  const categories = [
-    homeCategory,
-    ...props.categories.map((category) => ({
-      ...category,
-      _id: `/category/${category._id}`,
-    }))
-  ]
   return (
     <div>
       <HomePage
         pageNumber={props.pageNumber}
         totalCount={props.totalCount}
         blogs={props.blogs}
-        categories={categories}
+        categories={props.categories}
         tags={props.tags}
         years={props.years}
         year={props.year}

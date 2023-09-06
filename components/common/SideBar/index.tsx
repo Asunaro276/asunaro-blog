@@ -4,6 +4,7 @@ import SideProfile from "./SideProfile"
 import SideTag from "./SideTags"
 import SideToc from "./SideToc"
 import ArchivePerYear from "./ArchivePerYear"
+import { Calculate } from "@mui/icons-material"
 
 type Props = {
   headings?: Heading[]
@@ -14,7 +15,7 @@ type Props = {
 
 const SideBar = (props: Props) => {
   return (
-    <Box className="h-full">
+    <Box className="SideBar-Wrapper" sx={{ height: 'calc(100% - 2.5rem)' }}>
       <Box>
         <Box className="mb-8">
           <SideProfile />
