@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import Footer from "components/common/Footer";
 import Header from "components/common/Header";
 import SideBar from "components/common/SideBar";
@@ -32,16 +32,16 @@ const HomePage = (props: Props) => {
       return ""
   }})()
   return (
-    <div className="bg-slate-100">
-      <div>
+    <Box className="bg-slate-100">
+      <Box>
         <Header
           categories={props.categories}
         />
-      </div>
-      <Box className="flex justify-center">
-        <Box sx={{ maxWidth: "1300px", width: "95%", display: "flex", flexDirection: { xs: "column", md: "row" }, }}>
-          <Box sx={{ width: { xs: "100%", md: "75%" }, display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <Box sx={{ marginTop: "40px", width: "95%" }}>
+      </Box>
+      <Container maxWidth='lg' sx={{ paddingY: '2rem' }}>
+        <Grid container columnSpacing={4} rowSpacing={6}>
+          <Grid container item xs={12} md={9}>
+            <Grid item>
               {props.tag &&
               (<Box className="text-center my-12">
                 {props.blogs.length === 0
@@ -82,23 +82,23 @@ const HomePage = (props: Props) => {
               <PostsList
                 blogs={props.blogs}
               />
-            </Box>
-            {!(props.statusCode) &&
-            <Box className="flex justify-center mb-10">
-              <Pagination dir={dir} pageNumber={props.pageNumber} totalCount={props.totalCount} />
-            </Box>}
-          </Box>
-          <Box className="" sx={{ marginTop: { xs: "30px", md: "40px"}, marginX: "3%", width: { xs: "90%", md: "25%" } }}>
+            </Grid>
+          </Grid>
+          <Grid item xs={12} md={3}>
             <SideBar years={props.years} tags={props.tags} />
-          </Box>
-        </Box>
-      </Box>
+          </Grid>
+          {!(props.statusCode) &&
+          <Grid item container xs={12} justifyContent='center'>
+            <Pagination dir={dir} pageNumber={props.pageNumber} totalCount={props.totalCount} />
+          </Grid>}
+        </Grid>
+      </Container>
       <div>
         <Footer
           categories={props.categories}
         />
       </div>
-    </div>
+    </Box>
   )
 }
 
