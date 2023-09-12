@@ -21,14 +21,6 @@ type Params = {
 
 // pages/blog/[id].js
 export default function BlogPageId(props: Props) {
-  const homeCategory: CategoryResponse = { _id: "/", displayedName: "HOME", name: "home" }
-  const categories = [
-    homeCategory,
-    ...props.categories.map((category) => ({
-      ...category,
-      _id: `/category/${category._id}`,
-    }))
-  ]
   return (
     <main>
       <NextSeo
@@ -38,7 +30,7 @@ export default function BlogPageId(props: Props) {
       <HomePage
         pageNumber={props.pageNumber}
         blogs={props.blogs}
-        categories={categories}
+        categories={props.categories}
         tags={props.tags}
         years={props.years}
         totalCount={props.totalCount}
@@ -52,6 +44,7 @@ export const getStaticPaths = async () => {
   const blogs = await newtClient.getContents({ appUid: "asunaroblog", modelUid: "article" });
   const range = (start: number, end: number) => [...Array(end - start + 1)].map((_, i) => start + i)
   const paths = range(1, Math.ceil(blogs.total/ PER_PAGE)).map((pageNumber) => `/${pageNumber}`)
+  console.log(blogs)
   return { paths, fallback: false }
 };
 

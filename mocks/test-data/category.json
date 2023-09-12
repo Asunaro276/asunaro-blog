@@ -1,0 +1,71 @@
+{
+  "skip": 0,
+  "limit": 100,
+  "total": 4,
+  "items": [
+    {
+      "_id": "641d5f0d0293b870f66ac18c",
+      "_sys": {
+        "raw": {
+          "createdAt": "2023-03-24T08:27:57.405Z",
+          "updatedAt": "2023-05-28T05:51:30.377Z",
+          "firstPublishedAt": "2023-03-24T08:27:57.405Z",
+          "publishedAt": "2023-05-28T05:51:30.377Z"
+        },
+        "customOrder": 4,
+        "createdAt": "2023-03-24T08:27:57.405Z",
+        "updatedAt": "2023-05-28T05:51:30.377Z"
+      },
+      "displayedName": "CODE",
+      "name": "programming"
+    },
+    {
+      "_id": "641d5f2a0293b870f66ae525",
+      "_sys": {
+        "raw": {
+          "createdAt": "2023-03-24T08:28:26.263Z",
+          "updatedAt": "2023-05-28T05:52:22.939Z",
+          "firstPublishedAt": "2023-03-24T08:28:26.263Z",
+          "publishedAt": "2023-05-28T05:52:22.939Z"
+        },
+        "customOrder": 3,
+        "createdAt": "2023-03-24T08:28:26.263Z",
+        "updatedAt": "2023-05-28T05:52:22.939Z"
+      },
+      "displayedName": "BUSINESS",
+      "name": "business"
+    },
+    {
+      "_id": "641d5f560293b870f66b435b",
+      "_sys": {
+        "raw": {
+          "createdAt": "2023-03-24T08:29:10.945Z",
+          "updatedAt": "2023-05-28T05:52:35.983Z",
+          "firstPublishedAt": "2023-03-24T08:29:10.945Z",
+          "publishedAt": "2023-05-28T05:52:35.983Z"
+        },
+        "customOrder": 2,
+        "createdAt": "2023-03-24T08:29:10.945Z",
+        "updatedAt": "2023-05-28T05:52:35.983Z"
+      },
+      "displayedName": "MATH",
+      "name": "math"
+    },
+    {
+      "_id": "641d5f660293b870f66b50e6",
+      "_sys": {
+        "raw": {
+          "createdAt": "2023-03-24T08:29:26.807Z",
+          "updatedAt": "2023-05-28T05:52:43.106Z",
+          "firstPublishedAt": "2023-03-24T08:29:26.808Z",
+          "publishedAt": "2023-05-28T05:52:43.106Z"
+        },
+        "customOrder": 1,
+        "createdAt": "2023-03-24T08:29:26.808Z",
+        "updatedAt": "2023-05-28T05:52:43.106Z"
+      },
+      "displayedName": "OTHER",
+      "name": "other"
+    }
+  ]
+}

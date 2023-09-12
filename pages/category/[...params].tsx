@@ -22,14 +22,6 @@ interface Params extends ParsedUrlQuery {
 }
 
 export default function CategoryResponseId(props: Props) {
-  const homeCategory: CategoryResponse = { _id: "/", displayedName: "HOME", name: "home" }
-  const categories = [
-    homeCategory,
-    ...props.categories.map((category) => ({
-      ...category,
-      _id: `/category/${category._id}`,
-    }))
-  ]
   return (
     <div>
       <NextSeo
@@ -39,7 +31,7 @@ export default function CategoryResponseId(props: Props) {
         totalCount={props.totalCount}
         pageNumber={props.pageNumber}
         blogs={props.blogs}
-        categories={categories}
+        categories={props.categories}
         tags={props.tags}
         years={props.years}
         category={props.category}

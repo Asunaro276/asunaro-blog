@@ -21,6 +21,22 @@ export const NavigationBar = (props: Props) => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   };
+  const categories = [({
+    _id: '/',
+    _sys: {
+      raw: {
+        createdAt: '',
+        updatedAt: '',
+        firstPublishedAt: '',
+        publishedAt: ''
+      },
+      customOrder: 0,
+      createdAt: '',
+      updatedAt: ''
+    },
+    displayedName: 'HOME',
+    name: 'home'
+  }), ...props.categories]
   return (
     <AppBar position="static" className="bg-slate-500" sx={{ paddingY: {xs: 1, sm: 2, md:0} }}>
         <Toolbar disableGutters sx={{ position: "relative" }}>
@@ -54,7 +70,7 @@ export const NavigationBar = (props: Props) => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {props.categories.map((category, index) => (
+              {categories.map((category, index) => (
                 <MenuItem key={index} onClick={handleCloseNavMenu} className='text-lg hover:bg-slate-200 ease-out duration-100' sx={{ paddingTop: '10px' }}>
                   <NextLink
                     href={category._id}
@@ -93,7 +109,7 @@ export const NavigationBar = (props: Props) => {
           </Typography>
           <Box sx={{ width: "100%", display: { xs: "none", md: "flex" }, justifyContent: "center", marginLeft: "30px" }}>
             <Box sx={{ maxWidth: "1300px", width: "100%", display: "flex" }}>
-              {props.categories.map((category, index) => (
+              {categories.map((category, index) => (
                 <Box key={index} sx={{ marginRight: "20px" }}>
                   <NextLink
                     href={category._id}

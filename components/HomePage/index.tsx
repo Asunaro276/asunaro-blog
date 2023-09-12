@@ -39,7 +39,7 @@ const HomePage = (props: Props) => {
         />
       </div>
       <Box className="flex justify-center">
-        <Box sx={{ maxWidth: "1300px", display: "flex", flexDirection: { xs: "column", md: "row" }, }}>
+        <Box sx={{ maxWidth: "1300px", width: "95%", display: "flex", flexDirection: { xs: "column", md: "row" }, }}>
           <Box sx={{ width: { xs: "100%", md: "75%" }, display: "flex", flexDirection: "column", alignItems: "center" }}>
             <Box sx={{ marginTop: "40px", width: "95%" }}>
               {props.tag &&

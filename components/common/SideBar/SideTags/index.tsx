@@ -8,7 +8,7 @@ type Props = {
   tags: TagResponse[]
 }
 
-const SideTag = (props: Props) => {
+export const SideTags = (props: Props) => {
   return (
     <Card sx={{ height: "100%" }}>
       <CardContent sx={{ paddingBottom: "1.5em", fontWeight: 600 }}>
@@ -30,5 +30,3 @@ const SideTag = (props: Props) => {
     </Card>
   )
 }
-
-export default SideTag

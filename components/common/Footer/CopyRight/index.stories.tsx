@@ -1,14 +1,14 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { CopyRight } from '.'
+import type { Meta, StoryObj } from '@storybook/react';
 
-export default {
-  title: 'common/Footer/CopyRight',
+import { CopyRight } from './';
+
+const meta: Meta<typeof CopyRight> = {
   component: CopyRight,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
-} as ComponentMeta<typeof CopyRight>;
+};
 
-const Template: ComponentStory<typeof CopyRight> = () => <CopyRight />;
+export default meta;
+type Story = StoryObj<typeof CopyRight>;
 
-export const Primary = Template.bind({});
+export const Primary: Story = {
+  render: () => <CopyRight />,
+};

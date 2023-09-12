@@ -1,7 +1,6 @@
 import cheerio from 'cheerio'
 import openGraphScraper from 'open-graph-scraper'
 import hljs from 'highlight.js/lib/common'
-import axios, { AxiosError } from 'axios'
 import { ImageObject } from 'open-graph-scraper/dist/lib/types'
 
 export const parseBody = async (body: string) => {

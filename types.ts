@@ -1,6 +1,4 @@
-export type ArticleResponse = {
-  _id: BlogId;
-  _sys: Sys;
+export type Article = {
   title: string;
   description: string;
   coverImage: CoverImage;
@@ -9,19 +7,21 @@ export type ArticleResponse = {
   body: string;
 };
 
-export type TagResponse = {
-  _id: TagId;
-  _sys: Sys;
+export type ArticleResponse = NewtItems<Article>
+
+export type Tag = {
   tag: string;
   totalCount?: number;
 };
 
-export type CategoryResponse = {
-  _id: CategoryId;
-  _sys?: Sys;
+export type TagResponse = NewtItems<Tag>
+
+export type Category = {
   displayedName: string;
   name: string;
 };
+
+export type CategoryResponse = NewtItems<Category>
 
 export type CoverImage = {
   _id: string;
@@ -56,11 +56,23 @@ export type Heading = {
 };
 
 export type OGP = {
-  title: string;
-  description: string;
-  image: string;
-  [key: string]: string;
-};
+  title: string
+  description: string
+  image: string
+  [key: string]: string
+}
+
+export type NewtResponse<T> = {
+  skip: number,
+  limit: number,
+  total: number,
+  items: T[]
+}
+
+export type NewtItems<T> = {
+  _id: string,
+  _sys: Sys,
+} & T
 
 export type Years = {
   [key: string]: number;

@@ -21,14 +21,6 @@ export const PER_PAGE = 10
 export const pageIcons = [<HomeOutlinedIcon key={0} />, <CodeIcon key={1} />, <BusinessIcon key={2} />, <FunctionsIcon key={3} />, <MoreHorizIcon key={4} />]
 
 export default function Custom404(props: Props) {
-  const homeCategory: CategoryResponse = { _id: "/", displayedName: "HOME", name: "home" }
-  const categories = [
-    homeCategory,
-    ...props.categories.map((category) => ({
-      ...category,
-      _id: `/category/${category._id}`,
-    }))
-  ]
   return (
     <main>
       <NextSeo
@@ -38,7 +30,7 @@ export default function Custom404(props: Props) {
       <HomePage
         pageNumber={1}
         blogs={props.blogs}
-        categories={categories}
+        categories={props.categories}
         tags={props.tags}
         years={props.years}
         totalCount={props.totalCount}
