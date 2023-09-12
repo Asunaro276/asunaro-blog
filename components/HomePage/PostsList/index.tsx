@@ -1,5 +1,5 @@
 import { ArticleResponse } from "types"
-import { Box } from "@mui/material"
+import { Grid } from "@mui/material"
 import PostCard from "./PostCard"
 
 type Props = {
@@ -8,22 +8,19 @@ type Props = {
 
 const PostsList = (props: Props) => {
   return (
-    <Box className="flex flex-wrap">
+    <Grid container spacing={3}>
       {props.blogs.map((post, index) => {
         return (
-        <Box
+        <Grid item xs={12} sm={6}
           key={index}
-          sx={{ marginRight: { xs: "0px", sm: index % 2 === 0 ? "4%" : "0" },
-                width: { xs: "100%", sm: "48%" } }}
-          className="mb-8"
         >
           <PostCard
             blog={post}        
           />
-        </Box>
+        </Grid>
         )
       })}
-    </Box>
+    </Grid>
   )
 }
 
