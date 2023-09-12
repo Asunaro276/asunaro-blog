@@ -82,7 +82,7 @@ const HomePage = (props: Props) => {
             <SideBar years={props.years} tags={props.tags} />
           </Grid>
           {!props.statusCode && (
-            <Grid item container xs={12} justifyContent='center'>
+            <Grid item container md={9} justifyContent='center'>
               <Pagination dir={dir} pageNumber={props.pageNumber} totalCount={props.totalCount} />
             </Grid>
           )}
