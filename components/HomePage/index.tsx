@@ -1,11 +1,11 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
-import Footer from "components/common/Footer";
-import Header from "components/common/Header";
-import SideBar from "components/common/SideBar";
-import { ArticleResponse, CategoryResponse, TagResponse } from "types";
-import Pagination from "./Pagination";
-import PostsList from "./PostsList";
-import Error from "next/error";
+import { Box, Container, Grid, Typography } from '@mui/material'
+import Footer from 'components/common/Footer'
+import Header from 'components/common/Header'
+import SideBar from 'components/common/SideBar'
+import { ArticleResponse, CategoryResponse, TagResponse } from 'types'
+import Pagination from './Pagination'
+import PostsList from './PostsList'
+import Error from 'next/error'
 
 type Props = {
   pageNumber: number
@@ -24,79 +24,72 @@ const HomePage = (props: Props) => {
   const dir = (() => {
     if (props.tag) {
       return `tag/${props.tag._id}`
-  } else if (props.category) {
+    } else if (props.category) {
       return `category/${props.category._id}`
-  } else if (props.year) {
+    } else if (props.year) {
       return `year/${props.year}`
-  } else {
-      return ""
-  }})()
+    } else {
+      return ''
+    }
+  })()
   return (
-    <Box className="bg-slate-100">
+    <Box className='bg-slate-100'>
       <Box>
-        <Header
-          categories={props.categories}
-        />
+        <Header categories={props.categories} />
       </Box>
       <Container maxWidth='lg' sx={{ paddingY: '2rem' }}>
         <Grid container columnSpacing={4} rowSpacing={6}>
           <Grid container item xs={12} md={9}>
             <Grid item>
-              {props.tag &&
-              (<Box className="text-center my-12">
-                {props.blogs.length === 0
-                ? (<Typography className="">
-                    該当するタグの記事はありません
-                  </Typography>)
-                  : (<Typography>
-                      {props.tag.tag}に関する記事一覧
-                    </Typography>)
-                }
-              </Box>)}
-              {props.category &&
-              (<Box className="text-center my-12">
-                {props.blogs.length === 0
-                ? (<Typography className="">
-                    該当するカテゴリーの記事はありません
-                  </Typography>)
-                  : (<Typography>
+              {props.tag && (
+                <Box className='text-center my-12'>
+                  {props.blogs.length === 0 ? (
+                    <Typography className=''>該当するタグの記事はありません</Typography>
+                  ) : (
+                    <Typography>{props.tag.tag}に関する記事一覧</Typography>
+                  )}
+                </Box>
+              )}
+              {props.category && (
+                <Box className='text-center my-12'>
+                  {props.blogs.length === 0 ? (
+                    <Typography className=''>該当するカテゴリーの記事はありません</Typography>
+                  ) : (
+                    <Typography>
                       {props.blogs[0].category.displayedName}カテゴリの記事一覧
-                    </Typography>)
-                }
-              </Box>)}
-              {props.year &&
-              (<Box className="text-center my-12">
-                {props.blogs.length === 0
-                ? (<Typography className="">
-                    該当する年の記事はありません
-                  </Typography>)
-                  : (<Typography>
-                      {props.year}年の記事一覧
-                    </Typography>)
-                }
-              </Box>)}
-              {props.statusCode &&
-              (<Box className="text-center my-12" sx={{ height: '100%' }}>
-                <Error statusCode={props.statusCode as number} />
-              </Box>)}
-              <PostsList
-                blogs={props.blogs}
-              />
+                    </Typography>
+                  )}
+                </Box>
+              )}
+              {props.year && (
+                <Box className='text-center my-12'>
+                  {props.blogs.length === 0 ? (
+                    <Typography className=''>該当する年の記事はありません</Typography>
+                  ) : (
+                    <Typography>{props.year}年の記事一覧</Typography>
+                  )}
+                </Box>
+              )}
+              {props.statusCode && (
+                <Box className='text-center my-12' sx={{ height: '100%' }}>
+                  <Error statusCode={props.statusCode as number} />
+                </Box>
+              )}
+              <PostsList blogs={props.blogs} />
             </Grid>
           </Grid>
           <Grid item xs={12} md={3}>
             <SideBar years={props.years} tags={props.tags} />
           </Grid>
-          {!(props.statusCode) &&
-          <Grid item container xs={12} justifyContent='center'>
-            <Pagination dir={dir} pageNumber={props.pageNumber} totalCount={props.totalCount} />
-          </Grid>}
+          {!props.statusCode && (
+            <Grid item container xs={12} justifyContent='center'>
+              <Pagination dir={dir} pageNumber={props.pageNumber} totalCount={props.totalCount} />
+            </Grid>
+          )}
         </Grid>
       </Container>
       <div>
-        <Footer
-          categories={props.categories}
-        />
+        <Footer categories={props.categories} />
       </div>
     </Box>
   )

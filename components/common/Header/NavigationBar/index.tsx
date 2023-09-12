@@ -2,7 +2,15 @@ import * as React from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
-import { IconButton, Link as MuiLink, Menu, MenuItem, Typography, Grid, Container } from '@mui/material'
+import {
+  IconButton,
+  Link as MuiLink,
+  Menu,
+  MenuItem,
+  Typography,
+  Grid,
+  Container,
+} from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { pageIcons } from 'pages'
 import { CategoryResponse } from 'types'
@@ -17,42 +25,47 @@ export const NavigationBar = (props: Props) => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
-  };
+  }
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
-  };
-  const categories = [({
-    _id: '/',
-    _sys: {
-      raw: {
+  }
+  const categories = [
+    {
+      _id: '/',
+      _sys: {
+        raw: {
+          createdAt: '',
+          updatedAt: '',
+          firstPublishedAt: '',
+          publishedAt: '',
+        },
+        customOrder: 0,
         createdAt: '',
         updatedAt: '',
-        firstPublishedAt: '',
-        publishedAt: ''
       },
-      customOrder: 0,
-      createdAt: '',
-      updatedAt: ''
+      displayedName: 'HOME',
+      name: 'home',
     },
-    displayedName: 'HOME',
-    name: 'home'
-  }), ...props.categories]
+    ...props.categories,
+  ]
   return (
-    <AppBar position="static" className="bg-slate-500" sx={{ paddingY: {xs: 1, sm: 2, md:0} }}>
-      <Toolbar disableGutters sx={{ position: "relative" }}>
-        <Box sx={{ display: { xs: 'flex', md: 'none' }, position: {sm: "absolute"}, left: "30px" }}>
+    <AppBar position='static' className='bg-slate-500' sx={{ paddingY: { xs: 1, sm: 2, md: 0 } }}>
+      <Toolbar disableGutters sx={{ position: 'relative' }}>
+        <Box
+          sx={{ display: { xs: 'flex', md: 'none' }, position: { sm: 'absolute' }, left: '30px' }}
+        >
           <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
+            size='large'
+            aria-label='account of current user'
+            aria-controls='menu-appbar'
+            aria-haspopup='true'
             onClick={handleOpenNavMenu}
-            color="inherit"
+            color='inherit'
           >
             <MenuIcon />
           </IconButton>
           <Menu
-            id="menu-appbar"
+            id='menu-appbar'
             anchorEl={anchorElNav}
             anchorOrigin={{
               vertical: 'bottom',
@@ -71,23 +84,21 @@ export const NavigationBar = (props: Props) => {
             }}
           >
             {props.categories.map((category, index) => (
-              <MenuItem key={index} onClick={handleCloseNavMenu} className='text-lg hover:bg-slate-200 ease-out duration-100' sx={{ paddingTop: '10px' }}>
-                <NextLink
-                  href={category._id}
-                  passHref
-                >
+              <MenuItem
+                key={index}
+                onClick={handleCloseNavMenu}
+                className='text-lg hover:bg-slate-200 ease-out duration-100'
+                sx={{ paddingTop: '10px' }}
+              >
+                <NextLink href={category._id} passHref>
                   <MuiLink
-                    underline="none"
-                    color="inherit"
+                    underline='none'
+                    color='inherit'
                     className='flex'
-                    rel="noopener noreferrer"
+                    rel='noopener noreferrer'
                   >
-                    <Box sx={{ marginRight: '5px' }}>
-                      {pageIcons[index]}
-                    </Box>
-                    <Box>
-                      {category.displayedName}
-                    </Box>
+                    <Box sx={{ marginRight: '5px' }}>{pageIcons[index]}</Box>
+                    <Box>{category.displayedName}</Box>
                   </MuiLink>
                 </NextLink>
               </MenuItem>
@@ -96,40 +107,38 @@ export const NavigationBar = (props: Props) => {
         </Box>
         <Typography
           className='font-logo'
-          variant="h6"
+          variant='h6'
           noWrap
-          component="div"
-          sx={{ width: "100%", display: { xs: 'flex', md: 'none' }, fontSize: { xs: 25, md: 60 }, justifyContent: "center"}}
+          component='div'
+          sx={{
+            width: '100%',
+            display: { xs: 'flex', md: 'none' },
+            fontSize: { xs: 25, md: 60 },
+            justifyContent: 'center',
+          }}
         >
-          <NextLink href="/" passHref>
-            <MuiLink underline="none" color="inherit" rel="noopener noreferrer">
+          <NextLink href='/' passHref>
+            <MuiLink underline='none' color='inherit' rel='noopener noreferrer'>
               {props.logo}
             </MuiLink>
           </NextLink>
         </Typography>
-        <Container sx={{ display: { xs: "none", md: "flex" }}}>
+        <Container sx={{ display: { xs: 'none', md: 'flex' } }}>
           <Grid container maxWidth='lg'>
             {props.categories.map((category, index) => (
               <Box key={index} marginRight='30px'>
-                <NextLink
-                  href={category._id}
-                  passHref
-                >
+                <NextLink href={category._id} passHref>
                   <MuiLink
                     onClick={handleCloseNavMenu}
-                    sx={{ display: 'block', paddingBottom: "10px", paddingTop: '14px' }}
-                    underline="none"
-                    color="inherit"
+                    sx={{ display: 'block', paddingBottom: '10px', paddingTop: '14px' }}
+                    underline='none'
+                    color='inherit'
                     className='flex text-lg hover:bg-slate-400 ease-out duration-100'
-                    variant="button"
-                    rel="noopener noreferrer"
+                    variant='button'
+                    rel='noopener noreferrer'
                   >
-                    <Box sx={{ marginRight: '5px' }}>
-                      {pageIcons[index]}
-                    </Box>
-                    <Box>
-                      {category.displayedName}
-                    </Box>
+                    <Box sx={{ marginRight: '5px' }}>{pageIcons[index]}</Box>
+                    <Box>{category.displayedName}</Box>
                   </MuiLink>
                 </NextLink>
               </Box>
@@ -138,5 +147,5 @@ export const NavigationBar = (props: Props) => {
         </Container>
       </Toolbar>
     </AppBar>
-  );
-};
+  )
+}

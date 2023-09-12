@@ -11,7 +11,7 @@ const config = {
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   reactStrictMode: true,
   images: {
-    domains: ["images.microcms-assets.io"],
+    domains: ['images.microcms-assets.io'],
   },
 }
 

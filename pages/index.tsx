@@ -1,12 +1,12 @@
-import { ArticleResponse, CategoryResponse, TagResponse, Years } from "types";
-import CodeIcon from '@mui/icons-material/Code';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import BusinessIcon from '@mui/icons-material/Business';
-import FunctionsIcon from '@mui/icons-material/Functions';
-import HomePage from "components/HomePage";
-import { NextSeo } from "next-seo";
-import { fetchBlogData } from "libs/fetch/fetchBlogData";
+import { ArticleResponse, CategoryResponse, TagResponse, Years } from 'types'
+import CodeIcon from '@mui/icons-material/Code'
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
+import BusinessIcon from '@mui/icons-material/Business'
+import FunctionsIcon from '@mui/icons-material/Functions'
+import HomePage from 'components/HomePage'
+import { NextSeo } from 'next-seo'
+import { fetchBlogData } from 'libs/fetch/fetchBlogData'
 
 type Props = {
   blogs: ArticleResponse[]
@@ -18,15 +18,18 @@ type Props = {
 
 export const PER_PAGE = 10
 
-export const pageIcons = [<HomeOutlinedIcon key={0} />, <CodeIcon key={1} />, <BusinessIcon key={2} />, <FunctionsIcon key={3} />, <MoreHorizIcon key={4} />]
+export const pageIcons = [
+  <HomeOutlinedIcon key={0} />,
+  <CodeIcon key={1} />,
+  <BusinessIcon key={2} />,
+  <FunctionsIcon key={3} />,
+  <MoreHorizIcon key={4} />,
+]
 
 export default function Home(props: Props) {
   return (
     <main>
-      <NextSeo
-        title="asunaroblog｜Web技術で遊ぶブログ"
-        titleTemplate="%s"
-      />
+      <NextSeo title='asunaroblog｜Web技術で遊ぶブログ' titleTemplate='%s' />
       <HomePage
         pageNumber={1}
         blogs={props.blogs}
@@ -36,9 +39,8 @@ export default function Home(props: Props) {
         totalCount={props.totalCount}
       />
     </main>
-  );
+  )
 }
-
 
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async () => {
@@ -49,7 +51,7 @@ export const getStaticProps = async () => {
       categories,
       tags,
       years,
-      totalCount
+      totalCount,
     },
-  };
-};
+  }
+}

@@ -1,5 +1,5 @@
-import { newtClient } from "libs/client";
-import { CategoryResponse } from "types";
+import { newtClient } from 'libs/client'
+import { CategoryResponse } from 'types'
 
 export const fetchCategories = async (): Promise<CategoryResponse[]> => {
   const categories = (
@@ -8,6 +8,6 @@ export const fetchCategories = async (): Promise<CategoryResponse[]> => {
       modelUid: 'category',
       query: { order: ['-_sys.customOrder'] },
     })
-  ).items;
+  ).items
   return categories
 }

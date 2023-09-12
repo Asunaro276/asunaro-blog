@@ -1,13 +1,16 @@
-import { newtClient } from "libs/client";
-import { ArticleResponse, TagResponse, Year, Years } from "types";
+import { newtClient } from 'libs/client'
+import { ArticleResponse, TagResponse, Year, Years } from 'types'
 
 export const countYearArticles = async (years: number[]): Promise<Years> => {
-  const initialYears = years.reduce((acc, year) => ({
-    ...acc,
-    [year]: 0
-  }), {}) as Years
+  const initialYears = years.reduce(
+    (acc, year) => ({
+      ...acc,
+      [year]: 0,
+    }),
+    {},
+  ) as Years
 
-  return (await Object.keys(initialYears).reduce(
+  return await Object.keys(initialYears).reduce(
     async (after, y) => ({
       ...after,
       [y]: (
@@ -22,5 +25,5 @@ export const countYearArticles = async (years: number[]): Promise<Years> => {
       ).total,
     }),
     {},
-  ))
+  )
 }

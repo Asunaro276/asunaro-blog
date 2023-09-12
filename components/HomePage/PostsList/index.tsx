@@ -1,6 +1,6 @@
-import { ArticleResponse } from "types"
-import { Grid } from "@mui/material"
-import PostCard from "./PostCard"
+import { ArticleResponse } from 'types'
+import { Grid } from '@mui/material'
+import PostCard from './PostCard'
 
 type Props = {
   blogs: ArticleResponse[]
@@ -11,13 +11,9 @@ const PostsList = (props: Props) => {
     <Grid container spacing={3}>
       {props.blogs.map((post, index) => {
         return (
-        <Grid item xs={12} sm={6}
-          key={index}
-        >
-          <PostCard
-            blog={post}        
-          />
-        </Grid>
+          <Grid item xs={12} sm={6} key={index}>
+            <PostCard blog={post} />
+          </Grid>
         )
       })}
     </Grid>

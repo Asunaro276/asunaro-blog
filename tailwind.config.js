@@ -1,9 +1,9 @@
 module.exports = {
-  mode: "jit",
+  mode: 'jit',
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
-    './libs/parse/*.{js,ts,jsx,tsx}'
+    './libs/parse/*.{js,ts,jsx,tsx}',
   ],
   important: true,
   theme: {
@@ -11,17 +11,12 @@ module.exports = {
       fontFamily: {
         logo: ['Montserrat Subrayada'],
         title: ['Arial', 'Meiryo'],
-        body: [
-          'Meiryo',
-          'Arial',
-          'Yu Gothic',
-          'Roboto',
-        ],
-      }
+        body: ['Meiryo', 'Arial', 'Yu Gothic', 'Roboto'],
+      },
     },
   },
   plugins: [],
   corePlugins: {
     preflight: false,
-},
+  },
 }

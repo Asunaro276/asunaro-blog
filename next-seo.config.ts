@@ -19,4 +19,4 @@ export default {
     type: 'blog',
     locale: 'ja_JP',
   },
-};
+}

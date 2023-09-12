@@ -1,7 +1,7 @@
-import { Box, List, ListItem, Typography } from "@mui/material"
-import TocIcon from '@mui/icons-material/Toc';
-import { Link as Scroll } from "react-scroll"
-import { Heading } from "types";
+import { Box, List, ListItem, Typography } from '@mui/material'
+import TocIcon from '@mui/icons-material/Toc'
+import { Link as Scroll } from 'react-scroll'
+import { Heading } from 'types'
 
 type Props = {
   heading: Heading[]
@@ -10,48 +10,55 @@ type Props = {
 export const TableOfContents = (props: Props) => {
   let tocCount = [1, 1, 1]
   return (
-    <Box className="border-solid border-slate-200 rounded w-10/12" border="double">
-      <Box className="flex bg-slate-200 justify-center items-center h-8">
-        <TocIcon className="mr-2" />
-        <Typography className="">目次</Typography>
+    <Box className='border-solid border-slate-200 rounded w-10/12' border='double'>
+      <Box className='flex bg-slate-200 justify-center items-center h-8'>
+        <TocIcon className='mr-2' />
+        <Typography className=''>目次</Typography>
       </Box>
-      <Box className="py-10 flex flex-col justify-center items-center">
-        <List className="pl-2" sx={{ width: { xs: "80%", md: "60%" } }}>
+      <Box className='py-10 flex flex-col justify-center items-center'>
+        <List className='pl-2' sx={{ width: { xs: '80%', md: '60%' } }}>
           {props.heading.map((data, index) => {
             if (data.text === undefined) {
               return <div key={index}></div>
             }
-            if (data.htmlTag === "h1") {
+            if (data.htmlTag === 'h1') {
               tocCount[0] += 1
               tocCount[1] = 1
               return (
-                <ListItem key={index} className="list-none ml-6 my-4">
-                  <Scroll to={`${data._id}`} smooth={true} className="relative hover:opacity-50 cursor-pointer flex" id={`l${index}`} duration={400}>
-                    <Box className="absolute -left-10 border-solid border border-slate-400 w-8 sm:w-10 aspect-square flex justify-center items-center rounded-full bg-slate-200 ">
+                <ListItem key={index} className='list-none ml-6 my-4'>
+                  <Scroll
+                    to={`${data._id}`}
+                    smooth={true}
+                    className='relative hover:opacity-50 cursor-pointer flex'
+                    id={`l${index}`}
+                    duration={400}
+                  >
+                    <Box className='absolute -left-10 border-solid border border-slate-400 w-8 sm:w-10 aspect-square flex justify-center items-center rounded-full bg-slate-200 '>
                       {(tocCount[0] - 1).toString()}
                     </Box>
-                    <Box className="ml-2 mt-2">
-                      {data.text}
-                    </Box>
+                    <Box className='ml-2 mt-2'>{data.text}</Box>
                   </Scroll>
                 </ListItem>
               )
             }
-            if (data.htmlTag === "h2") {
+            if (data.htmlTag === 'h2') {
               tocCount[1] += 1
               tocCount[2] = 1
               return (
-                <li key={index} className="my-2 list-none">
-                  <Scroll to={`${data._id}`} smooth={true} className="hover:opacity-50 cursor-pointer flex" id={`${index}`} duration={400}>
-                    <Box className="sm:ml-5 sm:mr-5 text-md">
-                        {tocCount[0] > 1 ? 
-                          `${(tocCount[0] - 1)}.${tocCount[1] - 1}` :
-                          `${tocCount[1] - 1}`
-                        }
+                <li key={index} className='my-2 list-none'>
+                  <Scroll
+                    to={`${data._id}`}
+                    smooth={true}
+                    className='hover:opacity-50 cursor-pointer flex'
+                    id={`${index}`}
+                    duration={400}
+                  >
+                    <Box className='sm:ml-5 sm:mr-5 text-md'>
+                      {tocCount[0] > 1
+                        ? `${tocCount[0] - 1}.${tocCount[1] - 1}`
+                        : `${tocCount[1] - 1}`}
                     </Box>
-                    <Box className="ml-2">
-                      {data.text}
-                    </Box>
+                    <Box className='ml-2'>{data.text}</Box>
                   </Scroll>
                 </li>
               )
@@ -71,7 +78,7 @@ export const TableOfContents = (props: Props) => {
             //     </li>
             //   )
             // }
-        })}
+          })}
         </List>
       </Box>
     </Box>

@@ -1,13 +1,9 @@
-import { createTheme } from "@mui/material";
-import { blueGrey } from "@mui/material/colors";
+import { createTheme } from '@mui/material'
+import { blueGrey } from '@mui/material/colors'
 
 export const titleFontTheme = createTheme({
   typography: {
-    fontFamily: [
-      "Montserrat Subrayada",
-      'Roboto',
-      "sans-serif"
-    ].join(","),
+    fontFamily: ['Montserrat Subrayada', 'Roboto', 'sans-serif'].join(','),
   },
 })
 
@@ -19,15 +15,15 @@ export const basicTheme = createTheme({
       md: 960,
       lg: 1280,
       xl: 1920,
-    }
+    },
   },
   palette: {
     primary: {
       main: blueGrey[400],
       dark: blueGrey[600],
       light: blueGrey[100],
-      contrastText: "#fff",
-    }
+      contrastText: '#fff',
+    },
   },
   typography: {
     fontFamily: [
@@ -44,4 +40,4 @@ export const basicTheme = createTheme({
       '"Segoe UI Symbol"',
     ].join(','),
   },
-});
+})
