@@ -8,6 +8,7 @@
     "start": "next start",
     "export": "yarn run build && next export && next-export-optimize-images",
     "lint": "next lint",
+    "fmt": "prettier --write ./",
     "analyze": "ANALYZE=true next build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
