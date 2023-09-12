@@ -1,12 +1,14 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
 
-import SideProfile from '.'
+import { SideProfile } from './';
 
-export default {
-  title: 'common/SideBar/SideProfile',
+const meta: Meta<typeof SideProfile> = {
   component: SideProfile,
-} as ComponentMeta<typeof SideProfile>;
+};
 
-const Template: ComponentStory<typeof SideProfile> = () => <SideProfile />;
+export default meta;
+type Story = StoryObj<typeof SideProfile>;
 
-export const Primary = Template.bind({});
+export const Primary: Story = {
+  render: () => <SideProfile />,
+};
