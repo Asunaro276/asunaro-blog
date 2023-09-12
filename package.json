@@ -54,6 +54,7 @@
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-storybook": "^0.6.13",
     "msw": "1.2.2",
+    "msw-storybook-addon": "^1.8.0",
     "next-compose-plugins": "2.2.1",
     "next-export-optimize-images": "1.9.0",
     "postcss": "8.4.5",
