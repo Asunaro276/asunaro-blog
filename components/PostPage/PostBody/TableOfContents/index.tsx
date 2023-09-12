@@ -10,12 +10,12 @@ type Props = {
 export const TableOfContents = (props: Props) => {
   let tocCount = [1, 1, 1]
   return (
-    <Box className='border-solid border-slate-200 rounded w-10/12' border='double'>
-      <Box className='flex bg-slate-200 justify-center items-center h-8'>
+    <Box className='w-10/12 rounded border-solid border-slate-200' border='double'>
+      <Box className='flex h-8 items-center justify-center bg-slate-200'>
         <TocIcon className='mr-2' />
         <Typography className=''>目次</Typography>
       </Box>
-      <Box className='py-10 flex flex-col justify-center items-center'>
+      <Box className='flex flex-col items-center justify-center py-10'>
         <List className='pl-2' sx={{ width: { xs: '80%', md: '60%' } }}>
           {props.heading.map((data, index) => {
             if (data.text === undefined) {
@@ -25,15 +25,15 @@ export const TableOfContents = (props: Props) => {
               tocCount[0] += 1
               tocCount[1] = 1
               return (
-                <ListItem key={index} className='list-none ml-6 my-4'>
+                <ListItem key={index} className='my-4 ml-6 list-none'>
                   <Scroll
                     to={`${data._id}`}
                     smooth={true}
-                    className='relative hover:opacity-50 cursor-pointer flex'
+                    className='relative flex cursor-pointer hover:opacity-50'
                     id={`l${index}`}
                     duration={400}
                   >
-                    <Box className='absolute -left-10 border-solid border border-slate-400 w-8 sm:w-10 aspect-square flex justify-center items-center rounded-full bg-slate-200 '>
+                    <Box className='absolute -left-10 flex aspect-square w-8 items-center justify-center rounded-full border border-solid border-slate-400 bg-slate-200 sm:w-10 '>
                       {(tocCount[0] - 1).toString()}
                     </Box>
                     <Box className='ml-2 mt-2'>{data.text}</Box>
@@ -49,11 +49,11 @@ export const TableOfContents = (props: Props) => {
                   <Scroll
                     to={`${data._id}`}
                     smooth={true}
-                    className='hover:opacity-50 cursor-pointer flex'
+                    className='flex cursor-pointer hover:opacity-50'
                     id={`${index}`}
                     duration={400}
                   >
-                    <Box className='sm:ml-5 sm:mr-5 text-md'>
+                    <Box className='text-md sm:ml-5 sm:mr-5'>
                       {tocCount[0] > 1
                         ? `${tocCount[0] - 1}.${tocCount[1] - 1}`
                         : `${tocCount[1] - 1}`}

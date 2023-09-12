@@ -11,7 +11,7 @@ export const SideProfile = () => {
             <CardMedia
               component='img'
               src='https://storage.googleapis.com/p_641d41d3a492e5ac4c9226fe/a2e3eb3f-930d-4480-82e7-720ee19b3bd5/asunaro.jpg'
-              height="150"
+              height='150'
               sx={{ width: '150px', borderRadius: '100%' }}
             />
           </Box>

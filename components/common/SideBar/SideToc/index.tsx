@@ -11,7 +11,7 @@ const SideToc = (props: Props) => {
   return (
     <Card>
       <Typography className='mt-10 text-center'>目次</Typography>
-      <Box className='flex justify-center items-center'>
+      <Box className='flex items-center justify-center'>
         <ul className='mb-10 w-8/12'>
           {props.heading.map((data, index) => {
             if (data.text === undefined) {
@@ -24,11 +24,11 @@ const SideToc = (props: Props) => {
                   <Scroll
                     to={`${data._id}`}
                     smooth={true}
-                    className='relative hover:opacity-50 cursor-pointer flex'
+                    className='relative flex cursor-pointer hover:opacity-50'
                     id={`l${index}`}
                     duration={400}
                   >
-                    <Box className='absolute -left-10 border-solid border border-slate-400 aspect-square w-10 flex justify-center items-center rounded-full bg-slate-200 '>
+                    <Box className='absolute -left-10 flex aspect-square w-10 items-center justify-center rounded-full border border-solid border-slate-400 bg-slate-200 '>
                       <Typography className='font-body text-lg'>
                         {(tocCount[0] - 1).toString()}
                       </Typography>
@@ -45,11 +45,11 @@ const SideToc = (props: Props) => {
                   <Scroll
                     to={`${data._id}`}
                     smooth={true}
-                    className='hover:opacity-50 cursor-pointer flex'
+                    className='flex cursor-pointer hover:opacity-50'
                     id={`${index}`}
                     duration={400}
                   >
-                    <Box className='ml-5 mr-5 text-md'>{`${tocCount[1] - 1}`}</Box>
+                    <Box className='text-md ml-5 mr-5'>{`${tocCount[1] - 1}`}</Box>
                     <Box className='ml-2'>{data.text}</Box>
                   </Scroll>
                 </li>

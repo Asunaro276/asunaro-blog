@@ -42,7 +42,7 @@ const HomePage = (props: Props) => {
           <Grid container item xs={12} md={9}>
             <Grid item>
               {props.tag && (
-                <Box className='text-center my-12'>
+                <Box className='my-12 text-center'>
                   {props.blogs.length === 0 ? (
                     <Typography className=''>該当するタグの記事はありません</Typography>
                   ) : (
@@ -51,7 +51,7 @@ const HomePage = (props: Props) => {
                 </Box>
               )}
               {props.category && (
-                <Box className='text-center my-12'>
+                <Box className='my-12 text-center'>
                   {props.blogs.length === 0 ? (
                     <Typography className=''>該当するカテゴリーの記事はありません</Typography>
                   ) : (
@@ -62,7 +62,7 @@ const HomePage = (props: Props) => {
                 </Box>
               )}
               {props.year && (
-                <Box className='text-center my-12'>
+                <Box className='my-12 text-center'>
                   {props.blogs.length === 0 ? (
                     <Typography className=''>該当する年の記事はありません</Typography>
                   ) : (
@@ -71,7 +71,7 @@ const HomePage = (props: Props) => {
                 </Box>
               )}
               {props.statusCode && (
-                <Box className='text-center my-12' sx={{ height: '100%' }}>
+                <Box className='my-12 text-center' sx={{ height: '100%' }}>
                   <Error statusCode={props.statusCode as number} />
                 </Box>
               )}

@@ -87,7 +87,7 @@ export const NavigationBar = (props: Props) => {
               <MenuItem
                 key={index}
                 onClick={handleCloseNavMenu}
-                className='text-lg hover:bg-slate-200 ease-out duration-100'
+                className='text-lg duration-100 ease-out hover:bg-slate-200'
                 sx={{ paddingTop: '10px' }}
               >
                 <NextLink href={category._id} passHref>
@@ -133,7 +133,7 @@ export const NavigationBar = (props: Props) => {
                     sx={{ display: 'block', paddingBottom: '10px', paddingTop: '14px' }}
                     underline='none'
                     color='inherit'
-                    className='flex text-lg hover:bg-slate-400 ease-out duration-100'
+                    className='flex text-lg duration-100 ease-out hover:bg-slate-400'
                     variant='button'
                     rel='noopener noreferrer'
                   >

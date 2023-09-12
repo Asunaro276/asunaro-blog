@@ -18,7 +18,7 @@ type Props = {
 export default function PostCard(props: Props) {
   return (
     <Card
-      className='flex flex-col hover:brightness-[0.8] duration-[1000ms]'
+      className='flex flex-col duration-[1000ms] hover:brightness-[0.8]'
       sx={{ height: { xs: '30rem', lg: '32rem' } }}
     >
       <NextLink href={`/blog/${props.blog._id}`} passHref>
@@ -30,9 +30,9 @@ export default function PostCard(props: Props) {
             alt={props.blog.coverImage.altText}
           />
           {/* <Image src={props.blog.coverImage.src} alt={props.blog.coverImage.altText} width="550" height="300" objectFit='fill' /> */}
-          <CardContent className='h-1/2 p-1 mt-2'>
+          <CardContent className='mt-2 h-1/2 p-1'>
             <Typography gutterBottom component='div' className='mx-5' sx={{ fontSize: 20 }}>
-              <Typography className='text-black text-lg'>{props.blog.title}</Typography>
+              <Typography className='text-lg text-black'>{props.blog.title}</Typography>
               <Box
                 className=''
                 sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}
@@ -56,7 +56,7 @@ export default function PostCard(props: Props) {
               </Box>
             </Typography>
           </CardContent>
-          <CardContent className='p-1 pl-5 flex opacity-80 absolute bottom-2'>
+          <CardContent className='absolute bottom-2 flex p-1 pl-5 opacity-80'>
             <AccessTimeIcon fontSize='small' className='opacity-80' />
             <Typography color='text.secondary' sx={{ display: 'inline-block', marginLeft: '2px' }}>
               {convertDateFormat(props.blog._sys.updatedAt)}

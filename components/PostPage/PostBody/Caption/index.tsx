@@ -16,12 +16,12 @@ type Props = {
 const Caption = (props: Props) => {
   return (
     <Box className=''>
-      <Box className='flex justify-center mb-10'>
+      <Box className='mb-10 flex justify-center'>
         <Typography color='text.secondary' variant='caption'>
           {convertDateFormat(props.publishedAt)}
         </Typography>
       </Box>
-      <Box className='flex justify-center mt-10 mb-4'>
+      <Box className='mt-10 mb-4 flex justify-center'>
         <Typography className='w-9/12 font-title text-2xl font-bold text-slate-600'>
           {props.title}
         </Typography>
@@ -44,7 +44,7 @@ const Caption = (props: Props) => {
             </NextLink>
             {props.tagsOfPost.map((tag) => (
               <NextLink href={`/tag/${tag._id}`} key={tag._id} passHref>
-                <MuiLink className='text-sm mr-2' sx={{ textTransform: 'none', display: 'flex' }}>
+                <MuiLink className='mr-2 text-sm' sx={{ textTransform: 'none', display: 'flex' }}>
                   <LocalOfferIcon fontSize='small' />
                   {tag.tag}
                 </MuiLink>

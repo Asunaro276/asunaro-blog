@@ -27,7 +27,7 @@ const SideBar = (props: Props) => {
         </Box>
       </Box>
       {props.headings !== undefined && (
-        <Box className='box-border sticky top-4' sx={{ display: { xs: 'none', md: 'block' } }}>
+        <Box className='sticky top-4 box-border' sx={{ display: { xs: 'none', md: 'block' } }}>
           <SideToc heading={props.headings} />
         </Box>
       )}

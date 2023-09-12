@@ -13,7 +13,7 @@ export const BottomNavigationBar = (props: Props) => {
         {props.categories.map((category, index) => {
           return (
             <Box key={index}>
-              <div className='text-white mx-4 md:mx-6 my-6'>
+              <div className='mx-4 my-6 text-white md:mx-6'>
                 <NextLink href={category._id} passHref>
                   <MuiLink
                     color='inherit'
