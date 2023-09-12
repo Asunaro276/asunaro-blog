@@ -1,9 +1,7 @@
 let plugins = []
 
-const withExportImages = require('next-export-optimize-images')
-plugins.push(withExportImages)
 if (process.env.ANALYZE === 'true') {
-  const withBundleAnalyzer = require('@next/bundle-analyzer')
+  const withBundleAnalyzer = import('@next/bundle-analyzer')
   plugins.push(withBundleAnalyzer)
 }
 
