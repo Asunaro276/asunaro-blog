@@ -21,6 +21,22 @@ export const NavigationBar = (props: Props) => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   };
+  const categories = [({
+    _id: '/',
+    _sys: {
+      raw: {
+        createdAt: '',
+        updatedAt: '',
+        firstPublishedAt: '',
+        publishedAt: ''
+      },
+      customOrder: 0,
+      createdAt: '',
+      updatedAt: ''
+    },
+    displayedName: 'HOME',
+    name: 'home'
+  }), ...props.categories]
   return (
     <AppBar position="static" className="bg-slate-500" sx={{ paddingY: {xs: 1, sm: 2, md:0} }}>
       <Toolbar disableGutters sx={{ position: "relative" }}>

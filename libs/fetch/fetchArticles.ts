@@ -1,7 +1,7 @@
 import { newtClient } from "libs/client";
 import { parseBody } from "libs/parse/parseBody";
 import { PER_PAGE } from "pages";
-import { Year, Page, TagId, CategoryId, BlogId, ArticleResponse } from "types";
+import { Year, Page, TagId, CategoryId, BlogId, ArticleResponse, NewtItems, Article } from "types";
 
 type FetchArticlesOptions =
   | { year: Year; pageNumber?: Page }
@@ -66,7 +66,7 @@ export const fetchArticles = async (options: FetchArticlesOptions): Promise<{ bl
     };
   } else if ('blogId' in options) {
     const blogId = options.blogId;
-    const blog = await newtClient.getContent<ArticleResponse>({
+    const blog = await newtClient.getContent<NewtItems<Article>>({
       appUid: 'asunaroblog',
       modelUid: 'article',
       contentId: blogId,

@@ -22,14 +22,14 @@ const PostPage = (props: Props) => {
         />
       </div>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Box className="flex justify-between" sx={{ maxWidth: "1300px", width: "95%", flexDirection: {xs: "column", md: "row"} }}>
-          <Box className="" sx={{ width: { xs: "100%", md: "70%" } }}>
+        <Box sx={{ maxWidth: "1300px", width: "95%", flexDirection: {xs: "column", md: "row"}, display: 'flex', justifyContent: 'space-between' }}>
+          <Box sx={{ width: { xs: "100%", md: "75%" } }}>
             <PostBody
               blog={props.blog}
               headings={props.headings}
             />
           </Box>
-          <Box sx={{ marginTop: "2.5rem", marginX: "2%", width: { md: "30%" } }}>
+          <Box sx={{ marginTop: "2.5rem", marginX: "3%", width: { md: "25%" } }}>
             <SideBar
               tags={props.tags}
               years={props.years}

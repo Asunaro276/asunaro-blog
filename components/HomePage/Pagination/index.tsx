@@ -3,7 +3,6 @@ import MuiPagination from '@mui/material/Pagination';
 import MuiPaginationItem from '@mui/material/PaginationItem';
 import Link from 'next/link';
 import { PER_PAGE } from 'pages';
-import { ConstructionOutlined } from '@mui/icons-material';
 
 type Props = {
   dir: string
