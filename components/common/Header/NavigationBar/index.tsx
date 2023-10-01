@@ -31,7 +31,7 @@ export const NavigationBar = (props: Props) => {
   }
   const categories = [
     {
-      _id: '/',
+      _id: '',
       _sys: {
         raw: {
           createdAt: '',
@@ -90,7 +90,7 @@ export const NavigationBar = (props: Props) => {
                 className='text-lg duration-100 ease-out hover:bg-slate-200'
                 sx={{ paddingTop: '10px' }}
               >
-                <NextLink href={category._id} passHref>
+                <NextLink href={category._id ? `/category/${category._id}` : '/'} passHref>
                   <MuiLink
                     underline='none'
                     color='inherit'
@@ -127,7 +127,7 @@ export const NavigationBar = (props: Props) => {
           <Grid container maxWidth='lg'>
             {categories.map((category, index) => (
               <Box key={index} marginRight='30px'>
-                <NextLink href={category._id} passHref>
+                <NextLink href={category._id ? `/category/${category._id}` : '/'} passHref>
                   <MuiLink
                     onClick={handleCloseNavMenu}
                     sx={{ display: 'block', paddingBottom: '10px', paddingTop: '14px' }}
