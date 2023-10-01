@@ -83,7 +83,7 @@ export const NavigationBar = (props: Props) => {
               display: { xs: 'block', md: 'none' },
             }}
           >
-            {props.categories.map((category, index) => (
+            {categories.map((category, index) => (
               <MenuItem
                 key={index}
                 onClick={handleCloseNavMenu}
@@ -125,7 +125,7 @@ export const NavigationBar = (props: Props) => {
         </Typography>
         <Container sx={{ display: { xs: 'none', md: 'flex' } }}>
           <Grid container maxWidth='lg'>
-            {props.categories.map((category, index) => (
+            {categories.map((category, index) => (
               <Box key={index} marginRight='30px'>
                 <NextLink href={category._id} passHref>
                   <MuiLink

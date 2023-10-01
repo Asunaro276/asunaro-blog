@@ -39,8 +39,8 @@ const HomePage = (props: Props) => {
       </Box>
       <Container maxWidth='lg' sx={{ paddingY: '2rem' }}>
         <Grid container columnSpacing={4} rowSpacing={6}>
-          <Grid container item xs={12} md={9}>
-            <Grid item>
+          <Grid container item md={9}>
+            <Grid item xs={12}>
               {props.tag && (
                 <Box className='my-12 text-center'>
                   {props.blogs.length === 0 ? (
@@ -71,11 +71,11 @@ const HomePage = (props: Props) => {
                 </Box>
               )}
               {props.statusCode && (
-                <Box className='my-12 text-center' sx={{ height: '100%' }}>
-                  <Error statusCode={props.statusCode as number} />
-                </Box>
+                <Error statusCode={props.statusCode as number} />
               )}
-              <PostsList blogs={props.blogs} />
+              {!props.statusCode &&
+                <PostsList blogs={props.blogs} />
+              }
             </Grid>
           </Grid>
           <Grid item xs={12} md={3}>
