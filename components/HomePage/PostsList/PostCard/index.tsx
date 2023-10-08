@@ -34,7 +34,6 @@ export default function PostCard(props: Props) {
             <Typography gutterBottom component='div' className='mx-5' sx={{ fontSize: 20 }}>
               <Typography className='text-lg text-black'>{props.blog.title}</Typography>
               <Box
-                className=''
                 sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}
               >
                 <Button
@@ -59,7 +58,7 @@ export default function PostCard(props: Props) {
           <CardContent className='absolute bottom-2 flex p-1 pl-5 opacity-80'>
             <AccessTimeIcon fontSize='small' className='opacity-80' />
             <Typography color='text.secondary' sx={{ display: 'inline-block', marginLeft: '2px' }}>
-              {convertDateFormat(props.blog._sys.updatedAt)}
+              {convertDateFormat(props.blog._sys.createdAt)}
             </Typography>
           </CardContent>
         </CardActionArea>
