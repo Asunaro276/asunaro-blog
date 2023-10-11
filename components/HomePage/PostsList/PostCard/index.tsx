@@ -29,7 +29,6 @@ export default function PostCard(props: Props) {
             image={props.blog.coverImage.src}
             alt={props.blog.coverImage.altText}
           />
-          {/* <Image src={props.blog.coverImage.src} alt={props.blog.coverImage.altText} width="550" height="300" objectFit='fill' /> */}
           <CardContent className='mt-2 h-1/2 p-1'>
             <Typography gutterBottom component='div' className='mx-5' sx={{ fontSize: 20 }}>
               <Typography className='text-lg text-black'>{props.blog.title}</Typography>
