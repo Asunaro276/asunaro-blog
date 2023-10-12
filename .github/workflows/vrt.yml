@@ -47,7 +47,7 @@ jobs:
 
       - name: Get datetime for now
         id: datetime
-        run: echo "value=${TZ}" >> $GITHUB_OUTPUT
+        run: echo "value=$(date)" >> $GITHUB_OUTPUT
         env:
           TZ: Asia/Tokyo
 
