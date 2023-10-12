@@ -33,7 +33,7 @@ jobs:
 
       - name: Remove unnecessary path for Chromatic link
         id: storybook-url
-        run: echo "::set-output name=value::${STORYBOOK_URL//\/iframe.html/}"
+        run: echo "value=${STORYBOOK_URL//\/iframe.html/}" >> $GITHUB_OUTPUT
         env:
           STORYBOOK_URL: ${{ steps.chromatic.outputs.storybookUrl }}
 
@@ -47,7 +47,7 @@ jobs:
 
       - name: Get datetime for now
         id: datetime
-        run: echo "::set-output name=value::$(date)"
+        run: echo "value=${date}" >> $GITHUB_OUTPUT
         env:
           TZ: Asia/Tokyo
 
