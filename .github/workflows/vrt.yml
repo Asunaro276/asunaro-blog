@@ -1,14 +1,19 @@
 name: chromatic
 
 on:
-  pull_request_review:
-      types: [submitted]
+  pull_request:
+    types: [opened, synchronize, labeled]
 
 jobs:
   chromatic-deployment:
     name: Deploy Storybook to chromatic
     environment: chromatic
     runs-on: ubuntu-latest
+    if: |
+      ((github.event.action == 'labeled') && 
+        (github.event.label.name == 'test passed')) ||
+      ((github.event.action == 'synchronize') &&
+        contains(github.event.pull_request.labels.*.name, 'test passed')
     timeout-minutes: 10
     steps:
       - name: Checkout repository
