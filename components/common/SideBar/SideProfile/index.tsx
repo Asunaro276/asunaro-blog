@@ -20,7 +20,7 @@ export const SideProfile = () => {
             <Divider className='w-20' />
           </Box>
           <Typography className='my-10 px-10'>
-            新米エンジニアの技術ブログです。主にWeb技術や数学で遊んでいます。日々楽しみながら学んでいくことを目標としています。
+            新米エンジニアの技術ブログです。主にWeb技術や数学で遊んでいます。日々楽しみながら学んでいくことを目標としています!
           </Typography>
         </CardContent>
       </Card>
