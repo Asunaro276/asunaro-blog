@@ -10,10 +10,10 @@ jobs:
     environment: chromatic
     runs-on: ubuntu-latest
     if: |
-      ((github.event.action == 'labeled') && 
-        (github.event.label.name == 'test passed')) ||
-      ((github.event.action == 'synchronize') &&
-        contains(github.event.pull_request.labels.*.name, 'test passed')
+      ((github.event.action == 'labeled' && 
+        github.event.label.name == 'test passed') ||
+      (github.event.action == 'synchronize' &&
+        contains(github.event.pull_request.labels.*.name, 'test passed')))
     timeout-minutes: 10
     steps:
       - name: Checkout repository
