@@ -6,7 +6,7 @@
     "postbuild": "next-sitemap",
     "build": "next build",
     "start": "next start",
-    "export": "yarn run build && next export",
+    "export": "next build && next export",
     "lint": "next lint",
     "fmt": "prettier --write ./",
     "analyze": "ANALYZE=true next build",
@@ -79,11 +79,12 @@
   "msw": {
     "workerDirectory": "public"
   },
-  "name": "",
   "version": "",
   "readme": "ERROR: No README data found!",
   "_id": "@",
   "resolutions": {
-    "@types/react": "17.0.38"
-  }
+    "@types/react": "17.0.38",
+    "jackspeak": "2.1.1"
+  },
+  "packageManager": "yarn@1.22.19"
 }
