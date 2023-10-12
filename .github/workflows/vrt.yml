@@ -7,6 +7,7 @@ on:
 jobs:
   chromatic-deployment:
     name: Deploy Storybook to chromatic
+    environment: chromatic
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
