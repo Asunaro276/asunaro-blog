@@ -7,7 +7,6 @@ on:
 jobs:
   chromatic-deployment:
     name: Deploy Storybook to chromatic
-    if: github.event.review.state == 'APPROVED'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
