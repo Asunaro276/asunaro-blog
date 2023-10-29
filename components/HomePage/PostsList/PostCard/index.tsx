@@ -57,7 +57,7 @@ export default function PostCard(props: Props) {
           <CardContent className='absolute bottom-2 flex p-1 pl-5 opacity-80'>
             <AccessTimeIcon fontSize='small' className='opacity-80' />
             <Typography color='text.secondary' sx={{ display: 'inline-block', marginLeft: '2px' }}>
-              {convertDateFormat(props.blog._sys.createdAt)}
+              {convertDateFormat(props.blog._sys.raw.firstPublishedAt)}
             </Typography>
           </CardContent>
         </CardActionArea>
