@@ -1,5 +1,5 @@
 import { newtClient } from 'libs/client'
-import { ArticleResponse, TagResponse, Year, Years } from 'types'
+import { ArticleItem, TagItem, Year, Years } from 'types'
 
 export const countYearArticles = async (years: number[]): Promise<Years> => {
   const initialYears = years.reduce(
@@ -14,7 +14,7 @@ export const countYearArticles = async (years: number[]): Promise<Years> => {
     async (after, y) => ({
       ...after,
       [y]: (
-        await newtClient.getContents<ArticleResponse>({
+        await newtClient.getContents<ArticleItem>({
           appUid: 'asunaroblog',
           modelUid: 'article',
           query: {

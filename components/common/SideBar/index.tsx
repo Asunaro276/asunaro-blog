@@ -1,14 +1,13 @@
 import { Box } from '@mui/material'
-import { Heading, TagResponse } from 'types'
+import { Heading, TagItem } from 'types'
 import SideToc from './SideToc'
 import ArchivePerYear from './ArchivePerYear'
-import { Calculate } from '@mui/icons-material'
 import { SideProfile } from './SideProfile'
 import { SideTags } from './SideTags'
 
 type Props = {
   headings?: Heading[]
-  tags: TagResponse[]
+  tags: TagItem[]
   years: { [key: number]: number }
 }
 

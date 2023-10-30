@@ -4,12 +4,12 @@ import { fetchBlogData } from 'libs/fetch/fetchBlogData'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { PER_PAGE } from 'pages'
 import { ParsedUrlQuery } from 'querystring'
-import { ArticleResponse, CategoryResponse, TagResponse } from 'types'
+import { ArticleItem, CategoryItem, TagItem } from 'types'
 
 type Props = {
-  blogs: ArticleResponse[]
-  categories: CategoryResponse[]
-  tags: TagResponse[]
+  blogs: ArticleItem[]
+  categories: CategoryItem[]
+  tags: TagItem[]
   years: { [key: number]: number }
   year: number
   pageNumber: number
@@ -43,7 +43,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
   let paths = []
   for (const year of years) {
     const countPerYear = (
-      await newtClient.getContents<ArticleResponse>({
+      await newtClient.getContents<ArticleItem>({
         appUid: 'asunaroblog',
         modelUid: 'article',
         query: {

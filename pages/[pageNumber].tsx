@@ -4,13 +4,13 @@ import { fetchBlogData } from 'libs/fetch/fetchBlogData'
 import { GetStaticProps } from 'next'
 import { NextSeo } from 'next-seo'
 import { PER_PAGE } from 'pages'
-import { ArticleResponse, CategoryResponse, TagResponse, Years } from 'types'
+import { ArticleItem, CategoryItem, TagItem, Years } from 'types'
 
 type Props = {
   pageNumber: number
-  blogs: ArticleResponse[]
-  categories: CategoryResponse[]
-  tags: TagResponse[]
+  blogs: ArticleItem[]
+  categories: CategoryItem[]
+  tags: TagItem[]
   years: Years
   totalCount: number
 }

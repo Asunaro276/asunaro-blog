@@ -1,7 +1,7 @@
 import { newtClient } from 'libs/client'
 import { parseBody } from 'libs/parse/parseBody'
 import { PER_PAGE } from 'pages'
-import { Year, Page, TagId, CategoryId, BlogId, ArticleResponse, NewtItems, Article } from 'types'
+import { Year, Page, TagId, CategoryId, BlogId, ArticleItem, NewtItems, Article } from 'types'
 
 type FetchArticlesOptions =
   | { year: Year; pageNumber?: Page }
@@ -12,7 +12,7 @@ type FetchArticlesOptions =
 
 export const fetchArticles = async (
   options: FetchArticlesOptions,
-): Promise<{ blogs: ArticleResponse[]; totalCount: number }> => {
+): Promise<{ blogs: ArticleItem[]; totalCount: number }> => {
   const pageNumber = (() => {
     if ('pageNumber' in options) {
       return options.pageNumber
@@ -23,7 +23,7 @@ export const fetchArticles = async (
 
   if ('year' in options) {
     const year = options.year
-    const blogs = await newtClient.getContents<ArticleResponse>({
+    const blogs = await newtClient.getContents<ArticleItem>({
       appUid: 'asunaroblog',
       modelUid: 'article',
       query: {
@@ -38,7 +38,7 @@ export const fetchArticles = async (
     }
   } else if ('tagId' in options) {
     const tagId = options.tagId
-    const blogs = await newtClient.getContents<ArticleResponse>({
+    const blogs = await newtClient.getContents<ArticleItem>({
       appUid: 'asunaroblog',
       modelUid: 'article',
       query: {
@@ -53,7 +53,7 @@ export const fetchArticles = async (
     }
   } else if ('categoryId' in options) {
     const categoryId = options.categoryId
-    const blogs = await newtClient.getContents<ArticleResponse>({
+    const blogs = await newtClient.getContents<ArticleItem>({
       appUid: 'asunaroblog',
       modelUid: 'article',
       query: {
@@ -79,7 +79,7 @@ export const fetchArticles = async (
       totalCount: 1,
     }
   } else {
-    const blogs = await newtClient.getContents<ArticleResponse>({
+    const blogs = await newtClient.getContents<ArticleItem>({
       appUid: 'asunaroblog',
       modelUid: 'article',
       query: {

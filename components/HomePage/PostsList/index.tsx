@@ -1,9 +1,9 @@
-import { ArticleResponse } from 'types'
+import { ArticleItem } from 'types'
 import { Grid } from '@mui/material'
 import PostCard from './PostCard'
 
 type Props = {
-  blogs: ArticleResponse[]
+  blogs: ArticleItem[]
 }
 
 const PostsList = (props: Props) => {

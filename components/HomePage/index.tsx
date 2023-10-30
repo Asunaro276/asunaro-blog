@@ -2,20 +2,20 @@ import { Box, Container, Grid, Typography } from '@mui/material'
 import Footer from 'components/common/Footer'
 import Header from 'components/common/Header'
 import SideBar from 'components/common/SideBar'
-import { ArticleResponse, CategoryResponse, TagResponse } from 'types'
+import { ArticleItem, CategoryItem, TagItem } from 'types'
 import Pagination from './Pagination'
 import PostsList from './PostsList'
 import Error from 'next/error'
 
 type Props = {
   pageNumber: number
-  blogs: ArticleResponse[]
-  categories: CategoryResponse[]
-  tags: TagResponse[]
+  blogs: ArticleItem[]
+  categories: CategoryItem[]
+  tags: TagItem[]
   years: { [key: number]: number }
   totalCount: number
-  category?: CategoryResponse
-  tag?: TagResponse
+  category?: CategoryItem
+  tag?: TagItem
   year?: number
   statusCode?: number
 }

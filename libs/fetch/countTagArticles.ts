@@ -1,13 +1,13 @@
 import { newtClient } from 'libs/client'
-import { ArticleResponse, TagResponse } from 'types'
+import { ArticleItem, TagItem } from 'types'
 
-export const countTagArticles = async (tags: TagResponse[]): Promise<TagResponse[]> => {
+export const countTagArticles = async (tags: TagItem[]): Promise<TagItem[]> => {
   return (
     await Promise.all(
       tags.map(async (tag) => ({
         ...tag,
         totalCount: (
-          await newtClient.getContents<ArticleResponse>({
+          await newtClient.getContents<ArticleItem>({
             appUid: 'asunaroblog',
             modelUid: 'article',
             query: { tags: { in: [tag._id] }, field: 'total' },

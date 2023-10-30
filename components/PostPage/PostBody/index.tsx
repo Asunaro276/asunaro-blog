@@ -1,5 +1,5 @@
 import { Box, Card } from '@mui/material'
-import { ArticleResponse, Heading } from 'types'
+import { ArticleItem, Heading } from 'types'
 import Caption from './Caption'
 import { TableOfContents } from './TableOfContents'
 import { useEffect } from 'react'
@@ -7,7 +7,7 @@ import renderMathInElement from 'katex/contrib/auto-render'
 import 'katex/dist/katex.min.css'
 
 type Props = {
-  blog: ArticleResponse
+  blog: ArticleItem
   headings: Heading[]
 }
 

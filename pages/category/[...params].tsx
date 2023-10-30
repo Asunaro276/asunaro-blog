@@ -5,13 +5,13 @@ import { GetStaticProps, GetStaticPaths } from 'next'
 import { NextSeo } from 'next-seo'
 import { PER_PAGE } from 'pages'
 import { ParsedUrlQuery } from 'querystring'
-import { ArticleResponse, CategoryResponse, TagResponse } from 'types'
+import { ArticleItem, CategoryItem, TagItem } from 'types'
 
 type Props = {
-  blogs: ArticleResponse[]
-  categories: CategoryResponse[]
-  category: CategoryResponse
-  tags: TagResponse[]
+  blogs: ArticleItem[]
+  categories: CategoryItem[]
+  category: CategoryItem
+  tags: TagItem[]
   years: { [key: number]: number }
   totalCount: number
   pageNumber: number
@@ -21,7 +21,7 @@ interface Params extends ParsedUrlQuery {
   params: string[]
 }
 
-export default function CategoryResponseId(props: Props) {
+export default function CategoryItemId(props: Props) {
   return (
     <div>
       <NextSeo title={props.category.displayedName} />
@@ -41,7 +41,7 @@ export default function CategoryResponseId(props: Props) {
 // 静的生成のためのパスを指定します
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const categories = (
-    await newtClient.getContents<CategoryResponse>({
+    await newtClient.getContents<CategoryItem>({
       appUid: 'asunaroblog',
       modelUid: 'category',
       query: { limit: 100 },
@@ -51,7 +51,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
   let paths = []
   for (const category of categories) {
     const countPerCategory = (
-      await newtClient.getContents<ArticleResponse>({
+      await newtClient.getContents<ArticleItem>({
         appUid: 'asunaroblog',
         modelUid: 'article',
         query: { category: category._id, select: ['total'] },

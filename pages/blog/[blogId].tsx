@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import { newtClient } from '../../libs/client'
-import { ArticleResponse, CategoryResponse, Heading, TagResponse } from 'types'
+import { ArticleItem, CategoryItem, Heading, TagItem } from 'types'
 import { NextSeo } from 'next-seo'
 import PostPage from 'components/PostPage'
 import { parseHeading } from 'libs/parse/parseHeading'
@@ -9,10 +9,10 @@ import 'highlight.js/styles/monokai.css'
 import { fetchBlogData } from 'libs/fetch/fetchBlogData'
 
 type Props = {
-  blog: ArticleResponse
+  blog: ArticleItem
   headings: Heading[]
-  categories: CategoryResponse[]
-  tags: TagResponse[]
+  categories: CategoryItem[]
+  tags: TagItem[]
   years: { [key: number]: number }
 }
 
@@ -48,7 +48,7 @@ export default function BlogId(props: Props) {
 }
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const blogs = await newtClient.getContents<ArticleResponse>({
+  const blogs = await newtClient.getContents<ArticleItem>({
     appUid: 'asunaroblog',
     modelUid: 'article',
     query: { limit: 100 },

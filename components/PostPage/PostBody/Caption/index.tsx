@@ -2,13 +2,13 @@ import { Box, Button, CardMedia, Link as MuiLink, Typography } from '@mui/materi
 import { convertDateFormat } from 'libs/convertDateFormat'
 import NextLink from 'next/link'
 import LocalOfferIcon from '@mui/icons-material/LocalOffer'
-import { CategoryResponse, TagResponse } from 'types'
+import { CategoryItem, TagItem } from 'types'
 
 type Props = {
   title: string
   publishedAt: string
-  tagsOfPost: TagResponse[]
-  categoryOfPost: CategoryResponse
+  tagsOfPost: TagItem[]
+  categoryOfPost: CategoryItem
   imageUrl: string
   imageAlt: string
 }

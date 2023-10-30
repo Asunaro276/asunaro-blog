@@ -1,5 +1,5 @@
 import { newtClient } from 'libs/client'
-import { ArticleResponse, CategoryResponse, TagResponse } from 'types'
+import { ArticleItem, CategoryItem, TagItem } from 'types'
 import CodeIcon from '@mui/icons-material/Code'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
@@ -9,9 +9,9 @@ import HomePage from 'components/HomePage'
 import { NextSeo } from 'next-seo'
 
 type Props = {
-  blogs: ArticleResponse[]
-  categories: CategoryResponse[]
-  tags: TagResponse[]
+  blogs: ArticleItem[]
+  categories: CategoryItem[]
+  tags: TagItem[]
   years: { [key: number]: number }
   totalCount: number
 }
@@ -47,24 +47,24 @@ export default function Custom404(props: Props) {
 export const getStaticProps = async () => {
   if (process.env.NODE_ENV === 'development') {
   }
-  // const blogs = await newtClient.getContents<ArticleResponse>({ appUid: "asunaroblog", modelUid: "article", query: { skip: 0, limit: PER_PAGE} })
-  const categories = await newtClient.getContents<CategoryResponse>({
+  // const blogs = await newtClient.getContents<ArticleItem>({ appUid: "asunaroblog", modelUid: "article", query: { skip: 0, limit: PER_PAGE} })
+  const categories = await newtClient.getContents<CategoryItem>({
     appUid: 'asunaroblog',
     modelUid: 'category',
     query: { order: ['-_sys.customOrder'] },
   })
   const tags = (
-    await newtClient.getContents<TagResponse>({
+    await newtClient.getContents<TagItem>({
       appUid: 'asunaroblog',
       modelUid: 'tag',
       query: { limit: 100 },
     })
   ).items
   // タグごとのポスト数を入手
-  let propTags: TagResponse[] = []
+  let propTags: TagItem[] = []
   for (const tag of tags) {
     const countTag = (
-      await newtClient.getContents<ArticleResponse>({
+      await newtClient.getContents<ArticleItem>({
         appUid: 'asunaroblog',
         modelUid: 'article',
         query: { tags: { in: [tag._id] }, field: 'total' },
@@ -80,7 +80,7 @@ export const getStaticProps = async () => {
   let years: { [key: number]: number } = { 2023: 0 }
   for (const y in years) {
     years[y] = (
-      await newtClient.getContents<ArticleResponse>({
+      await newtClient.getContents<ArticleItem>({
         appUid: 'asunaroblog',
         modelUid: 'article',
         query: {

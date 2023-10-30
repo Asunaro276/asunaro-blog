@@ -1,4 +1,4 @@
-import { ArticleResponse, CategoryResponse, TagResponse, Years } from 'types'
+import { ArticleItem, CategoryItem, TagItem, Years } from 'types'
 import CodeIcon from '@mui/icons-material/Code'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
@@ -9,9 +9,9 @@ import { NextSeo } from 'next-seo'
 import { fetchBlogData } from 'libs/fetch/fetchBlogData'
 
 type Props = {
-  blogs: ArticleResponse[]
-  categories: CategoryResponse[]
-  tags: TagResponse[]
+  blogs: ArticleItem[]
+  categories: CategoryItem[]
+  tags: TagItem[]
   years: Years
   totalCount: number
 }

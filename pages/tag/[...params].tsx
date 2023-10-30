@@ -5,14 +5,14 @@ import { GetStaticProps, GetStaticPaths } from 'next'
 import { NextSeo } from 'next-seo'
 import { PER_PAGE } from 'pages'
 import { ParsedUrlQuery } from 'querystring'
-import { ArticleResponse, CategoryResponse, TagResponse } from 'types'
+import { ArticleItem, CategoryItem, TagItem } from 'types'
 
 type Props = {
-  blogs: ArticleResponse[]
-  categories: CategoryResponse[]
-  tags: TagResponse[]
+  blogs: ArticleItem[]
+  categories: CategoryItem[]
+  tags: TagItem[]
   years: { [key: number]: number }
-  tag: TagResponse
+  tag: TagItem
   pageNumber: number
   totalCount: number
 }
@@ -21,7 +21,7 @@ interface Params extends ParsedUrlQuery {
   params: string[]
 }
 
-export default function TagResponseId(props: Props) {
+export default function TagItemId(props: Props) {
   return (
     <div>
       <NextSeo title={props.tag.tag} />
@@ -41,7 +41,7 @@ export default function TagResponseId(props: Props) {
 // 静的生成のためのパスを指定します
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const tags = (
-    await newtClient.getContents<TagResponse>({
+    await newtClient.getContents<TagItem>({
       appUid: 'asunaroblog',
       modelUid: 'tag',
       query: { limit: 100 },
@@ -76,7 +76,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
     tagId: tagId,
     pageNumber: pageNumber,
   })
-  const tag = tags.filter((tag) => tag._id === tagId).pop() as TagResponse
+  const tag = tags.filter((tag) => tag._id === tagId).pop() as TagItem
 
   return {
     props: {

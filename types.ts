@@ -1,27 +1,29 @@
+// 記事本文に関する型
 export type Article = {
   title: string
   description: string
   coverImage: CoverImage
-  category: CategoryResponse
-  tags: TagResponse[]
+  category: CategoryItem
+  tags: TagItem[]
   body: string
 }
+export type ArticleItem = NewtItems<Article>
+export type ArticleResponse = NewtResponse<ArticleItem>
 
-export type ArticleResponse = NewtItems<Article>
-
+// タグに関する型
 export type Tag = {
   tag: string
-  totalCount?: number
 }
+export type TagItem = NewtItems<Tag>
+export type TagResponse = NewtResponse<TagItem>
 
-export type TagResponse = NewtItems<Tag>
-
+// カテゴリーに関する型
 export type Category = {
   displayedName: string
   name: string
 }
-
-export type CategoryResponse = NewtItems<Category>
+export type CategoryItem = NewtItems<Category>
+export type CategoryResponse = NewtResponse<CategoryItem>
 
 export type CoverImage = {
   _id: string
@@ -50,9 +52,9 @@ export type Sys = {
 }
 
 export type Heading = {
+  _id: string
   text: string
   htmlTag: string
-  _id: string
 }
 
 export type OGP = {
