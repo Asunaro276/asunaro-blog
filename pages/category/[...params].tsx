@@ -5,14 +5,15 @@ import { GetStaticProps, GetStaticPaths } from 'next'
 import { NextSeo } from 'next-seo'
 import { PER_PAGE } from 'pages'
 import { ParsedUrlQuery } from 'querystring'
-import { ArticleItem, CategoryItem, TagItem } from 'types'
+import { ArticleItem, CategoryItem, TagItem, YearMonthItem } from 'types'
+import { range } from '/libs/utils'
 
 type Props = {
   blogs: ArticleItem[]
   categories: CategoryItem[]
   category: CategoryItem
   tags: TagItem[]
-  years: { [key: number]: number }
+  yearmonths: YearMonthItem[]
   totalCount: number
   pageNumber: number
 }
@@ -31,7 +32,7 @@ export default function CategoryItemId(props: Props) {
         blogs={props.blogs}
         categories={props.categories}
         tags={props.tags}
-        years={props.years}
+        yearmonths={props.yearmonths}
         category={props.category}
       />
     </div>
@@ -47,23 +48,15 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
       query: { limit: 100 },
     })
   ).items
-  const range = (start: number, end: number) => [...Array(end - start + 1)].map((_, i) => start + i)
-  let paths = []
-  for (const category of categories) {
-    const countPerCategory = (
-      await newtClient.getContents<ArticleItem>({
-        appUid: 'asunaroblog',
-        modelUid: 'article',
-        query: { category: category._id, select: ['total'] },
-      })
-    ).total
-    paths.push(`/category/${category._id}`)
-    paths.push(
-      ...range(1, Math.ceil(countPerCategory / PER_PAGE)).map(
-        (pageNumber) => `/category/${category._id}/${pageNumber}`,
-      ),
-    )
-  }
+  const paths = categories.flatMap(categoryItem => {
+    const pageCount = Math.ceil(categoryItem.ref.length / PER_PAGE)
+    return range(pageCount).map(pageNum => ({
+        params: {
+          params: pageNum == 1 ? [categoryItem._id] : [categoryItem._id, String(pageNum)]
+        }
+      }
+    ))
+  })
   return { paths, fallback: false }
 }
 
@@ -71,10 +64,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
   const categoryId = context.params!.params[0]
   const pageNumber = context.params?.params.length === 1 ? 1 : Number(context.params!.params[1])
 
-  const { blogs, categories, tags, years, totalCount } = await fetchBlogData({
-    pageNumber: pageNumber,
-    categoryId: categoryId,
-  })
+  const { blogs, categories, tags, yearmonths, totalCount } = await fetchBlogData({ pageNumber, categoryId })
   const category = categories.filter((cat) => cat._id === categoryId)[0]
 
   return {
@@ -82,7 +72,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
       blogs,
       categories,
       tags,
-      years,
+      yearmonths,
       totalCount,
       pageNumber,
       category,

@@ -24,7 +24,7 @@ export const SideTags = (props: Props) => {
                 >
                   <LocalOfferIcon fontSize='small' className='mr-0.5' />
                   {tag.tag}
-                  <span>（{tag.total}）</span>
+                  <span>（{tag.ref?.length ?? 0}）</span>
                 </Button>
               </NextLink>
             </Box>

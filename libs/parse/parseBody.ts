@@ -69,7 +69,8 @@ export const parseBody = async (body: string) => {
       let og: { [key: string]: string } = {}
       const linkUrl = $(element).attr('href') as string
       try {
-        const ogData = await openGraphScraper({ url: linkUrl })
+        const options = { url: linkUrl, timeout: 60 }
+        const ogData = await openGraphScraper(options)
         og['title'] = ogData.result['ogTitle'] as string
         if (og['title'].match(/Amazon/)) {
           og['image'] = (ogData.result['ogImage'] as ImageObject[]).find((value) =>

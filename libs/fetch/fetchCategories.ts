@@ -6,7 +6,10 @@ export const fetchCategories = async (): Promise<CategoryItem[]> => {
     await newtClient.getContents<CategoryItem>({
       appUid: 'asunaroblog',
       modelUid: 'category',
-      query: { order: ['-_sys.customOrder'] },
+      query: {
+        order: ['-_sys.customOrder'],
+        depth: 1
+      },
     })
   ).items
   return categories

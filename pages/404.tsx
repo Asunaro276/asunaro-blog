@@ -1,5 +1,4 @@
-import { newtClient } from 'libs/client'
-import { ArticleItem, CategoryItem, TagItem } from 'types'
+import { ArticleItem, CategoryItem, TagItem, YearMonthItem } from 'types'
 import CodeIcon from '@mui/icons-material/Code'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
@@ -7,16 +6,15 @@ import BusinessIcon from '@mui/icons-material/Business'
 import FunctionsIcon from '@mui/icons-material/Functions'
 import HomePage from 'components/HomePage'
 import { NextSeo } from 'next-seo'
+import { fetchBlogData } from '/libs/fetch/fetchBlogData'
 
 type Props = {
   blogs: ArticleItem[]
   categories: CategoryItem[]
   tags: TagItem[]
-  years: { [key: number]: number }
+  yearmonths: YearMonthItem[]
   totalCount: number
 }
-
-export const PER_PAGE = 10
 
 export const pageIcons = [
   <HomeOutlinedIcon key={0} />,
@@ -35,7 +33,7 @@ export default function Custom404(props: Props) {
         blogs={props.blogs}
         categories={props.categories}
         tags={props.tags}
-        years={props.years}
+        yearmonths={props.yearmonths}
         totalCount={props.totalCount}
         statusCode={404}
       />
@@ -43,61 +41,15 @@ export default function Custom404(props: Props) {
   )
 }
 
-// データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async () => {
-  if (process.env.NODE_ENV === 'development') {
-  }
-  // const blogs = await newtClient.getContents<ArticleItem>({ appUid: "asunaroblog", modelUid: "article", query: { skip: 0, limit: PER_PAGE} })
-  const categories = await newtClient.getContents<CategoryItem>({
-    appUid: 'asunaroblog',
-    modelUid: 'category',
-    query: { order: ['-_sys.customOrder'] },
-  })
-  const tags = (
-    await newtClient.getContents<TagItem>({
-      appUid: 'asunaroblog',
-      modelUid: 'tag',
-      query: { limit: 100 },
-    })
-  ).items
-  // タグごとのポスト数を入手
-  let propTags: TagItem[] = []
-  for (const tag of tags) {
-    const countTag = (
-      await newtClient.getContents<ArticleItem>({
-        appUid: 'asunaroblog',
-        modelUid: 'article',
-        query: { tags: { in: [tag._id] }, field: 'total' },
-      })
-    ).total
-    propTags.push({
-      ...tag,
-      totalCount: countTag,
-    })
-  }
-  propTags.sort((a, b) => (Number(a.totalCount) < Number(b.totalCount) ? 1 : -1))
-  // 年ごとのポスト数を入手
-  let years: { [key: number]: number } = { 2023: 0 }
-  for (const y in years) {
-    years[y] = (
-      await newtClient.getContents<ArticleItem>({
-        appUid: 'asunaroblog',
-        modelUid: 'article',
-        query: {
-          '_sys.raw.firstPublishedAt': { lt: String(Number(y) + 1), gte: y },
-          select: ['total'],
-        },
-      })
-    ).total
-  }
-
+  const { blogs, categories, tags, yearmonths, totalCount } = await fetchBlogData({ pageNumber: 1 })
   return {
     props: {
-      blogs: [],
-      categories: categories.items,
-      tags: propTags,
-      years: years,
-      totalCount: 1,
+      blogs,
+      categories,
+      tags,
+      yearmonths,
+      totalCount,
     },
   }
 }

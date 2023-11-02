@@ -11,6 +11,6 @@ export const fetchTags = async (): Promise<TagItem[]> => {
         depth: 0
       },
     })
-  ).items
+  ).items.sort((a, b) => b.ref.length - a.ref.length)
   return tags
 }

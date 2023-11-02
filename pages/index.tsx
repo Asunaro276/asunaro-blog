@@ -1,4 +1,4 @@
-import { ArticleItem, CategoryItem, TagItem, Years } from 'types'
+import { ArticleItem, CategoryItem, TagItem, YearMonthItem } from 'types'
 import CodeIcon from '@mui/icons-material/Code'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
@@ -12,7 +12,7 @@ type Props = {
   blogs: ArticleItem[]
   categories: CategoryItem[]
   tags: TagItem[]
-  years: Years
+  yearmonths: YearMonthItem[]
   totalCount: number
 }
 
@@ -35,7 +35,7 @@ export default function Home(props: Props) {
         blogs={props.blogs}
         categories={props.categories}
         tags={props.tags}
-        years={props.years}
+        yearmonths={props.yearmonths}
         totalCount={props.totalCount}
       />
     </main>
@@ -44,13 +44,13 @@ export default function Home(props: Props) {
 
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async () => {
-  const { blogs, categories, tags, years, totalCount } = await fetchBlogData({ pageNumber: 1 })
+  const { blogs, categories, tags, yearmonths, totalCount } = await fetchBlogData({ pageNumber: 1 })
   return {
     props: {
       blogs,
       categories,
       tags,
-      years,
+      yearmonths,
       totalCount,
     },
   }

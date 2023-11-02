@@ -2,7 +2,7 @@ import { Box, Container, Grid, Typography } from '@mui/material'
 import Footer from 'components/common/Footer'
 import Header from 'components/common/Header'
 import SideBar from 'components/common/SideBar'
-import { ArticleItem, CategoryItem, TagItem } from 'types'
+import { ArticleItem, CategoryItem, TagItem, YearMonthItem } from 'types'
 import Pagination from './Pagination'
 import PostsList from './PostsList'
 import Error from 'next/error'
@@ -12,11 +12,11 @@ type Props = {
   blogs: ArticleItem[]
   categories: CategoryItem[]
   tags: TagItem[]
-  years: { [key: number]: number }
+  yearmonths: YearMonthItem[]
   totalCount: number
   category?: CategoryItem
   tag?: TagItem
-  year?: number
+  yearmonth?: string
   statusCode?: number
 }
 
@@ -26,8 +26,8 @@ const HomePage = (props: Props) => {
       return `tag/${props.tag._id}`
     } else if (props.category) {
       return `category/${props.category._id}`
-    } else if (props.year) {
-      return `year/${props.year}`
+    } else if (props.yearmonth) {
+      return `year/${props.yearmonth}`
     } else {
       return ''
     }
@@ -61,12 +61,12 @@ const HomePage = (props: Props) => {
                   )}
                 </Box>
               )}
-              {props.year && (
+              {props.yearmonth && (
                 <Box className='my-12 text-center'>
                   {props.blogs.length === 0 ? (
-                    <Typography className=''>該当する年の記事はありません</Typography>
+                    <Typography className=''>該当する期間の記事はありません</Typography>
                   ) : (
-                    <Typography>{props.year}年の記事一覧</Typography>
+                    <Typography>{props.yearmonth}の記事一覧</Typography>
                   )}
                 </Box>
               )}
@@ -76,16 +76,16 @@ const HomePage = (props: Props) => {
               {!props.statusCode &&
                 <PostsList blogs={props.blogs} />
               }
+              {!props.statusCode && (
+                <Grid item container md={12} justifyContent='center' sx={{ marginTop: '50px' }}>
+                  <Pagination dir={dir} pageNumber={props.pageNumber} totalCount={props.totalCount} />
+                </Grid>
+              )}
             </Grid>
           </Grid>
           <Grid item xs={12} md={3}>
-            <SideBar years={props.years} tags={props.tags} />
+            <SideBar yearmonths={props.yearmonths} tags={props.tags} />
           </Grid>
-          {!props.statusCode && (
-            <Grid item container md={9} justifyContent='center'>
-              <Pagination dir={dir} pageNumber={props.pageNumber} totalCount={props.totalCount} />
-            </Grid>
-          )}
         </Grid>
       </Container>
       <div>

@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { Heading, TagItem } from 'types'
+import { Heading, TagItem, YearMonthItem } from 'types'
 import SideToc from './SideToc'
 import ArchivePerYear from './ArchivePerYear'
 import { SideProfile } from './SideProfile'
@@ -8,7 +8,7 @@ import { SideTags } from './SideTags'
 type Props = {
   headings?: Heading[]
   tags: TagItem[]
-  years: { [key: number]: number }
+  yearmonths: YearMonthItem[]
 }
 
 const SideBar = (props: Props) => {
@@ -22,7 +22,7 @@ const SideBar = (props: Props) => {
           <SideTags tags={props.tags} />
         </Box>
         <Box className='mb-8'>
-          <ArchivePerYear years={props.years} />
+          <ArchivePerYear yearmonths={props.yearmonths} />
         </Box>
       </Box>
       {props.headings !== undefined && (

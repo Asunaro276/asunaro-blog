@@ -1,4 +1,4 @@
-import { ArticleItem, CategoryItem, Heading, TagItem } from 'types'
+import { ArticleItem, CategoryItem, Heading, TagItem, YearMonthItem } from 'types'
 import Box from '@mui/material/Box'
 import Header from 'components/common/Header'
 import PostBody from './PostBody'
@@ -10,7 +10,7 @@ type Props = {
   headings: Heading[]
   categories: CategoryItem[]
   tags: TagItem[]
-  years: { [key: number]: number }
+  yearmonths: YearMonthItem[]
 }
 
 const PostPage = (props: Props) => {
@@ -33,7 +33,7 @@ const PostPage = (props: Props) => {
             <PostBody blog={props.blog} headings={props.headings} />
           </Box>
           <Box sx={{ marginTop: '2.5rem', marginX: '3%', width: { md: '25%' } }}>
-            <SideBar tags={props.tags} years={props.years} headings={props.headings} />
+            <SideBar tags={props.tags} yearmonths={props.yearmonths} headings={props.headings} />
           </Box>
         </Box>
       </Box>
