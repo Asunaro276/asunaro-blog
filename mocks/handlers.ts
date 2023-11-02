@@ -2,24 +2,27 @@ import { rest } from 'msw'
 import indexData from './test-data/index.json'
 import categoryData from './test-data/category.json'
 import tagData from './test-data/tag.json'
+import yearmonthData from './test-data/yearmonth.json'
 import blogData from './test-data/blog/index'
-import { Article, Category, NewtItems, NewtResponse, Tag } from 'types'
+import { ArticleItem, ArticleResponse, CategoryResponse, TagResponse, YearMonthResponse } from 'types'
 
 const baseUrl = `https://${process.env.NEWT_SPACE_UID}.cdn.newt.so/v1`
 
 export const handlers = [
   rest.get(`${baseUrl}/asunaroblog/article`, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json<NewtResponse<Article>>(indexData))
+    return res(ctx.status(200), ctx.json<ArticleResponse>(indexData))
   }),
-  rest.get(`${baseUrl}/asunaroblog/article/:blogId`, (req, res, ctx) => {
-    const { blogId } = req.params
-    const resData = blogData[Number(blogId) % 2]
-    return res(ctx.status(200), ctx.json<NewtItems<Article>>(resData))
+  rest.get(`${baseUrl}/asunaroblog/article/:ArticleId`, (req, res, ctx) => {
+    const resData = blogData[1]
+    return res(ctx.status(200), ctx.json<ArticleItem>(resData))
   }),
   rest.get(`${baseUrl}/asunaroblog/tag`, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json<NewtResponse<Tag>>(tagData))
+    return res(ctx.status(200), ctx.json<TagResponse>(tagData))
+  }),
+  rest.get(`${baseUrl}/asunaroblog/yearmonth`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json<YearMonthResponse>(yearmonthData))
   }),
   rest.get(`${baseUrl}/asunaroblog/category`, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json<NewtResponse<Category>>(categoryData))
+    return res(ctx.status(200), ctx.json<CategoryResponse>(categoryData))
   }),
 ]
