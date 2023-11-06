@@ -14,13 +14,13 @@ jobs:
         github.event.label.name == 'visual test')
     timeout-minutes: 10
     steps:
-      - name: Setup
-        uses: ./.github/actions/setup
-
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
+      - name: Setup
+        uses: ./.github/actions/setup
 
       - name: Publish to Chromatic
         uses: chromaui/action@v1
