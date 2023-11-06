@@ -18,8 +18,11 @@ runs:
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
 
     - run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
+      shell: bash
 
     - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
       run: yarn install
+      shell: bash
 
     - run: yarn list --depth=0
+      shell: bash
