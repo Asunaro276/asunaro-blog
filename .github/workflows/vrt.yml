@@ -2,7 +2,7 @@ name: chromatic
 
 on:
   pull_request:
-    types: [opened, synchronize, labeled]
+    types: [labeled]
 
 jobs:
   chromatic-deployment:
@@ -10,30 +10,17 @@ jobs:
     environment: chromatic
     runs-on: ubuntu-latest
     if: |
-      ((github.event.action == 'labeled' && 
-        github.event.label.name == 'test passed') ||
-      (github.event.action == 'synchronize' &&
-        contains(github.event.pull_request.labels.*.name, 'test passed')))
+      (github.event.action == 'labeled' && 
+        github.event.label.name == 'visual test')
     timeout-minutes: 10
     steps:
+      - name: Setup
+        uses: ./.github/actions/setup
+
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-
-      - name: restore cached node_modules 
-        uses: actions/cache@v3
-        id: node_modules_cache_id
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-      - run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
-
-      - name: Install dependencies
-        if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
-        run: npm install
 
       - name: Publish to Chromatic
         uses: chromaui/action@v1
