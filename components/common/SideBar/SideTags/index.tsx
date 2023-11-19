@@ -15,7 +15,6 @@ export const SideTags = (props: Props) => {
         {props.tags.map((tag) => {
           return (
             <Box sx={{ marginTop: '1rem' }} key={tag._id}>
-              demo
               <NextLink href={`/tag/${tag._id}`} passHref>
                 <Button
                   variant='contained'
