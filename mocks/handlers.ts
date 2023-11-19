@@ -13,7 +13,10 @@ export const handlers = [
     return res(ctx.status(200), ctx.json<ArticleResponse>(indexData))
   }),
   rest.get(`${baseUrl}/asunaroblog/article/:ArticleId`, (req, res, ctx) => {
-    const resData = blogData[1]
+    const articleId = req.params.ArticleId as string
+    const num = parseInt(articleId)
+    const resData = blogData[num % 2]
+    console.log(num)
     return res(ctx.status(200), ctx.json<ArticleItem>(resData))
   }),
   rest.get(`${baseUrl}/asunaroblog/tag`, (req, res, ctx) => {

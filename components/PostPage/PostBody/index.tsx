@@ -39,11 +39,11 @@ const PostBody = (props: Props) => {
           }
         />
       </Box>
-      <Box className='mb-20 flex justify-center'>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <TableOfContents heading={props.headings} />
       </Box>
-      <Box className='flex justify-center'>
-        <Box className='mb-20 w-10/12'>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Box className='mb-20' sx={{ width: { xs: '90%', sx: '70%' }}}>
           <div dangerouslySetInnerHTML={{ __html: props.blog.body }} />
         </Box>
       </Box>

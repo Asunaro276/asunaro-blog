@@ -23,7 +23,7 @@ const PostPage = (props: Props) => {
         <Box
           sx={{
             maxWidth: '1300px',
-            width: '95%',
+            width: { xs: '100%', md: '95%' },
             flexDirection: { xs: 'column', md: 'row' },
             display: 'flex',
             justifyContent: 'space-between',

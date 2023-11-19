@@ -10,13 +10,13 @@ type Props = {
 export const TableOfContents = (props: Props) => {
   let tocCount = [1, 1, 1]
   return (
-    <Box className='w-10/12 rounded border-solid border-slate-200' border='double'>
+    <Box className='rounded border-solid border-slate-200' border='double' sx={{ width: { xs: '90%', sx: '70%' }}}>
       <Box className='flex h-8 items-center justify-center bg-slate-200'>
         <TocIcon className='mr-2' />
         <Typography className=''>目次</Typography>
       </Box>
       <Box className='flex flex-col items-center justify-center py-10'>
-        <List className='pl-2' sx={{ width: { xs: '80%', md: '60%' } }}>
+        <List className='pl-2' sx={{ width: { xs: '90%', sx: '70%' }}}>
           {props.heading.map((data, index) => {
             if (data.text === undefined) {
               return <div key={index}></div>

@@ -42,7 +42,7 @@ export const parseBody = async (body: string) => {
   })
 
   $('code:not(pre code)').each((_, element) => {
-    $(element).addClass('bg-slate-200 p-0.5 rounded text-red-500 font-thin')
+    $(element).addClass('bg-slate-200 px-1 py-[0.1rem] rounded text-red-600 font-code')
   })
 
   $('blockquote').each((_, element) => {

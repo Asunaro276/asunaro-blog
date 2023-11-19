@@ -12,6 +12,7 @@ module.exports = {
         logo: ['Montserrat Subrayada'],
         title: ['Arial', 'Meiryo'],
         body: ['Meiryo', 'Arial', 'Yu Gothic', 'Roboto'],
+        code: ['Source Han Code JP', 'HackGen35']
       },
     },
   },
