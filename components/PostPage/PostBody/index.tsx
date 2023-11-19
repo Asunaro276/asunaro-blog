@@ -1,5 +1,5 @@
 import { Box, Card } from '@mui/material'
-import { ArticleResponse, Heading } from 'types'
+import { ArticleItem, Heading } from 'types'
 import Caption from './Caption'
 import { TableOfContents } from './TableOfContents'
 import { useEffect } from 'react'
@@ -7,7 +7,7 @@ import renderMathInElement from 'katex/contrib/auto-render'
 import 'katex/dist/katex.min.css'
 
 type Props = {
-  blog: ArticleResponse
+  blog: ArticleItem
   headings: Heading[]
 }
 
@@ -39,11 +39,11 @@ const PostBody = (props: Props) => {
           }
         />
       </Box>
-      <Box className='mb-20 flex justify-center'>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <TableOfContents heading={props.headings} />
       </Box>
-      <Box className='flex justify-center'>
-        <Box className='mb-20 w-10/12'>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Box className='mb-20' sx={{ width: { xs: '90%', sx: '70%' }}}>
           <div dangerouslySetInnerHTML={{ __html: props.blog.body }} />
         </Box>
       </Box>

@@ -1,18 +1,18 @@
 import { newtClient } from 'libs/client'
 import { parseBody } from 'libs/parse/parseBody'
 import { PER_PAGE } from 'pages'
-import { Year, Page, TagId, CategoryId, BlogId, ArticleResponse, NewtItems, Article } from 'types'
+import { Page, TagId, CategoryId, ArticleId, ArticleItem, YearMonthId } from 'types'
 
 type FetchArticlesOptions =
-  | { year: Year; pageNumber?: Page }
+  | { yearmonth: YearMonthId; pageNumber?: Page }
   | { tagId: TagId; pageNumber?: Page }
   | { categoryId: CategoryId; pageNumber?: Page }
-  | { blogId: BlogId }
+  | { ArticleId: ArticleId }
   | { pageNumber?: Page }
 
 export const fetchArticles = async (
   options: FetchArticlesOptions,
-): Promise<{ blogs: ArticleResponse[]; totalCount: number }> => {
+): Promise<{ blogs: ArticleItem[]; totalCount: number }> => {
   const pageNumber = (() => {
     if ('pageNumber' in options) {
       return options.pageNumber
@@ -21,13 +21,13 @@ export const fetchArticles = async (
     }
   })() as number
 
-  if ('year' in options) {
-    const year = options.year
-    const blogs = await newtClient.getContents<ArticleResponse>({
+  if ('yearmonth' in options) {
+    const [year, month] = options.yearmonth.split('-').map(v => Number(v))
+    const blogs = await newtClient.getContents<ArticleItem>({
       appUid: 'asunaroblog',
       modelUid: 'article',
       query: {
-        '_sys.raw.firstPublishedAt': { lt: String(Number(year) + 1), gte: year },
+        '_sys.raw.firstPublishedAt': { lt: `${year}-${month + 1}`, gte: `${year}-${month}` },
         skip: (pageNumber - 1) * PER_PAGE,
         limit: PER_PAGE,
       },
@@ -38,7 +38,7 @@ export const fetchArticles = async (
     }
   } else if ('tagId' in options) {
     const tagId = options.tagId
-    const blogs = await newtClient.getContents<ArticleResponse>({
+    const blogs = await newtClient.getContents<ArticleItem>({
       appUid: 'asunaroblog',
       modelUid: 'article',
       query: {
@@ -53,7 +53,7 @@ export const fetchArticles = async (
     }
   } else if ('categoryId' in options) {
     const categoryId = options.categoryId
-    const blogs = await newtClient.getContents<ArticleResponse>({
+    const blogs = await newtClient.getContents<ArticleItem>({
       appUid: 'asunaroblog',
       modelUid: 'article',
       query: {
@@ -66,20 +66,21 @@ export const fetchArticles = async (
       blogs: blogs.items,
       totalCount: blogs.total,
     }
-  } else if ('blogId' in options) {
-    const blogId = options.blogId
-    const blog = await newtClient.getContent<NewtItems<Article>>({
+  } else if ('ArticleId' in options) {
+    const ArticleId = options.ArticleId
+    const blog = await newtClient.getContent<ArticleItem>({
       appUid: 'asunaroblog',
       modelUid: 'article',
-      contentId: blogId,
+      contentId: ArticleId,
     })
+
     const body = (await parseBody(blog.body)).replace('\n', '')
     return {
       blogs: [{ ...blog, body }],
       totalCount: 1,
     }
   } else {
-    const blogs = await newtClient.getContents<ArticleResponse>({
+    const blogs = await newtClient.getContents<ArticleItem>({
       appUid: 'asunaroblog',
       modelUid: 'article',
       query: {

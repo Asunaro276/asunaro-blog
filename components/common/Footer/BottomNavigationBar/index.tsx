@@ -1,9 +1,9 @@
 import { Box, Divider, Link as MuiLink } from '@mui/material'
 import NextLink from 'next/link'
-import { CategoryResponse } from 'types'
+import { CategoryItem } from 'types'
 
 type Props = {
-  categories: CategoryResponse[]
+  categories: CategoryItem[]
 }
 
 export const BottomNavigationBar = (props: Props) => {

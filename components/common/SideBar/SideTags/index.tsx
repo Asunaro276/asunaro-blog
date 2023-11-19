@@ -1,10 +1,10 @@
 import { Card, CardContent, Button, Box } from '@mui/material'
 import NextLink from 'next/link'
 import LocalOfferIcon from '@mui/icons-material/LocalOffer'
-import { TagResponse } from 'types'
+import { TagItem } from 'types'
 
 type Props = {
-  tags: TagResponse[]
+  tags: TagItem[]
 }
 
 export const SideTags = (props: Props) => {
@@ -24,7 +24,7 @@ export const SideTags = (props: Props) => {
                 >
                   <LocalOfferIcon fontSize='small' className='mr-0.5' />
                   {tag.tag}
-                  <span>（{tag.totalCount}）</span>
+                  <span>（{tag.ref?.length ?? 0}）</span>
                 </Button>
               </NextLink>
             </Box>

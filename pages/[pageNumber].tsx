@@ -4,14 +4,14 @@ import { fetchBlogData } from 'libs/fetch/fetchBlogData'
 import { GetStaticProps } from 'next'
 import { NextSeo } from 'next-seo'
 import { PER_PAGE } from 'pages'
-import { ArticleResponse, CategoryResponse, TagResponse, Years } from 'types'
+import { ArticleItem, CategoryItem, TagItem, YearMonthItem } from 'types'
 
 type Props = {
   pageNumber: number
-  blogs: ArticleResponse[]
-  categories: CategoryResponse[]
-  tags: TagResponse[]
-  years: Years
+  blogs: ArticleItem[]
+  categories: CategoryItem[]
+  tags: TagItem[]
+  yearmonths: YearMonthItem[]
   totalCount: number
 }
 
@@ -29,7 +29,7 @@ export default function BlogPageId(props: Props) {
         blogs={props.blogs}
         categories={props.categories}
         tags={props.tags}
-        years={props.years}
+        yearmonths={props.yearmonths}
         totalCount={props.totalCount}
       />
     </main>
@@ -41,23 +41,20 @@ export const getStaticPaths = async () => {
   const blogs = await newtClient.getContents({ appUid: 'asunaroblog', modelUid: 'article' })
   const range = (start: number, end: number) => [...Array(end - start + 1)].map((_, i) => start + i)
   const paths = range(1, Math.ceil(blogs.total / PER_PAGE)).map((pageNumber) => `/${pageNumber}`)
-  console.log(blogs)
   return { paths, fallback: false }
 }
 
 // データを取得
 export const getStaticProps: GetStaticProps<Props, Params> = async (context) => {
   const pageNumber = Number(context.params!.pageNumber)
-  const { blogs, categories, tags, years, totalCount } = await fetchBlogData({
-    pageNumber: pageNumber,
-  })
+  const { blogs, categories, tags, yearmonths, totalCount } = await fetchBlogData({ pageNumber })
 
   return {
     props: {
       blogs,
       categories,
       tags,
-      years,
+      yearmonths,
       totalCount,
       pageNumber,
     },

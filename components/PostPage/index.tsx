@@ -1,4 +1,4 @@
-import { ArticleResponse, CategoryResponse, Heading, TagResponse } from 'types'
+import { ArticleItem, CategoryItem, Heading, TagItem, YearMonthItem } from 'types'
 import Box from '@mui/material/Box'
 import Header from 'components/common/Header'
 import PostBody from './PostBody'
@@ -6,11 +6,11 @@ import Footer from 'components/common/Footer'
 import SideBar from 'components/common/SideBar'
 
 type Props = {
-  blog: ArticleResponse
+  blog: ArticleItem
   headings: Heading[]
-  categories: CategoryResponse[]
-  tags: TagResponse[]
-  years: { [key: number]: number }
+  categories: CategoryItem[]
+  tags: TagItem[]
+  yearmonths: YearMonthItem[]
 }
 
 const PostPage = (props: Props) => {
@@ -23,7 +23,7 @@ const PostPage = (props: Props) => {
         <Box
           sx={{
             maxWidth: '1300px',
-            width: '95%',
+            width: { xs: '100%', md: '95%' },
             flexDirection: { xs: 'column', md: 'row' },
             display: 'flex',
             justifyContent: 'space-between',
@@ -33,7 +33,7 @@ const PostPage = (props: Props) => {
             <PostBody blog={props.blog} headings={props.headings} />
           </Box>
           <Box sx={{ marginTop: '2.5rem', marginX: '3%', width: { md: '25%' } }}>
-            <SideBar tags={props.tags} years={props.years} headings={props.headings} />
+            <SideBar tags={props.tags} yearmonths={props.yearmonths} headings={props.headings} />
           </Box>
         </Box>
       </Box>

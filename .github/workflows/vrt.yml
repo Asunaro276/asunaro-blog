@@ -2,7 +2,7 @@ name: chromatic
 
 on:
   pull_request:
-    types: [opened, synchronize, labeled]
+    types: [labeled]
 
 jobs:
   chromatic-deployment:
@@ -10,10 +10,8 @@ jobs:
     environment: chromatic
     runs-on: ubuntu-latest
     if: |
-      ((github.event.action == 'labeled' && 
-        github.event.label.name == 'test passed') ||
-      (github.event.action == 'synchronize' &&
-        contains(github.event.pull_request.labels.*.name, 'test passed')))
+      (github.event.action == 'labeled' && 
+        github.event.label.name == 'visual test')
     timeout-minutes: 10
     steps:
       - name: Checkout repository
@@ -21,8 +19,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install dependencies
-        run: yarn install
+      - name: Setup Node
+        uses: ./.github/actions/setup
 
       - name: Publish to Chromatic
         uses: chromaui/action@v1

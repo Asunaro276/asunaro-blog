@@ -13,12 +13,12 @@ import {
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { pageIcons } from 'pages'
-import { CategoryResponse } from 'types'
+import { CategoryItem } from 'types'
 import NextLink from 'next/link'
 
 type Props = {
   logo: string
-  categories: CategoryResponse[]
+  categories: CategoryItem[]
 }
 
 export const NavigationBar = (props: Props) => {

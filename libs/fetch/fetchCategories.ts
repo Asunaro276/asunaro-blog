@@ -1,12 +1,15 @@
 import { newtClient } from 'libs/client'
-import { CategoryResponse } from 'types'
+import { CategoryItem } from 'types'
 
-export const fetchCategories = async (): Promise<CategoryResponse[]> => {
+export const fetchCategories = async (): Promise<CategoryItem[]> => {
   const categories = (
-    await newtClient.getContents<CategoryResponse>({
+    await newtClient.getContents<CategoryItem>({
       appUid: 'asunaroblog',
       modelUid: 'category',
-      query: { order: ['-_sys.customOrder'] },
+      query: {
+        order: ['-_sys.customOrder'],
+        depth: 1
+      },
     })
   ).items
   return categories

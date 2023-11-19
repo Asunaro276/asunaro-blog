@@ -42,7 +42,7 @@ export const parseBody = async (body: string) => {
   })
 
   $('code:not(pre code)').each((_, element) => {
-    $(element).addClass('bg-slate-200 p-0.5 rounded text-red-500 font-thin')
+    $(element).addClass('bg-slate-200 px-1 py-[0.1rem] rounded text-red-600 font-code')
   })
 
   $('blockquote').each((_, element) => {
@@ -69,7 +69,8 @@ export const parseBody = async (body: string) => {
       let og: { [key: string]: string } = {}
       const linkUrl = $(element).attr('href') as string
       try {
-        const ogData = await openGraphScraper({ url: linkUrl })
+        const options = { url: linkUrl, timeout: 60 }
+        const ogData = await openGraphScraper(options)
         og['title'] = ogData.result['ogTitle'] as string
         if (og['title'].match(/Amazon/)) {
           og['image'] = (ogData.result['ogImage'] as ImageObject[]).find((value) =>

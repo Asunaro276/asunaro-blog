@@ -1,27 +1,44 @@
+// 記事本文に関する型
+export type ArticleId = string
 export type Article = {
   title: string
   description: string
   coverImage: CoverImage
-  category: CategoryResponse
-  tags: TagResponse[]
+  category: CategoryItem
+  tags: TagItem[]
   body: string
 }
+export type ArticleItem = NewtItems<Article>
+export type ArticleResponse = NewtResponse<ArticleItem>
 
-export type ArticleResponse = NewtItems<Article>
-
+// タグに関する型
+export type TagId = string
 export type Tag = {
   tag: string
-  totalCount?: number
+  ref: ArticleId[] | ArticleItem[]
 }
+export type TagItem = NewtItems<Tag>
+export type TagResponse = NewtResponse<TagItem>
 
-export type TagResponse = NewtItems<Tag>
+// 年月に関する型
+export type YearMonthId = string
+export type YearMonth = {
+  yearmonth: string
+  ref: ArticleId[] | ArticleItem[]
+}
+export type YearMonthItem = NewtItems<YearMonth>
+export type YearMonthResponse = NewtResponse<YearMonthItem>
 
+
+// カテゴリーに関する型
+export type CategoryId = string
 export type Category = {
   displayedName: string
   name: string
+  ref: ArticleId[] | ArticleItem[]
 }
-
-export type CategoryResponse = NewtItems<Category>
+export type CategoryItem = NewtItems<Category>
+export type CategoryResponse = NewtResponse<CategoryItem>
 
 export type CoverImage = {
   _id: string
@@ -50,9 +67,9 @@ export type Sys = {
 }
 
 export type Heading = {
+  _id: string
   text: string
   htmlTag: string
-  _id: string
 }
 
 export type OGP = {
@@ -70,20 +87,8 @@ export type NewtResponse<T> = {
 }
 
 export type NewtItems<T> = {
-  _id: string
+  _id: ArticleId | TagId | CategoryId | YearMonthId
   _sys: Sys
 } & T
-
-export type Years = {
-  [key: string]: number
-}
-
-export type Year = number
-
-export type TagId = string
-
-export type CategoryId = string
-
-export type BlogId = string
 
 export type Page = number

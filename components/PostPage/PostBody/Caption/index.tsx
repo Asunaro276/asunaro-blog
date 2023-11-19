@@ -2,32 +2,32 @@ import { Box, Button, CardMedia, Link as MuiLink, Typography } from '@mui/materi
 import { convertDateFormat } from 'libs/convertDateFormat'
 import NextLink from 'next/link'
 import LocalOfferIcon from '@mui/icons-material/LocalOffer'
-import { CategoryResponse, TagResponse } from 'types'
+import { CategoryItem, TagItem } from 'types'
 
 type Props = {
   title: string
   publishedAt: string
-  tagsOfPost: TagResponse[]
-  categoryOfPost: CategoryResponse
+  tagsOfPost: TagItem[]
+  categoryOfPost: CategoryItem
   imageUrl: string
   imageAlt: string
 }
 
 const Caption = (props: Props) => {
   return (
-    <Box className=''>
+    <Box>
       <Box className='mb-10 flex justify-center'>
         <Typography color='text.secondary' variant='caption'>
           {convertDateFormat(props.publishedAt)}
         </Typography>
       </Box>
       <Box className='mt-10 mb-4 flex justify-center'>
-        <Typography className='w-9/12 font-title text-2xl font-bold text-slate-600'>
+        <Typography className='font-title text-2xl font-bold text-slate-600' sx={{ width: { xs: '90%', sx: '70%' }}}>
           {props.title}
         </Typography>
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Box className='w-9/12'>
+        <Box sx={{ width: { xs: '90%', sx: '70%' }}}>
           <Box
             className='mb-10 space-y-2'
             sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}

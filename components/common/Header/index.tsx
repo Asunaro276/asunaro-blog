@@ -1,9 +1,9 @@
 import { Container, Link, Typography } from '@mui/material'
-import { CategoryResponse } from 'types'
+import { CategoryItem } from 'types'
 import { NavigationBar } from './NavigationBar'
 
 type Props = {
-  categories: CategoryResponse[]
+  categories: CategoryItem[]
 }
 
 const Header = (props: Props) => {

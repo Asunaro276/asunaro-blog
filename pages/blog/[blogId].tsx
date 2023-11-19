@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import { newtClient } from '../../libs/client'
-import { ArticleResponse, CategoryResponse, Heading, TagResponse } from 'types'
+import { ArticleItem, CategoryItem, Heading, TagItem, YearMonthItem } from 'types'
 import { NextSeo } from 'next-seo'
 import PostPage from 'components/PostPage'
 import { parseHeading } from 'libs/parse/parseHeading'
@@ -9,18 +9,18 @@ import 'highlight.js/styles/monokai.css'
 import { fetchBlogData } from 'libs/fetch/fetchBlogData'
 
 type Props = {
-  blog: ArticleResponse
+  blog: ArticleItem
   headings: Heading[]
-  categories: CategoryResponse[]
-  tags: TagResponse[]
-  years: { [key: number]: number }
+  categories: CategoryItem[]
+  tags: TagItem[]
+  yearmonths: YearMonthItem[]
 }
 
 interface Params extends ParsedUrlQuery {
   blogId: string
 }
 
-export default function BlogId(props: Props) {
+export default function ArticleId(props: Props) {
   return (
     <main>
       <NextSeo
@@ -41,17 +41,20 @@ export default function BlogId(props: Props) {
         headings={props.headings}
         categories={props.categories}
         tags={props.tags}
-        years={props.years}
+        yearmonths={props.yearmonths}
       />
     </main>
   )
 }
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const blogs = await newtClient.getContents<ArticleResponse>({
+  const blogs = await newtClient.getContents<ArticleItem>({
     appUid: 'asunaroblog',
     modelUid: 'article',
-    query: { limit: 100 },
+    query: {
+      limit: 100,
+      select: ['_id']
+    },
   })
   const paths = blogs.items.map((blog) => `/blog/${blog._id}`)
   return { paths, fallback: false }
@@ -60,7 +63,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 export const getStaticProps: GetStaticProps<Props, Params> = async (context) => {
   const id = context.params!.blogId
 
-  const { blogs, categories, tags, years } = await fetchBlogData({ blogId: id })
+  const { blogs, categories, tags, yearmonths } = await fetchBlogData({ ArticleId: id })
 
   const headings = parseHeading(blogs[0].body)
 
@@ -70,7 +73,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (context) => 
       headings: headings,
       categories: categories,
       tags: tags,
-      years: years,
+      yearmonths: yearmonths,
     },
   }
 }
