@@ -8,7 +8,8 @@ export const fetchYearMonth = async (): Promise<YearMonthItem[]> => {
       modelUid: 'yearmonth',
       query: {
         limit: 100,
-        depth: 1
+        depth: 1,
+        order: ['_sys.customOrder']
       },
     })
   ).items.reverse()
