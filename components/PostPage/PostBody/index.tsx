@@ -43,7 +43,7 @@ const PostBody = (props: Props) => {
         <TableOfContents heading={props.headings} />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Box className='mb-20' sx={{ width: { xs: '90%', sm: '80%', md: '70%' }}}>
+        <Box className='mb-20' sx={{ width: { xs: '90%', sm: '80%' }}}>
           <div dangerouslySetInnerHTML={{ __html: props.blog.body }} />
         </Box>
       </Box>
