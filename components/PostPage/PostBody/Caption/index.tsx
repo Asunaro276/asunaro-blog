@@ -22,12 +22,12 @@ const Caption = (props: Props) => {
         </Typography>
       </Box>
       <Box className='mt-10 mb-4 flex justify-center'>
-        <Typography className='font-title font-bold text-slate-600' sx={{ width: { xs: '90%', sm: '80%', md: '70%' }, fontSize: { xs: '20px', sm: '24px' }}}>
+        <Typography className='font-title font-bold text-slate-600' sx={{ width: { xs: '90%', sm: '80%' }, fontSize: { xs: '20px', sm: '24px' }}}>
           {props.title}
         </Typography>
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Box sx={{ width: { xs: '90%', sm: '80%', md: '70%' }}}>
+        <Box sx={{ width: { xs: '90%', sm: '80%' }}}>
           <Box
             className='mb-10 space-y-2'
             sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}
