@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/react'
 import { initialize, mswLoader } from 'msw-storybook-addon'
+import { modes } from './modes'
 
 initialize()
 
@@ -12,6 +13,10 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
+    viewport: { viewports: modes } ,
+    chromatic: {
+      modes: modes
+    }
   },
   loaders: [mswLoader],
 }
