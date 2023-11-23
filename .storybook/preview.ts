@@ -15,7 +15,7 @@ const preview: Preview = {
     },
     viewport: { viewports: modes } ,
     chromatic: {
-      modes: modes
+      modes: modes['small']
     }
   },
   loaders: [mswLoader],
