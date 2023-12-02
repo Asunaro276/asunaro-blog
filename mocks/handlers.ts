@@ -16,7 +16,6 @@ export const handlers = [
     const articleId = req.params.ArticleId as string
     const num = parseInt(articleId)
     const resData = blogData[num % 2]
-    console.log(num)
     return res(ctx.status(200), ctx.json<ArticleItem>(resData))
   }),
   rest.get(`${baseUrl}/asunaroblog/tag`, (req, res, ctx) => {

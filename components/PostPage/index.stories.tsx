@@ -14,7 +14,6 @@ const meta: Meta<typeof PostPage> = {
   component: PostPage,
   title: 'page/PostPage',
   render: (args, { loaded: { body } }) => {
-    console.log(body)
     return <PostPage {...args} blog={{...args.blog, body: body}} />    
   },
   parameters: {
