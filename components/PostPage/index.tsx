@@ -2,7 +2,7 @@ import { ArticleItem, CategoryItem, Heading, TagItem, YearMonthItem } from 'type
 import Box from '@mui/material/Box'
 import { Header } from 'components/common/Header'
 import PostBody from './PostBody'
-import SideBar from 'components/common/SideBar'
+import { SideBar } from 'components/common/SideBar'
 import { Footer } from '../common/Footer'
 
 type Props = {
