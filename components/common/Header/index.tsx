@@ -6,7 +6,7 @@ type Props = {
   categories: CategoryItem[]
 }
 
-const Header = (props: Props) => {
+export const Header = (props: Props) => {
   const logo = 'ASUNAROBLOG'
   return (
     <div>
@@ -29,5 +29,3 @@ const Header = (props: Props) => {
     </div>
   )
 }
-
-export default Header

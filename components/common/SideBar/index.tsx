@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { Heading, TagItem, YearMonthItem } from 'types'
-import SideToc from './SideToc'
+import { SideToc } from './SideToc'
 import ArchivePerYear from './ArchivePerYear'
 import { SideProfile } from './SideProfile'
 import { SideTags } from './SideTags'
@@ -11,7 +11,7 @@ type Props = {
   yearmonths: YearMonthItem[]
 }
 
-const SideBar = (props: Props) => {
+export const SideBar = (props: Props) => {
   return (
     <Box className='SideBar-Wrapper' sx={{ height: 'calc(100% - 2.5rem)' }}>
       <Box>
@@ -27,11 +27,9 @@ const SideBar = (props: Props) => {
       </Box>
       {props.headings !== undefined && (
         <Box className='sticky top-4 box-border' sx={{ display: { xs: 'none', md: 'block' } }}>
-          <SideToc heading={props.headings} />
+          <SideToc headings={props.headings} />
         </Box>
       )}
     </Box>
   )
 }
-
-export default SideBar

@@ -1,11 +1,11 @@
 import { Box, Container, Grid, Typography } from '@mui/material'
-import Footer from 'components/common/Footer'
-import Header from 'components/common/Header'
+import { Header } from 'components/common/Header'
 import SideBar from 'components/common/SideBar'
 import { ArticleItem, CategoryItem, TagItem, YearMonthItem } from 'types'
 import Pagination from './Pagination'
 import PostsList from './PostsList'
 import Error from 'next/error'
+import { Footer } from '../common/Footer'
 
 type Props = {
   pageNumber: number
