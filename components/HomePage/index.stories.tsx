@@ -20,7 +20,7 @@ const meta: Meta<typeof HomePage> = {
         mobile: modes['small'],
         desktop: modes['large']     
       },
-      disableSnapshot: true
+      disableSnapshot: false
     }
   },
 }

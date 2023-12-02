@@ -25,7 +25,7 @@ const meta: Meta<typeof PostPage> = {
         mobile: modes['small'],
         desktop: modes['large']     
       },
-      disableSnapshot: true
+      disableSnapshot: false 
     }
   },
 }

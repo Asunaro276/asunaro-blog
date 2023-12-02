@@ -20,7 +20,7 @@ const preview: Preview = {
         mobile: modes['small'],
         desktop: modes["large"],
       },
-      disableSnapshot: false
+      disableSnapshot: true
     }
   },
   loaders: [mswLoader],
