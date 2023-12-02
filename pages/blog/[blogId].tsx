@@ -3,10 +3,10 @@ import { ParsedUrlQuery } from 'querystring'
 import { newtClient } from '../../libs/client'
 import { ArticleItem, CategoryItem, Heading, TagItem, YearMonthItem } from 'types'
 import { NextSeo } from 'next-seo'
-import PostPage from 'components/PostPage'
 import { parseHeading } from 'libs/parse/parseHeading'
 import 'highlight.js/styles/monokai.css'
 import { fetchBlogData } from 'libs/fetch/fetchBlogData'
+import { PostPage } from '/components/PostPage'
 
 type Props = {
   blog: ArticleItem

@@ -1,11 +1,11 @@
 import { Box, Container, Grid, Typography } from '@mui/material'
-import Footer from 'components/common/Footer'
-import Header from 'components/common/Header'
+import { Header } from 'components/common/Header'
 import SideBar from 'components/common/SideBar'
 import { ArticleItem, CategoryItem, TagItem, YearMonthItem } from 'types'
 import Pagination from './Pagination'
 import PostsList from './PostsList'
 import Error from 'next/error'
+import { Footer } from '../common/Footer'
 
 type Props = {
   pageNumber: number
@@ -20,7 +20,7 @@ type Props = {
   statusCode?: number
 }
 
-const HomePage = (props: Props) => {
+export const HomePage = (props: Props) => {
   const dir = (() => {
     if (props.tag) {
       return `tag/${props.tag._id}`
@@ -94,5 +94,3 @@ const HomePage = (props: Props) => {
     </Box>
   )
 }
-
-export default HomePage

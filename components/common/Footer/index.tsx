@@ -6,7 +6,7 @@ type Props = {
   categories: CategoryItem[]
 }
 
-const Footer = (props: Props) => {
+export const Footer = (props: Props) => {
   return (
     <div>
       <BottomNavigationBar categories={props.categories} />
@@ -14,5 +14,3 @@ const Footer = (props: Props) => {
     </div>
   )
 }
-
-export default Footer

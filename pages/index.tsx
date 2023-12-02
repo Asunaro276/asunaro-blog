@@ -4,9 +4,9 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import BusinessIcon from '@mui/icons-material/Business'
 import FunctionsIcon from '@mui/icons-material/Functions'
-import HomePage from 'components/HomePage'
 import { NextSeo } from 'next-seo'
 import { fetchBlogData } from 'libs/fetch/fetchBlogData'
+import { HomePage } from '/components/HomePage'
 
 type Props = {
   blogs: ArticleItem[]

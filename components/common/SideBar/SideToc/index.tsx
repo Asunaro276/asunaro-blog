@@ -3,17 +3,17 @@ import { Link as Scroll } from 'react-scroll'
 import { Heading } from 'types'
 
 type Props = {
-  heading: Heading[]
+  headings: Heading[]
 }
 
-const SideToc = (props: Props) => {
+export const SideToc = (props: Props) => {
   var tocCount = [1, 1, 1]
   return (
     <Card>
       <Typography className='mt-10 text-center'>目次</Typography>
       <Box className='flex items-center justify-center'>
         <ul className='mb-10 w-8/12'>
-          {props.heading.map((data, index) => {
+          {props.headings.map((data, index) => {
             if (data.text === undefined) {
               return <div key={data._id}></div>
             }
@@ -76,5 +76,3 @@ const SideToc = (props: Props) => {
     </Card>
   )
 }
-
-export default SideToc

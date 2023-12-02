@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/react'
 import { initialize, mswLoader } from 'msw-storybook-addon'
 import { modes } from './modes'
+import '/styles/globals.css'
 
 initialize()
 
@@ -15,7 +16,11 @@ const preview: Preview = {
     },
     viewport: { viewports: modes } ,
     chromatic: {
-      modes: modes['small']
+      modes: {
+        mobile: modes['small'],
+        desktop: modes["large"],
+      },
+      disableSnapshot: true
     }
   },
   loaders: [mswLoader],

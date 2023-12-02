@@ -1,9 +1,9 @@
 import { ArticleItem, CategoryItem, Heading, TagItem, YearMonthItem } from 'types'
 import Box from '@mui/material/Box'
-import Header from 'components/common/Header'
+import { Header } from 'components/common/Header'
 import PostBody from './PostBody'
-import Footer from 'components/common/Footer'
 import SideBar from 'components/common/SideBar'
+import { Footer } from '../common/Footer'
 
 type Props = {
   blog: ArticleItem
@@ -13,7 +13,7 @@ type Props = {
   yearmonths: YearMonthItem[]
 }
 
-const PostPage = (props: Props) => {
+export const PostPage = (props: Props) => {
   return (
     <div className='bg-slate-100'>
       <div>
@@ -43,5 +43,3 @@ const PostPage = (props: Props) => {
     </div>
   )
 }
-
-export default PostPage
