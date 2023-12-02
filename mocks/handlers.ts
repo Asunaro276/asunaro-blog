@@ -27,4 +27,10 @@ export const handlers = [
   rest.get(`${baseUrl}/asunaroblog/category`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json<CategoryResponse>(categoryData))
   }),
+  rest.get(`https://amzn.to/*`, (req, res, ctx) => {
+    return res()
+  }),
+  rest.get(`https://qiita.com/*`, (req, res, ctx) => {
+    return res()
+  }),
 ]
