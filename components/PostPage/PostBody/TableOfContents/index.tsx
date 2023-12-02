@@ -10,7 +10,7 @@ type Props = {
 export const TableOfContents = (props: Props) => {
   let tocCount = [1, 1, 1]
   return (
-    <Box className='rounded border-solid border-slate-200' border='double' sx={{ width: { xs: '90%', sm: '80%' }}}>
+    <Box className='rounded border-solid border-slate-200 font-body' border='double' sx={{ width: { xs: '90%', sm: '80%' }}}>
       <Box className='flex h-8 items-center justify-center bg-slate-200'>
         <TocIcon className='mr-2' />
         <Typography sx={{ fontSize: { xs: '14px', sm: '16px' }}}>目次</Typography>
