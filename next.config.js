@@ -11,10 +11,6 @@ const config = {
   images: {
     domains: ['images.microcms-assets.io'],
   },
-  webpack: config => {
-    config.resolve.alias["/"] = path.resolve(_dirname, ".")
-    return config
-  }
 }
 
 module.exports = (_phase, { defaultConfig }) => {

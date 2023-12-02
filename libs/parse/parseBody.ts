@@ -86,38 +86,38 @@ export const parseBody = async (body: string) => {
           og['image'] = `${linkUrl.split('/').slice(0, 3).join('/')}${og['image']}`
         }
         og['description'] = ogData.result['ogDescription'] as string
-      } catch (error) {
-        console.log(error)
-      }
-      if (og['title'] === undefined) {
-        const res = await fetch(linkUrl)
-        const data = await res.text()
-        const $link = cheerio.load(data)
-        $link('meta[property^="og"]').each((_, element) => {
-          og[$link(element).attr('property')?.replace('og:', '') as string] = $link(element).attr(
-            'content',
-          ) as string
-        })
-        if (og['image'] === undefined) {
-          og[
-            'image'
-          ] = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${linkUrl}`
-        }
-        $link('meta[name="title"]').each((_, element) => {
-          if (og[$link(element).attr('name') as string] === undefined) {
-            og[$link(element).attr('name') as string] = $link(element).attr('content') as string
-          }
-        })
         if (og['title'] === undefined) {
-          $link('title').each((_, element) => {
-            og['title'] = $link(element).text() as string
+          const res = await fetch(linkUrl)
+          const data = await res.text()
+          const $link = cheerio.load(data)
+          $link('meta[property^="og"]').each((_, element) => {
+            og[$link(element).attr('property')?.replace('og:', '') as string] = $link(element).attr(
+              'content',
+            ) as string
+          })
+          if (og['image'] === undefined) {
+            og[
+              'image'
+            ] = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${linkUrl}`
+          }
+          $link('meta[name="title"]').each((_, element) => {
+            if (og[$link(element).attr('name') as string] === undefined) {
+              og[$link(element).attr('name') as string] = $link(element).attr('content') as string
+            }
+          })
+          if (og['title'] === undefined) {
+            $link('title').each((_, element) => {
+              og['title'] = $link(element).text() as string
+            })
+          }
+          $link('meta[name="description"]').each((_, element) => {
+            if (og[$link(element).attr('name') as string] === undefined) {
+              og[$link(element).attr('name') as string] = $link(element).attr('content') as string
+            }
           })
         }
-        $link('meta[name="description"]').each((_, element) => {
-          if (og[$link(element).attr('name') as string] === undefined) {
-            og[$link(element).attr('name') as string] = $link(element).attr('content') as string
-          }
-        })
+      } catch (error) {
+        console.log(error)
       }
       $(element).replaceWith(`
         <div class="shadow-md shadow-outline bg-slate-100 mt-4 mb-20 hover:brightness-[0.9] duration-300 ease-out">

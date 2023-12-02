@@ -20,7 +20,7 @@ type Props = {
   statusCode?: number
 }
 
-const HomePage = (props: Props) => {
+export const HomePage = (props: Props) => {
   const dir = (() => {
     if (props.tag) {
       return `tag/${props.tag._id}`
@@ -94,5 +94,3 @@ const HomePage = (props: Props) => {
     </Box>
   )
 }
-
-export default HomePage

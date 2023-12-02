@@ -13,7 +13,7 @@ type Props = {
   yearmonths: YearMonthItem[]
 }
 
-const PostPage = (props: Props) => {
+export const PostPage = (props: Props) => {
   return (
     <div className='bg-slate-100'>
       <div>
@@ -43,5 +43,3 @@ const PostPage = (props: Props) => {
     </div>
   )
 }
-
-export default PostPage

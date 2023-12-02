@@ -1,10 +1,10 @@
-import HomePage from 'components/HomePage'
 import { newtClient } from 'libs/client'
 import { fetchBlogData } from 'libs/fetch/fetchBlogData'
 import { GetStaticProps } from 'next'
 import { NextSeo } from 'next-seo'
 import { PER_PAGE } from 'pages'
 import { ArticleItem, CategoryItem, TagItem, YearMonthItem } from 'types'
+import { HomePage } from '/components/HomePage'
 
 type Props = {
   pageNumber: number

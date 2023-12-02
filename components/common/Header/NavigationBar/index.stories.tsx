@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { NavigationBar } from './'
 import { handlers } from '/mocks/handlers'
 import categoryData from '/mocks/test-data/category.json'
-import { modes } from '/.storybook/modes'
 
 const meta: Meta<typeof NavigationBar> = {
   component: NavigationBar,
@@ -11,10 +10,6 @@ const meta: Meta<typeof NavigationBar> = {
     msw: {
       handlers: [...handlers],
     },
-    view: {
-      mobile: modes['small'],
-      desktop: modes['large']     
-    }
   },
 }
 

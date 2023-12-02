@@ -1,4 +1,3 @@
-import HomePage from 'components/HomePage'
 import { newtClient } from 'libs/client'
 import { fetchBlogData } from 'libs/fetch/fetchBlogData'
 import { GetStaticProps, GetStaticPaths } from 'next'
@@ -7,6 +6,7 @@ import { PER_PAGE } from 'pages'
 import { ParsedUrlQuery } from 'querystring'
 import { ArticleItem, CategoryItem, Page, TagId, TagItem, YearMonthItem } from 'types'
 import { range } from '/libs/utils'
+import { HomePage } from '/components/HomePage'
 
 type Props = {
   blogs: ArticleItem[]
