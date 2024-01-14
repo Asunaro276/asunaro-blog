@@ -9,6 +9,7 @@ import yearmonthData from '/mocks/test-data/yearmonth.json'
 import { modes } from '/.storybook/modes'
 import { parseHeading } from '/libs/parse/parseHeading'
 import { parseBody } from '/libs/parse/parseBody'
+import 'highlight.js/styles/monokai.css'
 
 const meta: Meta<typeof PostPage> = {
   component: PostPage,

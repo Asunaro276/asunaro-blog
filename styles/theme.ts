@@ -3,7 +3,7 @@ import { blueGrey } from '@mui/material/colors'
 
 export const titleFontTheme = createTheme({
   typography: {
-    fontFamily: ['Montserrat Subrayada', 'Roboto', 'sans-serif'].join(','),
+    fontFamily: ['Montserrat Subrayada', 'Roboto', 'Noto Sans JP', 'sans-serif'].join(','),
   },
 })
 
@@ -38,6 +38,8 @@ export const basicTheme = createTheme({
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
+      'Noto Sans JP',
+      'sans-serif'
     ].join(','),
   },
 })
