@@ -5,6 +5,7 @@ import { TableOfContents } from './TableOfContents'
 import { useEffect } from 'react'
 import renderMathInElement from 'katex/contrib/auto-render'
 import 'katex/dist/katex.min.css'
+import { useCodeCopy } from '/hooks/useCodeCopy'
 
 type Props = {
   blog: ArticleItem
@@ -12,6 +13,7 @@ type Props = {
 }
 
 const PostBody = (props: Props) => {
+  useCodeCopy()
   useEffect(() => {
     renderMathInElement(document.body, {
       delimiters: [

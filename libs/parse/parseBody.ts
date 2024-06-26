@@ -58,8 +58,9 @@ export const parseBody = async (body: string) => {
   $('pre code').each((_, element) => {
     const result = hljs.highlightAuto($(element).text()).value
     $(element).html(result)
-    $(element).parent().addClass('shadow-md text-sm md:text-base')
+    $(element).parent().addClass('shadow-md text-sm md:text-base relative')
     $(element).addClass(`hljs mb-10`)
+    $(element).parent().prepend('<div class="clipboard absolute right-[16px] top-[16px] hidden"><div class="copied text-white mr-0.5 font-sans">copied!</div><svg class="hover:opacity-70 active:mt-1" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#8f9398"><path d="M360-240q-29.7 0-50.85-21.15Q288-282.3 288-312v-480q0-29.7 21.15-50.85Q330.3-864 360-864h384q29.7 0 50.85 21.15Q816-821.7 816-792v480q0 29.7-21.15 50.85Q773.7-240 744-240H360Zm0-72h384v-480H360v480ZM216-96q-29.7 0-50.85-21.15Q144-138.3 144-168v-552h72v552h456v72H216Zm144-216v-480 480Z"/></svg></div>')
   })
 
   const links = $('a')
