@@ -25,7 +25,7 @@ export const TableOfContents = (props: Props) => {
               tocCount[0] += 1
               tocCount[1] = 1
               return (
-                <ListItem key={index} className='my-4 ml-6 list-none'>
+                <ListItem key={index} className='my-2 ml-6 list-none'>
                   <Scroll
                     to={`${data._id}`}
                     smooth={true}
@@ -33,10 +33,10 @@ export const TableOfContents = (props: Props) => {
                     id={`l${index}`}
                     duration={400}
                   >
-                    <Box className='absolute -left-10 flex aspect-square w-8 items-center justify-center rounded-full border border-solid border-slate-400 bg-slate-200 sm:w-10 '>
+                    <Box className='absolute -left-10 flex aspect-square items-center justify-center rounded-full border border-solid border-slate-400 bg-slate-200' sx={{width: {xs: '32px', sm: '40px'}}}>
                       {(tocCount[0] - 1).toString()}
                     </Box>
-                    <Box className='ml-2 mt-2'>{data.text}</Box>
+                    <Box sx={{ marginLeft: { xs: '6px', sm: '12px' }, lineHeight: { xs: '32px', sm: '40px' } }}>{data.text}</Box>
                   </Scroll>
                 </ListItem>
               )
@@ -53,7 +53,7 @@ export const TableOfContents = (props: Props) => {
                     id={`${index}`}
                     duration={400}
                   >
-                    <Box className='text-md sm:ml-5 sm:mr-5'>
+                    <Box className='text-md' sx={{marginLeft: { xs: '30px' }}}>
                       {tocCount[0] > 1
                         ? `${tocCount[0] - 1}.${tocCount[1] - 1}`
                         : `${tocCount[1] - 1}`}

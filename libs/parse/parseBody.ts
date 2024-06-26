@@ -18,12 +18,15 @@ export const parseBody = async (body: string) => {
     $(element).parent().prepend('<div class="w-2 bg-yellow-400"></div>')
   })
   $('p').each((_, element) => {
-    $(element).addClass('text-sm md:text-lg font-body leading-loose')
+    $(element).addClass('font-body')
+    $(element).css('line-height', '1.8')
+    $(element).css('font-size', '16px')
     $(element).wrap('<div class="mt-5 mb-10"></div>')
   })
 
   $('li').each((_, element) => {
     $(element).addClass('font-body')
+    $(element).css('font-size', '16px')
   })
 
   $('ol').each((_, element) => {
@@ -46,7 +49,7 @@ export const parseBody = async (body: string) => {
   })
 
   $('blockquote').each((_, element) => {
-    $(element).addClass('ml-4 text-xl opacity-90 font-body')
+    $(element).addClass('my-0 text-xl opacity-90 font-body')
     $(element).wrap('<div class="flex"></div>')
     $(element).parent().prepend('<div class="w-2 bg-slate-200"></div>')
   })

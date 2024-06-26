@@ -5,7 +5,7 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
     './libs/parse/*.{js,ts,jsx,tsx}',
   ],
-  important: true,
+  // important: true,
   theme: {
     extend: {
       fontFamily: {
